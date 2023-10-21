@@ -30,7 +30,7 @@ public partial class CardViewer : UserControl
             {
                 _selectedIndex = 0;
                 SelectDot(_selectedIndex);
-                DisplayedCard.CardData = Cards[0];
+                DisplayedCard.CardData = Cards[_selectedIndex];
             }
         }
     }
@@ -63,6 +63,7 @@ public partial class CardViewer : UserControl
     {
         UnselectDot(_selectedIndex);
         _selectedIndex = CardDots.Children.IndexOf((Border)sender);
+        DisplayedCard.CardData = Cards[_selectedIndex];
         SelectDot(_selectedIndex);
     }
 

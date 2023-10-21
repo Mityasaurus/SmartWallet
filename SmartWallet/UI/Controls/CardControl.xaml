@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SmartWallet.UI.Controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
     <Grid>
         <StackPanel x:Name="Card" Margin="23 0 23 16" Height="184">
@@ -17,16 +18,13 @@
                 </TextBlock>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Foreground="white" FontSize="24" FontWeight="SemiBold">$</TextBlock>
-                    <TextBlock Foreground="white" FontSize="24" FontWeight="SemiBold" Text="{Binding Balance}">
-                        <!-- 15,595.15 -->
-                        
-                    </TextBlock>
+                    <TextBlock x:Name="Balance" Foreground="white" FontSize="24" FontWeight="SemiBold"/>
                 </StackPanel>
             </StackPanel>
                     
             <DockPanel Margin="23 68 23 0">
-                <TextBlock Foreground="White" FontSize="14" FontWeight="Medium" Margin="0 0 110 0">5282 3456 7890 1289</TextBlock>
-                <TextBlock Foreground="White" FontSize="14" FontWeight="Medium">09/25</TextBlock>
+                <TextBlock x:Name="Number" Foreground="White" FontSize="14" FontWeight="Medium" Margin="0 0 110 0">5282 3456 7890 1289</TextBlock>
+                <TextBlock x:Name="DateExpire" Foreground="White" FontSize="14" FontWeight="Medium">09/25</TextBlock>
             </DockPanel>
         </StackPanel>
     </Grid>
