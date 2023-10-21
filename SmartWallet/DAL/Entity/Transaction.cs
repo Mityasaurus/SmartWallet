@@ -8,11 +8,14 @@ public class Transaction
     [Key]
     public int Id { get; set; }
     
-    public int UserId { get; set; }
-    public int UserCardId { get; set; }
-    public User User { get; set; }
-    public Card UserCard { get; set; }
+    public int SenderId { get; set; }
+    public int SenderCardId { get; set; }
+    public int RecipientId { get; set; }
+    public int RecipientCardId { get; set; }
+    public User Sender { get; set; }
+    public Card SenderCard { get; set; }
+    public User Recipient { get; set; }
+    public Card RecipientCard { get; set; }
     
     public double Amount { get; set; }
-    public string OperationType { get; set; } // Get or Send // TODO make Enum
 }
