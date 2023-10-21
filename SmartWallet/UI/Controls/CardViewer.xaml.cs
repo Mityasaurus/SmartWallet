@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -12,35 +13,31 @@ namespace SmartWallet.UI.Controls;
 
 public partial class CardViewer : UserControl
 {
-    private int _selectedIndex
-    {
-        get => _selectedIndex;
-        set
-        {
-            SelectDot(_selectedIndex != null ? _selectedIndex : 0);
-            _selectedIndex = value;
-        }
-    }
+    private int _selectedIndex { get; set; }
+    private List<Border> CardDotsList = new List<Border>();
+
+    public static readonly DependencyProperty CardsProperty = DependencyProperty.Register(
+        "Cards", typeof(List<Card>), typeof(CardViewer), new PropertyMetadata(null));
 
     public List<Card> Cards
     {
-        get
-        {
-            return Cards;
-        }
+        get { return (List<Card>)GetValue(CardsProperty); }
         set
         {
-            Cards = value;
-            if (value.Count > 0) _selectedIndex = 0;
-            showDots(6);
+            SetValue(CardsProperty, value);
+            showDots(value.Count);
+            if (value.Count > 0)
+            {
+                _selectedIndex = 0;
+                SelectDot(_selectedIndex);
+                DisplayedCard.CardData = Cards[_selectedIndex];
+            }
         }
     }
 
     public CardViewer()
     {
         InitializeComponent();
-        NameScope.SetNameScope(this, new NameScope());
-        showDots(6);
     }
 
     private void showDots(int number)
@@ -49,36 +46,41 @@ public partial class CardViewer : UserControl
         
         for (int i = 0; i < number; i++)
         {
-            Ellipse ellipse = new Ellipse();
-            ellipse.Name = $"CardDot{i}";
-            ellipse.Style = FindResource("CardDot") as Style;
-            ellipse.MouseLeftButtonUp += CardDotClick;
-            ellipse.Margin = new Thickness(0, 0, i < number - 1 ? 4 : 0, 0);
+            Border rectangle = new Border();
+            rectangle.Name = $"CardDot{i}";
+            rectangle.Style = FindResource("CardDot") as Style;
+            rectangle.MouseLeftButtonUp += CardDotClick;
+            rectangle.Margin = new Thickness(0, 0, i < number - 1 ? 4 : 0, 0);
 
-            CardDots.Children.Add(ellipse);
-            
-            this.RegisterName(ellipse.Name, ellipse);
+            CardDots.Children.Add(rectangle);
+            CardDotsList.Add(rectangle);
         }
-        
-        if (number > 0) SelectDot(0);
     }
 
     private void CardDotClick(object sender, MouseButtonEventArgs e)
     {
-        _selectedIndex = CardDots.Children.IndexOf((Ellipse)sender);
+        UnselectDot(_selectedIndex);
+        _selectedIndex = CardDots.Children.IndexOf((Border)sender);
+        DisplayedCard.CardData = Cards[_selectedIndex];
+        SelectDot(_selectedIndex);
     }
 
     private void SelectDot(int index)
     {
-        var animation = new DoubleAnimation();
-        animation.From = 6;
-        animation.To = 20;
-        animation.Duration = new Duration(TimeSpan.FromSeconds(5));
+        DoubleAnimation widthAnimation = new DoubleAnimation(30, TimeSpan.FromSeconds(0.1));
+        CardDotsList[index].BeginAnimation(Border.WidthProperty, widthAnimation);
+        CardDotsList[index].Background = new SolidColorBrush(Color.FromRgb(99, 89, 233));
+    }
+    
+    private void UnselectDot(int index)
+    {
+        DoubleAnimation widthAnimation = new DoubleAnimation(10, TimeSpan.FromSeconds(0.1));
+        CardDotsList[index].BeginAnimation(Border.WidthProperty, widthAnimation);
+        CardDotsList[index].Background = new SolidColorBrush(Color.FromRgb(39, 38, 78));
+    }
 
-        var storyboard = new Storyboard();
-        storyboard.Children.Add(animation);
-        Storyboard.SetTargetName(animation, $"CardDot{index}");
-        Storyboard.SetTargetProperty(animation, new PropertyPath(WidthProperty));
-        storyboard.Begin();
+    private void TransferClick(object sender, RoutedEventArgs e)
+    {
+        // TODO Transfer
     }
 }
