@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SmartWallet.UI.Controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -13,35 +14,22 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Border Height="433" Width="374" CornerRadius="20" Background="#1D1D41">
+        <Border Height="363" Width="374" CornerRadius="20" Background="#1D1D41">
             <StackPanel>
                 <TextBlock Margin="23 19" Foreground="White" FontSize="24" FontWeight="SemiBold">
                     My Cards
                 </TextBlock>
                 
-                <StackPanel x:Name="Card" Margin="23 0 23 16" Height="184">
-                    <StackPanel.Background>
-                        <ImageBrush ImageSource="D:\C#\SmartWallet\SmartWallet\UI\Images\CardBackground.png"/>
-                    </StackPanel.Background>
-                    
-                    <StackPanel Margin="30 30 30 0">
-                        <TextBlock Foreground="#8C89B4" FontSize="16" FontWeight="Regular">
-                            Current Balance
-                            </TextBlock>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Foreground="white" FontSize="24" FontWeight="SemiBold">$</TextBlock>
-                            <TextBlock Foreground="white" FontSize="24" FontWeight="SemiBold">
-                                15,595.15
-                            </TextBlock>
-                        </StackPanel>
-                    </StackPanel>
-                    
-                    <DockPanel Margin="23 68 23 0">
-                        <TextBlock Foreground="White" FontSize="14" FontWeight="Medium" Margin="0 0 110 0">5282 3456 7890 1289</TextBlock>
-                        <TextBlock Foreground="White" FontSize="14" FontWeight="Medium">09/25</TextBlock>
-                    </DockPanel>
-                </StackPanel>
-                <StackPanel x:Name="CardDots" Orientation="Horizontal" HorizontalAlignment="Center"/>
+                <local:CardControl x:Name="DisplayedCard"/>
+                <StackPanel x:Name="CardDots" Margin="0 0 0 15" Orientation="Horizontal" HorizontalAlignment="Center"/>
+                <Border CornerRadius="10" Height="50" Margin="23 0" BorderThickness="2" BorderBrush="White">
+                    <Button Foreground="White" Height="46" Background="Transparent" Click="TransferClick">
+                        <Button.BorderThickness>
+                            0
+                        </Button.BorderThickness>
+                        Transfer
+                    </Button>
+                </Border>
             </StackPanel>
         </Border>
     </Grid>
