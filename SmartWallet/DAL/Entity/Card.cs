@@ -28,8 +28,6 @@ public class Card
     [Required]
     public double Balance { get; set; }
     
-    public List<Transaction> Transactions { get; set; }
-    
     public int UserId { get; set; }
     public User User { get; set; }
 }

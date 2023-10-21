@@ -73,21 +73,27 @@ namespace SmartWallet.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<string>("OperationType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserCardId")
+                    b.Property<int>("RecipientCardId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("RecipientId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderCardId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserCardId");
+                    b.HasIndex("RecipientCardId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("RecipientId");
+
+                    b.HasIndex("SenderCardId");
+
+                    b.HasIndex("SenderId");
 
                     b.ToTable("Transactions");
                 });
@@ -138,26 +144,37 @@ namespace SmartWallet.Migrations
 
             modelBuilder.Entity("SmartWallet.DAL.Entity.Transaction", b =>
                 {
-                    b.HasOne("SmartWallet.DAL.Entity.Card", "UserCard")
-                        .WithMany("Transactions")
-                        .HasForeignKey("UserCardId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("SmartWallet.DAL.Entity.User", "User")
+                    b.HasOne("SmartWallet.DAL.Entity.Card", "RecipientCard")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("RecipientCardId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.HasOne("SmartWallet.DAL.Entity.User", "Recipient")
+                        .WithMany()
+                        .HasForeignKey("RecipientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("UserCard");
-                });
+                    b.HasOne("SmartWallet.DAL.Entity.Card", "SenderCard")
+                        .WithMany()
+                        .HasForeignKey("SenderCardId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-            modelBuilder.Entity("SmartWallet.DAL.Entity.Card", b =>
-                {
-                    b.Navigation("Transactions");
+                    b.HasOne("SmartWallet.DAL.Entity.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Recipient");
+
+                    b.Navigation("RecipientCard");
+
+                    b.Navigation("Sender");
+
+                    b.Navigation("SenderCard");
                 });
 
             modelBuilder.Entity("SmartWallet.DAL.Entity.User", b =>
