@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SmartWallet.DAL;
+using SmartWallet.DAL.Repository;
+using SmartWallet.Providers;
 
 namespace SmartWallet
 {
@@ -21,9 +24,15 @@ namespace SmartWallet
     /// </summary>
     public partial class MainWindow : Window
     {
+        private UserProvider _userProvider = new UserProvider();
+        
         public MainWindow()
         {
             InitializeComponent();
+
+            CardViewer.Cards = _userProvider.GetAllUsers()[0].Cards;
+
+            Console.Write("test");
         }
     }
 }
