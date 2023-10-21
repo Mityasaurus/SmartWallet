@@ -7,9 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel>
-            <controls:TotalIncome x:Name="totalIncomeControl" Width="200" Height="100" Margin="0 50 0 0"></controls:TotalIncome>
-            <controls:TotalOutcome x:Name="totalOutcomeControl" Width="200" Height="100" Margin="0 100 0 0"></controls:TotalOutcome>
-        </StackPanel>
+
     </Grid>
 </Window>

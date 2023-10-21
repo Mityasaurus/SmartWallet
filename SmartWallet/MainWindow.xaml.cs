@@ -24,9 +24,6 @@ namespace SmartWallet
         public MainWindow()
         {
             InitializeComponent();
-
-            totalIncomeControl.Card = new Card() { Balance = 15747.79};
-            totalOutcomeControl.Card = new Card() { Balance = 9500.15 };
         }
     }
 }
