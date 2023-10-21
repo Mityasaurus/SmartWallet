@@ -14,16 +14,32 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SmartWallet
+namespace SmartWallet.UI.Controls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TotalIncome.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TotalIncome : UserControl
     {
-        public MainWindow()
+        private Card card;
+        public Card Card
+        {
+            get => card;
+            set
+            {
+                card = value;
+                SetIncome();
+            }
+        }
+        public TotalIncome()
         {
             InitializeComponent();
+        }
+
+        private void SetIncome()
+        {
+            //TODO logic for getting total income
+            tb_Income.Text = card.Balance.ToString();
         }
     }
 }
