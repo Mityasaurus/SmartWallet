@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartWallet" xmlns:controls="clr-namespace:SmartWallet.UI.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
+        Title="MainWindow" Height="1024" Width="1120">
+    <Grid Background="#141332">
+        <Grid Margin="26">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Margin="0 0 0 36">
+                <TextBlock Foreground="White" FontSize="24" FontWeight="SemiBold">
+                    Welcome Back, Ali
+                </TextBlock>
+                <TextBlock Foreground="#A6A6A6" FontSize="16" FontWeight="Regular">
+                    Here's what's happening with your accounts today.
+                </TextBlock>
+            </StackPanel>
+            
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="374"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid Grid.Column="0" Margin="0 0 26 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="126"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <UniformGrid Grid.Row="0" Height="250">
+                        <controls:TotalIncome Margin="0 0 26 0"/>
+                        <controls:TotalOutcome/>
+                    </UniformGrid>
+                </Grid>
+                
+                <controls:CardViewer Grid.Column="1" x:Name="CardViewer" VerticalAlignment="Top"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
