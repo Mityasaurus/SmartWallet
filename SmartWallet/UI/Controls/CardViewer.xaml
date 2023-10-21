@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="SmartWallet.UI.Controls.CardViewer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SmartWallet.UI.Controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Border Height="363" Width="374" CornerRadius="20" Background="#1D1D41">
+            <StackPanel>
+                <TextBlock Margin="23 19" Foreground="White" FontSize="24" FontWeight="SemiBold">
+                    My Cards
+                </TextBlock>
+                
+                <local:CardControl x:Name="DisplayedCard"/>
+                <StackPanel x:Name="CardDots" Margin="0 0 0 15" Orientation="Horizontal" HorizontalAlignment="Center"/>
+                <Border CornerRadius="10" Height="50" Margin="23 0" BorderThickness="2" BorderBrush="White">
+                    <Button Foreground="White" Height="46" Background="Transparent" Click="TransferClick">
+                        <Button.BorderThickness>
+                            0
+                        </Button.BorderThickness>
+                        Transfer
+                    </Button>
+                </Border>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
