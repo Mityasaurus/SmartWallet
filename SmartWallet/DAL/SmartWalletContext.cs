@@ -21,15 +21,15 @@ public class SmartWalletContext: DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Transaction>()
-            .HasOne(t => t.Recipient)
+            .HasOne(t => t.User)
             .WithMany()
-            .HasForeignKey(t => t.RecipientId)
+            .HasForeignKey(t => t.UserId)
             .OnDelete(DeleteBehavior.Restrict);
 
         modelBuilder.Entity<Transaction>()
-            .HasOne(t => t.RecipientCard)
+            .HasOne(t => t.UserCard)
             .WithMany(c => c.Transactions)
-            .HasForeignKey(t => t.RecipientCardId)
+            .HasForeignKey(t => t.UserCardId)
             .OnDelete(DeleteBehavior.Restrict);
     }
 }
