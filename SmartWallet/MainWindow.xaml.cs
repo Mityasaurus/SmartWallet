@@ -24,15 +24,15 @@ namespace SmartWallet
     /// </summary>
     public partial class MainWindow : Window
     {
-        private UserProvider _userProvider = new UserProvider();
+        private DBProvider _dbProvider = new DBProvider();
         
         public MainWindow()
         {
             InitializeComponent();
 
-            CardViewer.Cards = _userProvider.GetAllUsers()[0].Cards;
+            CardViewer.Cards = _dbProvider.GetAllUsers()[0].Cards;
 
-            Console.Write("test");
+            // _dbProvider.AddNewTransaction("8922334455667862", "9438547896267294", 135.68);
         }
     }
 }

@@ -18,4 +18,5 @@ public class Transaction
     public Card RecipientCard { get; set; }
     
     public double Amount { get; set; }
+    public double Rate { get; set; }
 }

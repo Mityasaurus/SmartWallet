@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SmartWallet.DAL.Repository;
 
-public class UserRepository<T> : IRepository<T> where T: class
+public class Repository<T> : IRepository<T> where T: class
 {
     private readonly DbContext _context;
     private readonly DbSet<T> _dbSet;
 
-    public UserRepository(DbContext context)
+    public Repository(DbContext context)
     {
         _context = context;
         _dbSet = _context.Set<T>();
