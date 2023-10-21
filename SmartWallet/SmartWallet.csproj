@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MaterialDesignThemes" Version="5.0.0-ci368" />
     <None Remove="UI\Images\arrow_income.png" />
     <None Remove="UI\Images\arrow_outcome.png" />
   </ItemGroup>
@@ -25,9 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="UI\Images\CardBackground.png" />
-    <Resource Include="UI\Images\CardBackground.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     <Resource Include="UI\Images\arrow_income.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
