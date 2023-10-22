@@ -23,17 +23,9 @@ namespace SmartWallet
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private UserProvider _userProvider;
-
         public LoginWindow()
         {
             InitializeComponent();
-
-            SmartWalletContext context = new SmartWalletContext();
-
-            IRepository<User> userRepository = new Repository<User>(context);
-
-            _userProvider = new UserProvider(userRepository);
         }
 
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -61,7 +53,7 @@ namespace SmartWallet
             string email = tb_Email.Text;
             string password = tb_Password.Password;
 
-            string message = _userProvider.CheckLogin(email, password);
+            string message = UserProvider.CheckLogin(email, password);
 
             if (message != "")
             {
@@ -70,7 +62,7 @@ namespace SmartWallet
             }
             else
             {
-                MainWindow mainWindow = new MainWindow();
+                MainWindow mainWindow = new MainWindow(UserProvider.GetUserByCredentials(email, password).Id);
                 mainWindow.Show();
                 this.Close();
             }
