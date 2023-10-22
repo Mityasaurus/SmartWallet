@@ -12,19 +12,19 @@
                 <ImageBrush ImageSource="..\Images\CardBackground.png"/>
             </StackPanel.Background>
                     
-            <StackPanel Margin="30 30 30 0">
+            <StackPanel Margin="30 20 30 0">
                 <TextBlock Foreground="#8C89B4" FontSize="16" FontWeight="Regular">
                     Current Balance
                 </TextBlock>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Foreground="white" FontSize="24" FontWeight="SemiBold">$</TextBlock>
+                    <TextBlock x:Name="CurrencySymbol" Foreground="white" FontSize="24" FontWeight="SemiBold"/>
                     <TextBlock x:Name="Balance" Foreground="white" FontSize="24" FontWeight="SemiBold"/>
                 </StackPanel>
             </StackPanel>
-                    
+
             <DockPanel Margin="23 68 23 0">
-                <TextBlock x:Name="Number" Foreground="White" FontSize="14" FontWeight="Medium" Margin="0 0 110 0">5282 3456 7890 1289</TextBlock>
-                <TextBlock x:Name="DateExpire" Foreground="White" FontSize="14" FontWeight="Medium">09/25</TextBlock>
+                <TextBlock x:Name="Number" DockPanel.Dock="Left" Width="Auto" Foreground="White" FontSize="14" FontWeight="Medium"/>
+                <TextBlock x:Name="DateExpire" DockPanel.Dock="Right" TextAlignment="Right" Width="Auto" Foreground="White" FontSize="14" FontWeight="Medium"/>
             </DockPanel>
         </StackPanel>
     </Grid>
