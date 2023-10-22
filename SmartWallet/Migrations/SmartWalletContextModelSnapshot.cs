@@ -33,9 +33,8 @@ namespace SmartWallet.Migrations
                     b.Property<double>("Balance")
                         .HasColumnType("float");
 
-                    b.Property<string>("Currency")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Currency")
+                        .HasColumnType("int");
 
                     b.Property<string>("Cvv")
                         .IsRequired()

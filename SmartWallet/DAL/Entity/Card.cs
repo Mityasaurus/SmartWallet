@@ -23,7 +23,7 @@ public class Card
     public string Type { get; set; } // TODO Make Enum
     
     [Required]
-    public string Currency { get; set; } // TODO Make Enum
+    public Currency Currency { get; set; }
     
     [Required]
     public double Balance { get; set; }
