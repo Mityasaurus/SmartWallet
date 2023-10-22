@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using SmartWallet.DAL.Entity;
+using SmartWallet.Providers;
 
 namespace SmartWallet.UI.Controls;
 
@@ -20,6 +21,7 @@ public partial class CardControl : UserControl
             Balance.Text = value.Balance.ToString("N2");
             Number.Text = formatCardNumber(value.Number);
             DateExpire.Text = formatDateExpire(value.DateExpire);
+            CurrencySymbol.Text = MoneyProvider.Symbols[value.Currency];
         }
     }
     
