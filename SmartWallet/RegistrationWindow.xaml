@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SmartWallet"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Registration" Height="660" Width="430" Background="#141332">
+        Title="Registration" Height="660" Width="430" MinHeight="660" MinWidth="430" MaxHeight="660" MaxWidth="430" Background="#141332">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -19,17 +19,18 @@
             <TextBlock Text="Welcome to Smart Wallet!" Foreground="White" FontSize="25" FontWeight="DemiBold" Margin="15 20 0 10"/>
             <TextBlock Text="Your new way of financial management." Foreground="GhostWhite" FontSize="14" Margin="15 0"/>
             <TextBlock Text="Enter name" Foreground="GhostWhite" FontSize="14" Margin="20 40 0 0"></TextBlock>
-            <TextBox x:Name="tb_Name" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}"></TextBox>
+            <TextBox x:Name="tb_Name" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"></TextBox>
             <TextBlock Text="Enter lastname" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
-            <TextBox x:Name="tb_LastName" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}"></TextBox>
+            <TextBox x:Name="tb_LastName" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"></TextBox>
             <TextBlock Text="Enter email" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
-            <TextBox x:Name="tb_Email" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}"></TextBox>
+            <TextBox x:Name="tb_Email" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"></TextBox>
             <TextBlock Text="Enter phone number" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
-            <TextBox x:Name="tb_Phone" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}"></TextBox>
+            <TextBox x:Name="tb_Phone" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"></TextBox>
             <TextBlock Text="Create a password" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
-            <PasswordBox x:Name="tb_Password" Margin="20 7 20 0" Style="{StaticResource PasswordBoxRegistrationWindow}"/>
-            <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="20 40 20 0">
-                <Button x:Name="btn_Register" Content="Create an account" Background="Transparent" BorderThickness="0"/>
+            <PasswordBox x:Name="tb_Password" Margin="20 7 20 0" Style="{StaticResource PasswordBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
+            <TextBlock x:Name="tb_Error" Foreground="Red" FontSize="14" Margin="0 15 0 0" HorizontalAlignment="Center"></TextBlock>
+            <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="20 15 20 0">
+                <Button x:Name="btn_Register" Content="Create an account" Background="Transparent" BorderThickness="0" Click="btn_Register_Click"/>
             </Border>
             <StackPanel Orientation="Horizontal" Margin="0 17" HorizontalAlignment="Center">
                 <TextBlock Text="Already a member?" Foreground="GhostWhite" FontSize="12" Margin="0 0 5 0"/>

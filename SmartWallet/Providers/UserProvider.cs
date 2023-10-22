@@ -44,5 +44,22 @@ namespace SmartWallet.Providers
         {
             _repository.Update(user);
         }
+
+        public string UserExists(User user)
+        {
+            var emails = _repository.GetAll().Select(u => u.Email);
+            if(emails.Contains(user.Email))
+            {
+                return "This email is already registered";
+            }
+
+            var phones = _repository.GetAll().Select(u => u.Phone);
+            if (phones.Contains(user.Phone))
+            {
+                return "This phone is already registered";
+            }
+
+            return "0";
+        }
     }
 }
