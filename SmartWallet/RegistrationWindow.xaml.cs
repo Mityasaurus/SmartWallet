@@ -41,7 +41,9 @@ namespace SmartWallet
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            //TODO Redirection to login window
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
         }
 
         private void btn_Register_Click(object sender, RoutedEventArgs e)
@@ -104,7 +106,9 @@ namespace SmartWallet
 
             _userProvider.AddUser(newUser);
 
-            //TODO Redirection to login window
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
         }
 
         private bool IsValidEmail(string email)

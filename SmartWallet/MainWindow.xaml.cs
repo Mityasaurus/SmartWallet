@@ -32,9 +32,6 @@ namespace SmartWallet
 
             CardViewer.Cards = _dbProvider.GetAllUsers()[0].Cards;
 
-
-            RegistrationWindow registration = new RegistrationWindow();
-            registration.Show();
             // _dbProvider.AddNewTransaction("8922334455667862", "9438547896267294", 135.68);
         }
     }

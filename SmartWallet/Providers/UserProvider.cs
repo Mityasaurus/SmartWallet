@@ -61,5 +61,25 @@ namespace SmartWallet.Providers
 
             return "0";
         }
+
+        public string CheckLogin(string email, string password)
+        {
+            var emails = _repository.GetAll().Select(u => u.Email);
+            if (!emails.Contains(email))
+            {
+                return "This email is not registered";
+            }
+
+            string userPassword = GetAllUsers().Where(u => u.Email == email).First().Password;
+
+            if(userPassword == password)
+            {
+                return "";
+            }
+            else
+            {
+                return "Incorrect password";
+            }
+        }
     }
 }
