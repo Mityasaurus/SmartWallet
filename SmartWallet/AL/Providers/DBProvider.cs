@@ -50,7 +50,7 @@ public class DBProvider
         Card senderCard = _cards.Find(card => card.Number == senderNumber);
         Card recipientCard = _cards.Find(card => card.Number == recipientNumber);
 
-        double rate = 1; // TODO get rate from API
+        double rate = MoneyProvider.GetRate(senderCard.Currency, recipientCard.Currency);
         
         AddNewTransaction(senderCard.UserId, senderCard.Id, recipientCard.UserId, recipientCard.Id, amount, rate);
     }
