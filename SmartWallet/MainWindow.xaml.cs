@@ -33,6 +33,7 @@ namespace SmartWallet
         {
             InitializeComponent();
             _userId = userId;
+            UserName.Text = UserProvider.GetUserByID(_userId).Name;
             
             UpdateUI();
             
