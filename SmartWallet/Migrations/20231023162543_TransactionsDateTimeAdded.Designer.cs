@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartWallet.DAL;
 
@@ -11,9 +12,10 @@ using SmartWallet.DAL;
 namespace SmartWallet.Migrations
 {
     [DbContext(typeof(SmartWalletContext))]
-    partial class SmartWalletContextModelSnapshot : ModelSnapshot
+    [Migration("20231023162543_TransactionsDateTimeAdded")]
+    partial class TransactionsDateTimeAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
