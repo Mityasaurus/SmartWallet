@@ -1,22 +1,6 @@
-﻿using SmartWallet.DAL.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-using SmartWallet.DAL;
-using SmartWallet.DAL.Repository;
 using SmartWallet.Providers;
 
 namespace SmartWallet
@@ -28,6 +12,21 @@ namespace SmartWallet
     {
         private DispatcherTimer _timer;
         private int _userId;
+        private int _cardId;
+
+        public int CardId
+        {
+            get => _cardId;
+            set
+            {
+                if (value < UserProvider.GetUserByID(_userId).Cards.Count && value >= 0)
+                {
+                    _cardId = value;
+                    UpdateUI();
+                    Console.WriteLine(value);
+                }
+            }
+        }
         
         public MainWindow(int userId)
         {
@@ -36,12 +35,18 @@ namespace SmartWallet
             UserName.Text = UserProvider.GetUserByID(_userId).Name;
             
             UpdateUI();
+            CardViewer.SetSelectedCardId += SetSelectedCardId;
             
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(5);
             _timer.Tick += TimerTick;
             _timer.Start();
-            TransactionProvider.AddNewTransaction("8922334455667862", "9438547896267294", 1);
+            TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 1);
+        }
+
+        public void SetSelectedCardId(int id)
+        {
+            CardId = id;
         }
 
         private void TimerTick(object sender, EventArgs e)
