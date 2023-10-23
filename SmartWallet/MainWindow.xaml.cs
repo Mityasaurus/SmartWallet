@@ -18,6 +18,7 @@ using System.Windows.Threading;
 using SmartWallet.DAL;
 using SmartWallet.DAL.Repository;
 using SmartWallet.Providers;
+using SmartWallet.UI.Controls;
 
 namespace SmartWallet
 {
@@ -29,10 +30,10 @@ namespace SmartWallet
         private DispatcherTimer _timer;
         private int _userId;
         
-        public MainWindow(int userId)
+        public MainWindow()
         {
             InitializeComponent();
-            _userId = userId;
+            _userId = 6;
             UserName.Text = UserProvider.GetUserByID(_userId).Name;
             
             UpdateUI();
@@ -41,7 +42,7 @@ namespace SmartWallet
             _timer.Interval = TimeSpan.FromSeconds(5);
             _timer.Tick += TimerTick;
             _timer.Start();
-            TransactionProvider.AddNewTransaction("8922334455667862", "9438547896267294", 1);
+            //TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 65000);
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -52,6 +53,9 @@ namespace SmartWallet
         private void UpdateUI()
         {
             CardViewer.Cards = UserProvider.GetUserByID(_userId).Cards;
+            Analytics.CardNumber = 11;
+            TotalIncome.CardId = 11;
+            TotalOutcome.CardId = 11;
         }
     }
 }

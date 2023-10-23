@@ -62,8 +62,8 @@ namespace SmartWallet
             }
             else
             {
-                MainWindow mainWindow = new MainWindow(UserProvider.GetUserByCredentials(email, password).Id);
-                mainWindow.Show();
+                //MainWindow mainWindow = new MainWindow(UserProvider.GetUserByCredentials(email, password).Id);
+                //mainWindow.Show();
                 this.Close();
             }
         }

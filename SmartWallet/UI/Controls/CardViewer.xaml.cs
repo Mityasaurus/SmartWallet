@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using SmartWallet.DAL.Entity;
+using SmartWallet.Providers;
 
 namespace SmartWallet.UI.Controls;
 
@@ -119,6 +120,7 @@ public partial class CardViewer : UserControl
     private void TransferClick(object sender, RoutedEventArgs e)
     {
         // TODO Transfer
+        TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 6000);
     }
 
     private void AddNewCard_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

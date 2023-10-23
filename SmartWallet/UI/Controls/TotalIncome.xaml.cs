@@ -1,4 +1,5 @@
 ﻿using SmartWallet.DAL.Entity;
+using SmartWallet.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +22,13 @@ namespace SmartWallet.UI.Controls
     /// </summary>
     public partial class TotalIncome : UserControl
     {
-        private Card card;
-        public Card Card
+        private int cardId;
+        public int CardId
         {
-            get => card;
+            get => cardId;
             set
             {
-                card = value;
+                cardId = value;
                 SetIncome();
             }
         }
@@ -38,8 +39,8 @@ namespace SmartWallet.UI.Controls
 
         private void SetIncome()
         {
-            //TODO logic for getting total income
-            tb_Income.Text = card.Balance.ToString();
+            var income = CardProvider.GetIncomeByMonth(DateTime.Now.Month, cardId);
+            tb_Income.Text = $"{income:f2}";
         }
     }
 }

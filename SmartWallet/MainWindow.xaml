@@ -34,14 +34,16 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="126"></RowDefinition>
                     </Grid.RowDefinitions>
-                    
+
                     <UniformGrid Grid.Row="0" Height="250">
-                        <controls:TotalIncome Margin="0 0 26 0"/>
-                        <controls:TotalOutcome/>
+                        <controls:TotalIncome x:Name="TotalIncome" Margin="0 0 26 0"/>
+                        <controls:TotalOutcome x:Name="TotalOutcome"/>
                     </UniformGrid>
                 </Grid>
                 
                 <controls:CardViewer Grid.Column="1" x:Name="CardViewer" VerticalAlignment="Top"/>
+
+                <controls:Analytics x:Name="Analytics"></controls:Analytics>
             </Grid>
         </Grid>
     </Grid>

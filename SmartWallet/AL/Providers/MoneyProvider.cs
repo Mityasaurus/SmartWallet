@@ -202,7 +202,7 @@ public class MoneyProvider
         ApiEngine engine = new ApiEngine();
         string json = engine.getRateJson(from, to, DateTime.Now);
         JObject jObject = JObject.Parse(json);
-        if ((bool)jObject["success"]) return (double)jObject["info"]["rate"];
+        if ((bool)jObject["success"]) return (double)jObject["result"];
         return 0;
     }
 }
