@@ -43,5 +43,7 @@ public class SmartWalletContext: DbContext
             .WithMany()
             .HasForeignKey(t => t.RecipientCardId)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        base.OnModelCreating(modelBuilder);
     }
 }

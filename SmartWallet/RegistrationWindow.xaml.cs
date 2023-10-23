@@ -26,17 +26,17 @@ namespace SmartWallet
     /// </summary>
     public partial class RegistrationWindow : Window
     {
-        private UserProvider _userProvider; 
+        // private UserProvider _userProvider; 
 
         public RegistrationWindow()
         {
             InitializeComponent();
 
-            SmartWalletContext context = new SmartWalletContext();
+            // SmartWalletContext context = new SmartWalletContext();
 
-            IRepository<User> userRepository = new Repository<User>(context);
+            // IRepository<User> userRepository = new Repository<User>(context);
 
-            _userProvider = new UserProvider(userRepository);
+            // _userProvider = new UserProvider(userRepository);
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
@@ -96,7 +96,7 @@ namespace SmartWallet
                 Password = password
             };
 
-            string message = _userProvider.UserExists(newUser);
+            string message = UserProvider.UserExists(newUser);
 
             if (message != "0")
             {
@@ -104,7 +104,7 @@ namespace SmartWallet
                 return;
             }
 
-            _userProvider.AddUser(newUser);
+            UserProvider.AddUser(newUser);
 
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();

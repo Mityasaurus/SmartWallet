@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:SmartWallet.UI.Controls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -20,7 +21,13 @@
                     My Cards
                 </TextBlock>
                 
-                <local:CardControl x:Name="DisplayedCard"/>
+                <local:CardControl x:Name="DisplayedCard" Visibility="Visible" Margin="23 0 23 16"/>
+                <StackPanel x:Name="AddNewCard" Margin="23 0 23 16" MouseLeftButtonUp="AddNewCard_OnMouseLeftButtonUp" Visibility="Collapsed" Width="326" Height="184">
+                    <StackPanel.Background>
+                        <ImageBrush ImageSource="../Images/addCard.png"></ImageBrush>
+                    </StackPanel.Background>
+                </StackPanel>
+                
                 <StackPanel x:Name="CardDots" Margin="0 0 0 15" Orientation="Horizontal" HorizontalAlignment="Center"/>
                 <Border CornerRadius="10" Height="50" Margin="23 0" BorderThickness="2" BorderBrush="White">
                     <Button Foreground="White" Height="46" Background="Transparent" Click="TransferClick">
