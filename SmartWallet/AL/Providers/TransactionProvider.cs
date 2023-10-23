@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SmartWallet.DAL;
 using SmartWallet.DAL.Entity;
@@ -42,6 +43,27 @@ public class TransactionProvider
         Repository<Transaction> repository = new Repository<Transaction>(context);
         return repository.GetAll().Where(t => t.RecipientCardId == id || t.SenderCardId == id).ToList();
     }
+
+    public static List<Transaction> GetTransactionsAfterDate(DateTime dateTime)
+    {
+        SmartWalletContext context = new SmartWalletContext();
+        Repository<Transaction> repository = new Repository<Transaction>(context);
+        return repository.GetAll().Where(t => t.DateTime > dateTime).ToList();
+    }
+    
+    public static List<Transaction> GetTransactionsBeforeDate(DateTime dateTime)
+    {
+        SmartWalletContext context = new SmartWalletContext();
+        Repository<Transaction> repository = new Repository<Transaction>(context);
+        return repository.GetAll().Where(t => t.DateTime < dateTime).ToList();
+    }
+    
+    public static List<Transaction> GetTransactionsByDate(DateTime dateTime)
+    {
+        SmartWalletContext context = new SmartWalletContext();
+        Repository<Transaction> repository = new Repository<Transaction>(context);
+        return repository.GetAll().Where(t => t.DateTime == dateTime).ToList();
+    }
     
     public static void AddNewTransaction(string senderNumber, string recipientNumber, double amount)
     {
@@ -65,7 +87,8 @@ public class TransactionProvider
             RecipientId = recipientId,
             RecipientCardId = recipientCardId,
             Amount = amount,
-            Rate = rate
+            Rate = rate,
+            DateTime = DateTime.Now
         });
     }
 }

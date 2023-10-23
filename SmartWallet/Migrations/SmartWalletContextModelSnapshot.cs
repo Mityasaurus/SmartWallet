@@ -72,6 +72,9 @@ namespace SmartWallet.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<double>("Rate")
                         .HasColumnType("float");
 

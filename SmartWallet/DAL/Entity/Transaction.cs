@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace SmartWallet.DAL.Entity;
@@ -19,4 +20,5 @@ public class Transaction
     
     public double Amount { get; set; }
     public double Rate { get; set; }
+    public DateTime DateTime { get; set; }
 }
