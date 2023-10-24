@@ -11,7 +11,6 @@ namespace SmartWallet
     /// </summary>
     public partial class MainWindow : Window
     {
-        private DispatcherTimer _timer;
         private int _userId;
         private int _cardId;
 
@@ -34,14 +33,10 @@ namespace SmartWallet
             InitializeComponent();
             _userId = userId;
             UserName.Text = UserProvider.GetUserByID(_userId).Name;
-            
+
             UpdateUI();
             CardViewer.SetSelectedCardId += SetSelectedCardId;
-            
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(5);
-            _timer.Tick += TimerTick;
-            _timer.Start();
+
             //TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 65000);
         }
 
@@ -50,17 +45,17 @@ namespace SmartWallet
             CardId = id;
         }
 
-        private void TimerTick(object sender, EventArgs e)
-        {
-            UpdateUI();
-        }
-
         private void UpdateUI()
         {
             CardViewer.Cards = UserProvider.GetUserByID(_userId).Cards;
             Analytics.CardNumber = CardId;
             TotalIncome.CardId = CardId;
             TotalOutcome.CardId = CardId;
+        }
+
+        private void btn_Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateUI();
         }
     }
 }
