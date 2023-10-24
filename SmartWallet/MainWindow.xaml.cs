@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Threading;
 using SmartWallet.Providers;
+using SmartWallet.UI.Controls;
 
 namespace SmartWallet
 {
@@ -41,7 +42,7 @@ namespace SmartWallet
             _timer.Interval = TimeSpan.FromSeconds(5);
             _timer.Tick += TimerTick;
             _timer.Start();
-            TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 1);
+            //TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 65000);
         }
 
         public void SetSelectedCardId(int id)
@@ -57,6 +58,9 @@ namespace SmartWallet
         private void UpdateUI()
         {
             CardViewer.Cards = UserProvider.GetUserByID(_userId).Cards;
+            Analytics.CardNumber = CardId;
+            TotalIncome.CardId = CardId;
+            TotalOutcome.CardId = CardId;
         }
     }
 }

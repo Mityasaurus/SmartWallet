@@ -15,7 +15,7 @@
             <StackPanel Grid.Row="0" Margin="0 0 0 36">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Foreground="White" FontSize="24" FontWeight="SemiBold" Margin="0 0 5 0">
-                        Welcome Back, 
+                        Welcome Back,
                     </TextBlock>
                     <TextBlock x:Name="UserName" Foreground="White" FontSize="24" FontWeight="SemiBold"/>
                 </StackPanel>
@@ -23,25 +23,27 @@
                     Here's what's happening with your accounts today.
                 </TextBlock>
             </StackPanel>
-            
+
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="374"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <Grid Grid.Column="0" Margin="0 0 26 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="126"></RowDefinition>
                     </Grid.RowDefinitions>
-                    
+
                     <UniformGrid Grid.Row="0" Height="250">
-                        <controls:TotalIncome Margin="0 0 26 0"/>
-                        <controls:TotalOutcome/>
+                        <controls:TotalIncome x:Name="TotalIncome" Margin="0 0 26 0"/>
+                        <controls:TotalOutcome x:Name="TotalOutcome"/>
                     </UniformGrid>
                 </Grid>
-                
+
                 <controls:CardViewer Grid.Column="1" x:Name="CardViewer" VerticalAlignment="Top"/>
+
+                <controls:Analytics x:Name="Analytics" Margin="-2,154,24,413"/>
             </Grid>
         </Grid>
     </Grid>
