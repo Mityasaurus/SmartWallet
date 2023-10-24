@@ -24,7 +24,7 @@ public partial class CardViewer : UserControl
         set
         {
             selectedIndex = value;
-            if (SetSelectedCardId != null) SetSelectedCardId.Invoke(value);
+            if (SetSelectedCardId != null && value >= 0 && value < CardsList.Count) SetSelectedCardId.Invoke(CardsList[value].CardData.Id);
         }
     }
 

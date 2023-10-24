@@ -20,12 +20,12 @@ namespace SmartWallet
             get => _cardId;
             set
             {
-                if (value < UserProvider.GetUserByID(_userId).Cards.Count && value >= 0)
-                {
+                //if (value < UserProvider.GetUserByID(_userId).Cards.Count && value >= 0)
+                //{
                     _cardId = value;
                     UpdateUI();
                     Console.WriteLine(value);
-                }
+                //}
             }
         }
         
