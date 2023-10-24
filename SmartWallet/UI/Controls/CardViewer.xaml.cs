@@ -12,7 +12,22 @@ namespace SmartWallet.UI.Controls;
 
 public partial class CardViewer : UserControl
 {
-    private int _selectedIndex { get; set; }
+    public delegate void SetSelectedCardIdHandler(int id);
+
+    public event SetSelectedCardIdHandler SetSelectedCardId;
+    
+    private int selectedIndex { get; set; }
+
+    private int _selectedIndex
+    {
+        get => selectedIndex;
+        set
+        {
+            selectedIndex = value;
+            if (SetSelectedCardId != null) SetSelectedCardId.Invoke(value);
+        }
+    }
+
     private List<Border> CardDotsList = new List<Border>();
     private List<CardControl> CardsList = new List<CardControl>();
 
