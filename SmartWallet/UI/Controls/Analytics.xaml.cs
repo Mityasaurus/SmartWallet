@@ -32,6 +32,10 @@ namespace SmartWallet.UI.Controls
             get => _cardNumber;
             set
             {
+                if (value != _cardNumber)
+                {
+                    _oldTransactionsCount = -1;
+                }
                 _cardNumber = value;
                 UpdateChartSeries();
             }
@@ -49,7 +53,7 @@ namespace SmartWallet.UI.Controls
         {
             var Transactions = TransactionProvider.GetAllTransactionByCardId(CardNumber);
 
-            if (Transactions == null || Transactions.Count == 0)
+            if (Transactions == null)
             {
                 return;
             }
