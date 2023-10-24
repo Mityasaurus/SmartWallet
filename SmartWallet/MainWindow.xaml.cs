@@ -30,10 +30,10 @@ namespace SmartWallet
         private DispatcherTimer _timer;
         private int _userId;
         
-        public MainWindow()
+        public MainWindow(int userId)
         {
             InitializeComponent();
-            _userId = 6;
+            _userId = userId;
             UserName.Text = UserProvider.GetUserByID(_userId).Name;
             
             UpdateUI();

@@ -25,6 +25,7 @@ namespace SmartWallet.UI.Controls
     public partial class Analytics : UserControl
     {
         private int _cardNumber;
+        private int _oldTransactionsCount;
 
         public int CardNumber
         {
@@ -48,31 +49,45 @@ namespace SmartWallet.UI.Controls
         {
             var Transactions = TransactionProvider.GetAllTransactionByCardId(CardNumber);
 
-            if (Transactions == null)
+            if (Transactions == null || Transactions.Count == 0)
             {
                 return;
             }
 
+            if(Transactions.Count == _oldTransactionsCount)
+            {
+                return;
+            }
+
+            _oldTransactionsCount = Transactions.Count;
+
             ChartSeries = new SeriesCollection();
             MonthLabels = new List<string>();
 
-            var uniqueMonths = Transactions.Select(t => t.DateTime.Month).Distinct().Reverse().Take(6).Reverse();
-
-            // Создаем серии для income и outcome
-            var incomeSeries = new ColumnSeries
-            {
-                Title = "Income",
-                Values = new ChartValues<double>(),
-                DataLabels = true,
-                LabelPoint = point => $"{point.Y:N2}",
-            };
+            var uniqueMonths = Transactions.Select(t => t.DateTime.Month).Distinct().Reverse().Take(8).Reverse();
 
             var outcomeSeries = new ColumnSeries
             {
                 Title = "Outcome",
                 Values = new ChartValues<double>(),
-                DataLabels = true,
+                DataLabels = false,
                 LabelPoint = point => $"{point.Y:N2}",
+                Fill = new SolidColorBrush(Color.FromRgb(100, 207, 246)),
+                MaxColumnWidth = 15,
+                ColumnPadding = 8,
+                Foreground = new SolidColorBrush(Colors.White),
+            };
+
+            var incomeSeries = new ColumnSeries
+            {
+                Title = "Income",
+                Values = new ChartValues<double>(),
+                DataLabels = false,
+                LabelPoint = point => $"{point.Y:N2}",
+                Fill = new SolidColorBrush(Color.FromRgb(99, 89, 233)),
+                MaxColumnWidth = 15,
+                ColumnPadding = 8,
+                Foreground = new SolidColorBrush(Colors.White),
             };
 
             foreach (var month in uniqueMonths)
@@ -80,15 +95,12 @@ namespace SmartWallet.UI.Controls
                 var income = CardProvider.GetIncomeByMonth(month, CardNumber);
                 var outcome = CardProvider.GetOutcomeByMonth(month, CardNumber);
 
-                // Добавляем данные в серии
                 incomeSeries.Values.Add(income);
                 outcomeSeries.Values.Add(outcome);
 
-                // Добавляем месяц внизу диаграммы
                 MonthLabels.Add($"{month}");
             }
 
-            // Добавляем серии в ChartSeries
             ChartSeries.Add(incomeSeries);
             ChartSeries.Add(outcomeSeries);
 
