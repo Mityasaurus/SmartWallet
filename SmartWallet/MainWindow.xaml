@@ -5,46 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartWallet" xmlns:controls="clr-namespace:SmartWallet.UI.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1024" Width="1120">
+        Title="MainWindow" Height="1000" Width="1200">
     <Grid Background="#141332">
-        <Grid Margin="26">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Margin="0 0 0 36">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.ColumnSpan="2" Margin="15 20 0 0">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Foreground="White" FontSize="24" FontWeight="SemiBold" Margin="0 0 5 0">
+                    <TextBlock Foreground="White" FontSize="28" FontWeight="SemiBold" Margin="0 0 5 0">
                         Welcome Back,
                     </TextBlock>
-                    <TextBlock x:Name="UserName" Foreground="White" FontSize="24" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="UserName" Foreground="White" FontSize="28" FontWeight="SemiBold"/>
                 </StackPanel>
-                <TextBlock Foreground="#A6A6A6" FontSize="16" FontWeight="Regular">
+                <TextBlock Foreground="#A6A6A6" FontSize="19" FontWeight="Regular" >
                     Here's what's happening with your accounts today.
                 </TextBlock>
             </StackPanel>
+            <controls:TotalIncome Grid.Row="1" x:Name="TotalIncome" Margin="15 25"/>
+            <controls:TotalOutcome Grid.Row="1" Grid.Column="2" x:Name="TotalOutcome" Margin="15 25"/>
 
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="374"/>
-                </Grid.ColumnDefinitions>
+            <controls:Analytics x:Name="Analytics" Grid.Row="2" Grid.ColumnSpan="2" Margin="15"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4.7*"/>
+                <RowDefinition Height="3.8*"/>
+            </Grid.RowDefinitions>
+            <Border BorderThickness="2" BorderBrush="White" CornerRadius="10" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Margin="17">
+                <Button x:Name="btn_Refresh" Content="Refresh" Background="Transparent" BorderThickness="0" Click="btn_Refresh_Click"
+                        Width="150" Height="50"/>
+            </Border>
 
-                <Grid Grid.Column="0" Margin="0 0 26 0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="126"></RowDefinition>
-                    </Grid.RowDefinitions>
-
-                    <UniformGrid Grid.Row="0" Height="250">
-                        <controls:TotalIncome x:Name="TotalIncome" Margin="0 0 26 0"/>
-                        <controls:TotalOutcome x:Name="TotalOutcome"/>
-                    </UniformGrid>
-                </Grid>
-
-                <controls:CardViewer Grid.Column="1" x:Name="CardViewer" VerticalAlignment="Top"/>
-
-                <controls:Analytics x:Name="Analytics" Margin="-2,154,24,413"/>
-            </Grid>
+            <controls:CardViewer Grid.Row="1" x:Name="CardViewer" VerticalAlignment="Top" Margin="0 25 5 0"/>
         </Grid>
     </Grid>
 </Window>
