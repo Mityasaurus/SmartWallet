@@ -39,6 +39,10 @@
     <Resource Include="UI\Images\addCard.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <None Remove="UI\Images\Calendar.png" />
+    <Resource Include="UI\Images\Calendar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

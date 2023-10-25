@@ -65,4 +65,68 @@
         </Style.Triggers>
     </Style>
     
+    <Style x:Key="DatePickerStyle" TargetType="DatePicker">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#AEABD8"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DatePicker">
+                    <Grid x:Name="DatePickerGrid">
+                        <Border 
+                            BorderBrush="#AEABD8" 
+                            CornerRadius="10" 
+                            BorderThickness="1"
+                            Width="100"
+                            Height="38">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="18"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                
+                                <CalendarButton Grid.Column="0" Width="18" Height="18">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="Images/Calendar.png"/>
+                                    </Button.Background>
+                                </CalendarButton>
+                                
+                                <Popup AllowsTransparency="True"
+                                       Placement="Bottom"
+                                       PlacementTarget="{Binding ElementName=DatePickerGrid}"
+                                       StaysOpen="False"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridColumnHeader">
+                    <TextBlock 
+                        Text="{TemplateBinding Content}" 
+                        TextAlignment="Center" 
+                        VerticalAlignment="Center"
+                        FontSize="12"
+                        Foreground="#AEABD8"
+                        FontWeight="Regular"></TextBlock>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="DataGridCellStyle" TargetType="DataGridCell">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+    
 </ResourceDictionary>
