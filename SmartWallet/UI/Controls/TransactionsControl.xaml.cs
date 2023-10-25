@@ -45,6 +45,7 @@ public class StatusToColorConverter : IValueConverter
 
 public partial class TransactionsControl : UserControl
 {
+    private bool _isDateChangedByCode = true;
     private List<TransactionsItem> _transactions { get; set; }
 
     public static readonly DependencyProperty CardIdProperty = DependencyProperty.Register(
@@ -56,8 +57,6 @@ public partial class TransactionsControl : UserControl
         set
         {
             SetValue(CardIdProperty, value);
-            // Task upodateList = new Task(() => UpdateList());
-            // upodateList.Start();
             UpdateList();
         }
     }
@@ -65,12 +64,19 @@ public partial class TransactionsControl : UserControl
     public TransactionsControl()
     {
         InitializeComponent();
+        
+        EndDatePicker.SelectedDate = DateTime.Today;
+        StartDatePicker.SelectedDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+        _isDateChangedByCode = false;
     }
 
     private async Task UpdateList()
     {
-        _transactions = await ParseTransactions(TransactionProvider.GetAllTransactionByCardId(CardId).Take(10).ToList());
-        Console.WriteLine("first");
+        if (StartDatePicker.SelectedDate == null || EndDatePicker.SelectedDate == null) return;
+        DateTime startDate = StartDatePicker.SelectedDate.Value;
+        DateTime endDate = EndDatePicker.SelectedDate.Value;
+        
+        _transactions = await ParseTransactions(TransactionProvider.GetTransactionsBetweenDate(startDate, endDate, CardId).ToList());
         TransactionsList.ItemsSource = _transactions;
         TransactionsList.Items.Refresh();
     }
@@ -78,11 +84,11 @@ public partial class TransactionsControl : UserControl
     private async Task<List<TransactionsItem>> ParseTransactions(List<Transaction> transactions)
     {
         List<TransactionsItem> items = new List<TransactionsItem>();
+        
         foreach (Transaction transaction in transactions)
         {
             Card recipient = CardProvider.GetAllCards().Find(c => c.Id == transaction.RecipientCardId);
             Card sender = CardProvider.GetAllCards().Find(c => c.Id == transaction.SenderCardId);
-            // Card sender = CardProvider.GetCardById(transaction.SenderCardId);
             TransactionsItem item = new TransactionsItem()
             {
                 Card = transaction.SenderCardId == CardId 
@@ -97,5 +103,34 @@ public partial class TransactionsControl : UserControl
         }
 
         return items;
+    }
+
+    private void EndDatePicker_OnSelectedDateChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (StartDatePicker.SelectedDate == null) return;
+        DateTime startDate = StartDatePicker.SelectedDate.Value;
+        if (startDate > EndDatePicker.SelectedDate.Value)
+        {
+            DateTime selectedDate = EndDatePicker.SelectedDate.Value;
+            StartDatePicker.SelectedDate = new DateTime(selectedDate.Year, selectedDate.Month, 1);
+        }
+
+        UpdateList();
+    }
+
+    private void StartDatePicker_OnSelectedDateChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (EndDatePicker.SelectedDate == null) return;
+        DateTime endDate = EndDatePicker.SelectedDate.Value;
+        if (StartDatePicker.SelectedDate.Value > endDate)
+        {
+            DateTime selectedDate = StartDatePicker.SelectedDate.Value;
+            DateTime endOfMonth = new DateTime(selectedDate.Year, selectedDate.Month,
+                DateTime.DaysInMonth(selectedDate.Year, selectedDate.Month));
+            if (DateTime.Today < endOfMonth) EndDatePicker.SelectedDate = DateTime.Today;
+            else EndDatePicker.SelectedDate = endOfMonth;
+        }
+
+        UpdateList();
     }
 }

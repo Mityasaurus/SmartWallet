@@ -11,55 +11,60 @@
     </UserControl.Resources>
     <Grid>
         <Border CornerRadius="20" Background="#1D1D41">
-            <StackPanel Margin="25">
-                <DockPanel Margin="0 0 0 35">
+            <Grid Margin="25">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <DockPanel Grid.Row="0" Margin="0 0 0 35">
                     <TextBlock Foreground="White" FontSize="24" FontWeight="SemiBold">Transactions</TextBlock>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                        <DatePicker Margin="0 0 10 0" Style="{StaticResource DatePickerStyle1}"/>
-                        <DatePicker Style="{StaticResource DatePickerStyle1}"/>
+                        <DatePicker x:Name="StartDatePicker" Margin="0 0 10 0" Style="{StaticResource DatePickerStyle1}" SelectedDateChanged="StartDatePicker_OnSelectedDateChanged" />
+                        <DatePicker x:Name="EndDatePicker" Style="{StaticResource DatePickerStyle1}" SelectedDateChanged="EndDatePicker_OnSelectedDateChanged" />
                     </StackPanel>
                 </DockPanel>
-                <DataGrid 
-                    GridLinesVisibility="None" 
-                    x:Name="TransactionsList" 
-                    IsReadOnly="True" 
-                    Background="Transparent" 
-                    Foreground="White" 
-                    Height="300"
+                <DataGrid
+                    Grid.Row="1"
+                    GridLinesVisibility="None"
+                    x:Name="TransactionsList"
+                    IsReadOnly="True"
+                    Background="Transparent"
+                    Foreground="White"
                     AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn 
-                            Header="Card Number" 
-                            Width="*" 
-                            Binding="{Binding Card}" 
-                            HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"/>
-                        <DataGridTextColumn 
-                            Header="Date" 
-                            Width="*" 
-                            Binding="{Binding Date}" 
-                            HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"/>
-                        <DataGridTextColumn 
-                            Header="Amount" 
-                            Width="*" 
-                            Binding="{Binding Amount}" 
-                            HeaderStyle="{StaticResource DataGridColumnHeaderStyle}"/>
-                        <DataGridTemplateColumn 
-                            Header="Action" 
-                            Width="*" 
+                        <DataGridTextColumn
+                            Header="Card Number"
+                            Width="*"
+                            Binding="{Binding Card}"
+                            HeaderStyle="{StaticResource DataGridColumnHeaderStyle}" />
+                        <DataGridTextColumn
+                            Header="Date"
+                            Width="*"
+                            Binding="{Binding Date}"
+                            HeaderStyle="{StaticResource DataGridColumnHeaderStyle}" />
+                        <DataGridTextColumn
+                            Header="Amount"
+                            Width="*"
+                            Binding="{Binding Amount}"
+                            HeaderStyle="{StaticResource DataGridColumnHeaderStyle}" />
+                        <DataGridTemplateColumn
+                            Header="Action"
+                            Width="*"
                             HeaderStyle="{StaticResource DataGridColumnHeaderStyle}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Border 
-                                        CornerRadius="10" 
-                                        Height="20" 
-                                        Width="70" 
+                                    <Border
+                                        CornerRadius="10"
+                                        Height="20"
+                                        Width="70"
                                         Background="{Binding Converter={StaticResource StatusToColorConverter}}">
-                                        <TextBlock 
-                                            Text="{Binding TransactionStatus}" 
+                                        <TextBlock
+                                            Text="{Binding TransactionStatus}"
                                             FontSize="12"
                                             FontWeight="Regular"
-                                            TextAlignment="Center" 
-                                            VerticalAlignment="Center"/>
+                                            TextAlignment="Center"
+                                            VerticalAlignment="Center" />
                                     </Border>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -67,20 +72,20 @@
                     </DataGrid.Columns>
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Height" Value="35"/>
-                            <Setter Property="Margin" Value="0 0 0 20"/>
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="Height" Value="35" />
+                            <Setter Property="Margin" Value="0 0 0 20" />
                         </Style>
                     </DataGrid.RowStyle>
                     <DataGrid.CellStyle>
                         <Style TargetType="DataGridCell">
-                            <Setter Property="FontSize" Value="16"/>
-                            <Setter Property="FontWeight" Value="Regular"/>
+                            <Setter Property="FontSize" Value="16" />
+                            <Setter Property="FontWeight" Value="Regular" />
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="DataGridCell">
-                                        <ContentPresenter 
-                                            VerticalAlignment="Center" 
+                                        <ContentPresenter
+                                            VerticalAlignment="Center"
                                             HorizontalAlignment="Center">
                                         </ContentPresenter>
                                     </ControlTemplate>
@@ -89,7 +94,7 @@
                         </Style>
                     </DataGrid.CellStyle>
                 </DataGrid>
-            </StackPanel>
+            </Grid>
         </Border>
     </Grid>
 </UserControl>

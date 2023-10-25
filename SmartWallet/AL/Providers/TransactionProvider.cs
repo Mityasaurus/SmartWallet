@@ -44,25 +44,24 @@ public class TransactionProvider
         return repository.GetAll().Where(t => t.RecipientCardId == id || t.SenderCardId == id).ToList();
     }
 
-    public static List<Transaction> GetTransactionsAfterDate(DateTime dateTime)
+    public static List<Transaction> GetTransactionsAfterDate(DateTime dateTime, int id)
     {
-        SmartWalletContext context = new SmartWalletContext();
-        Repository<Transaction> repository = new Repository<Transaction>(context);
-        return repository.GetAll().Where(t => t.DateTime > dateTime).ToList();
+        return GetAllTransactionByCardId(id).Where(t => t.DateTime > dateTime).ToList();
     }
     
-    public static List<Transaction> GetTransactionsBeforeDate(DateTime dateTime)
+    public static List<Transaction> GetTransactionsBeforeDate(DateTime dateTime, int id)
     {
-        SmartWalletContext context = new SmartWalletContext();
-        Repository<Transaction> repository = new Repository<Transaction>(context);
-        return repository.GetAll().Where(t => t.DateTime < dateTime).ToList();
+        return GetAllTransactionByCardId(id).Where(t => t.DateTime < dateTime).ToList();
     }
     
-    public static List<Transaction> GetTransactionsByDate(DateTime dateTime)
+    public static List<Transaction> GetTransactionsByDate(DateTime dateTime, int id)
     {
-        SmartWalletContext context = new SmartWalletContext();
-        Repository<Transaction> repository = new Repository<Transaction>(context);
-        return repository.GetAll().Where(t => t.DateTime == dateTime).ToList();
+        return GetAllTransactionByCardId(id).Where(t => t.DateTime == dateTime).ToList();
+    }
+    
+    public static List<Transaction> GetTransactionsBetweenDate(DateTime startDate, DateTime endDate, int id)
+    {
+        return GetAllTransactionByCardId(id).Where(t => t.DateTime <= endDate && t.DateTime >= startDate).ToList();
     }
     
     public static void AddNewTransaction(string senderNumber, string recipientNumber, double amount)
