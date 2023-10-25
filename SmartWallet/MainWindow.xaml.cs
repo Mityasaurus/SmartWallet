@@ -49,8 +49,7 @@ namespace SmartWallet
         {
             CardViewer.Cards = UserProvider.GetUserByID(_userId).Cards;
             Analytics.CardNumber = CardId;
-            TotalIncome.CardId = CardId;
-            TotalOutcome.CardId = CardId;
+            TransactionsView.CardId = CardId;
         }
 
         private void btn_Refresh_Click(object sender, RoutedEventArgs e)

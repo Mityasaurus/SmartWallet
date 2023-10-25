@@ -37,6 +37,7 @@
             <controls:TotalOutcome Grid.Row="1" Grid.Column="2" x:Name="TotalOutcome" Margin="15 25"/>
 
             <controls:Analytics x:Name="Analytics" Grid.Row="2" Grid.ColumnSpan="2" Margin="15"/>
+            <controls:TransactionsControl Grid.Row="3" Grid.ColumnSpan="2" x:Name="TransactionsView" Margin="15 0 15 15"></controls:TransactionsControl>
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
