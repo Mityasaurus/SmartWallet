@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="LottieSharp" Version="2.2.0" />
     <PackageReference Include="MaterialDesignThemes" Version="5.0.0-ci368" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.23" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.23">
@@ -44,6 +45,15 @@
     <Resource Include="UI\Images\Calendar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <None Remove="UI\Animations\noTransactions.json" />
+    <Resource Include="UI\Animations\noTransactions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="UI\Animations\noTransactions1.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\sokol\.nuget\packages\lottiesharp\2.3.0\contentFiles\any\net6.0-windows7.0\lottie_sharp.ico" />
   </ItemGroup>
 
 </Project>

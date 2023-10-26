@@ -45,7 +45,6 @@ public class StatusToColorConverter : IValueConverter
 
 public partial class TransactionsControl : UserControl
 {
-    private bool _isDateChangedByCode = true;
     private List<TransactionsItem> _transactions { get; set; }
 
     public static readonly DependencyProperty CardIdProperty = DependencyProperty.Register(
@@ -67,7 +66,8 @@ public partial class TransactionsControl : UserControl
         
         EndDatePicker.SelectedDate = DateTime.Today;
         StartDatePicker.SelectedDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-        _isDateChangedByCode = false;
+        
+        AnimationView.PlayAnimation();
     }
 
     private async Task UpdateList()
@@ -77,8 +77,20 @@ public partial class TransactionsControl : UserControl
         DateTime endDate = EndDatePicker.SelectedDate.Value;
         
         _transactions = await ParseTransactions(TransactionProvider.GetTransactionsBetweenDate(startDate, endDate, CardId).ToList());
-        TransactionsList.ItemsSource = _transactions;
-        TransactionsList.Items.Refresh();
+
+        if (_transactions.Count == 0)
+        {
+            TransactionsList.Visibility = Visibility.Collapsed;
+            AnimationView.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            TransactionsList.ItemsSource = _transactions;
+            TransactionsList.Items.Refresh();
+            
+            TransactionsList.Visibility = Visibility.Visible;
+            AnimationView.Visibility = Visibility.Collapsed;
+        }
     }
 
     private async Task<List<TransactionsItem>> ParseTransactions(List<Transaction> transactions)
