@@ -8,20 +8,22 @@ namespace SmartWallet.Providers;
 
 public class CardProvider
 {
-    private Repository<Card> _repository;
+    private Repository<Card> _cardRepository;
+    private List<Card> _cards;
 
     public CardProvider(SmartWalletContext context)
     {
-        _repository = new Repository<Card>(context);
+        _cardRepository = new Repository<Card>(context);
+        _cards = _cardRepository.GetAll().ToList();
     }
     
     public List<Card> GetAllCards()
     {
-        return _repository.GetAll().ToList();
+        return _cards;
     }
     
     public Card GetCardById(int id)
     {
-        return _repository.Get(id);
+        return _cardRepository.Get(id);
     }
 }

@@ -11,36 +11,40 @@ public class TransactionProvider
 {
     private Repository<Transaction> _transactionRepository;
     private Repository<Card> _cardRepository;
+    private List<Transaction> _transactions;
+    private List<Card> _cards;
 
     public TransactionProvider(SmartWalletContext context)
     {
         _transactionRepository = new Repository<Transaction>(context);
         _cardRepository = new Repository<Card>(context);
+        _transactions = _transactionRepository.GetAll().ToList();
+        _cards = _cardRepository.GetAll().ToList();
     }
     
     public List<Transaction> GetAllTransactions()
     {
-        return _transactionRepository.GetAll().ToList();
+        return _transactions;
     }
 
     public List<Transaction> GetAllTransactionSendByCardId(int id)
     {
-        return _transactionRepository.GetAll().Where(t => t.SenderCardId == id).ToList();
+        return _transactions.Where(t => t.SenderCardId == id).ToList();
     }
     
     public List<Transaction> GetAllTransactionReceivedByCardId(int id)
     {
-        return _transactionRepository.GetAll().Where(t => t.RecipientCardId == id).ToList();
+        return _transactions.Where(t => t.RecipientCardId == id).ToList();
     }
 
     public Transaction GetTransactionById(int id)
     {
-        return _transactionRepository.GetAll().ToList().Find(t => t.Id == id);
+        return _transactions.Find(t => t.Id == id);
     }
     
     public List<Transaction> GetAllTransactionByCardId(int id)
     {
-        return _transactionRepository.GetAll().Where(t => t.RecipientCardId == id || t.SenderCardId == id).ToList();
+        return _transactions.Where(t => t.RecipientCardId == id || t.SenderCardId == id).ToList();
     }
 
     public List<Transaction> GetTransactionsAfterDate(DateTime dateTime, int id)
@@ -83,8 +87,8 @@ public class TransactionProvider
     
     public void AddNewTransaction(string senderNumber, string recipientNumber, double amount) // TODO remove static
     {
-        Card senderCard = _cardRepository.GetAll().ToList().Find(card => card.Number == senderNumber);
-        Card recipientCard = _cardRepository.GetAll().ToList().Find(card => card.Number == recipientNumber);
+        Card senderCard = _cards.Find(card => card.Number == senderNumber);
+        Card recipientCard = _cards.Find(card => card.Number == recipientNumber);
 
         double rate = MoneyProvider.GetRate(senderCard.Currency, recipientCard.Currency);
         
