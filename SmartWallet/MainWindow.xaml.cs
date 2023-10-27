@@ -1,8 +1,6 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Threading;
+﻿using System.Windows;
+using SmartWallet.DAL;
 using SmartWallet.Providers;
-using SmartWallet.UI.Controls;
 
 namespace SmartWallet
 {
@@ -19,21 +17,21 @@ namespace SmartWallet
             get => _cardId;
             set
             {
-                //if (value < UserProvider.GetUserByID(_userId).Cards.Count && value >= 0)
-                //{
-                    _cardId = value;
-                    UpdateUI();
-                    Console.WriteLine(value);
-                //}
+                _cardId = value;
+                UpdateUI();
             }
         }
+
+        private SmartWalletContext _context;
+        private CardProvider _cardProvider;
+        private TransactionProvider _transactionProvider;
+        private UserProvider _userProvider;
         
         public MainWindow(int userId)
         {
             InitializeComponent();
             _userId = userId;
-            UserName.Text = UserProvider.GetUserByID(_userId).Name;
-
+            
             UpdateUI();
             CardViewer.SetSelectedCardId += SetSelectedCardId;
 
@@ -47,9 +45,29 @@ namespace SmartWallet
 
         private void UpdateUI()
         {
-            CardViewer.Cards = UserProvider.GetUserByID(_userId).Cards;
+            // refresh context and providers
+            _context = new SmartWalletContext();
+            _cardProvider = new CardProvider(_context);
+            _transactionProvider = new TransactionProvider(_context);
+            _userProvider = new UserProvider(_context);
+            
+            // Greeting line
+            UserName.Text = _userProvider.GetUserById(_userId).Name;
+            
+            // MyCards Control
+            CardViewer.TransactionProvider = _transactionProvider;
+            CardViewer.Cards = _userProvider.GetUserById(_userId).Cards;
+            
+            // Analytics Control
             Analytics.CardNumber = CardId;
+            Analytics.TransactionProvider = _transactionProvider;
+            Analytics.Refresh();
+            
+            // Transaction control
+            TransactionsView.CardProvider = _cardProvider;
+            TransactionsView.TransactionProvider = _transactionProvider;
             TransactionsView.CardId = CardId;
+            TransactionsView.Refresh();
         }
 
         private void btn_Refresh_Click(object sender, RoutedEventArgs e)

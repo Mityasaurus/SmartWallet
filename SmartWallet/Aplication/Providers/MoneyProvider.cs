@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.VisualBasic;
 using Newtonsoft.Json.Linq;
 using SmartWallet.AL.API;
 using SmartWallet.DAL.Entity;

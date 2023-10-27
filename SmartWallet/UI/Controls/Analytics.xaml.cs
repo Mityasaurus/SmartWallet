@@ -1,20 +1,9 @@
 ﻿using LiveCharts.Wpf;
 using LiveCharts;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using SmartWallet.DAL.Entity;
 using SmartWallet.Providers;
 
 namespace SmartWallet.UI.Controls
@@ -37,9 +26,10 @@ namespace SmartWallet.UI.Controls
                     _oldTransactionsCount = -1;
                 }
                 _cardNumber = value;
-                UpdateChartSeries();
             }
         }
+
+        public TransactionProvider TransactionProvider;
 
         public SeriesCollection ChartSeries { get; set; }
         public List<string> MonthLabels { get; set; }
@@ -49,8 +39,15 @@ namespace SmartWallet.UI.Controls
             InitializeComponent();
         }
 
+        public void Refresh()
+        {
+            UpdateChartSeries();
+        }
+
         private void UpdateChartSeries()
         {
+            if (TransactionProvider == null) return;
+            
             var Transactions = TransactionProvider.GetAllTransactionByCardId(CardNumber);
 
             if (Transactions == null)
@@ -96,8 +93,8 @@ namespace SmartWallet.UI.Controls
 
             foreach (var month in uniqueMonths)
             {
-                var income = CardProvider.GetIncomeByMonth(month, CardNumber);
-                var outcome = CardProvider.GetOutcomeByMonth(month, CardNumber);
+                var income = TransactionProvider.GetIncomeByMonth(month, CardNumber);
+                var outcome = TransactionProvider.GetOutcomeByMonth(month, CardNumber);
 
                 incomeSeries.Values.Add(income);
                 outcomeSeries.Values.Add(outcome);
