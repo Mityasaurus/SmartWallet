@@ -9,73 +9,93 @@ namespace SmartWallet.Providers;
 
 public class TransactionProvider
 {
-    public static List<Transaction> GetAllTransactions()
-    {
-        SmartWalletContext context = new SmartWalletContext();
-        Repository<Transaction> repository = new Repository<Transaction>(context);
-        return repository.GetAll().ToList();
-    }
+    private Repository<Transaction> _transactionRepository;
+    private Repository<Card> _cardRepository;
+    private List<Transaction> _transactions;
+    private List<Card> _cards;
 
-    public static List<Transaction> GetAllTransactionSendByCardId(int id)
+    public TransactionProvider(SmartWalletContext context)
     {
-        SmartWalletContext context = new SmartWalletContext();
-        Repository<Transaction> repository = new Repository<Transaction>(context);
-        return repository.GetAll().Where(t => t.SenderCardId == id).ToList();
+        _transactionRepository = new Repository<Transaction>(context);
+        _cardRepository = new Repository<Card>(context);
+        _transactions = _transactionRepository.GetAll().ToList();
+        _cards = _cardRepository.GetAll().ToList();
     }
     
-    public static List<Transaction> GetAllTransactionReceivedByCardId(int id)
+    public List<Transaction> GetAllTransactions()
     {
-        SmartWalletContext context = new SmartWalletContext();
-        Repository<Transaction> repository = new Repository<Transaction>(context);
-        return repository.GetAll().Where(t => t.RecipientCardId == id).ToList();
+        return _transactions;
     }
 
-    public static Transaction GetTransactionById(int id)
+    public List<Transaction> GetAllTransactionSendByCardId(int id)
     {
-        SmartWalletContext context = new SmartWalletContext();
-        Repository<Transaction> repository = new Repository<Transaction>(context);
-        return repository.Get(id);
+        return _transactions.Where(t => t.SenderCardId == id).ToList();
     }
     
-    public static List<Transaction> GetAllTransactionByCardId(int id)
+    public List<Transaction> GetAllTransactionReceivedByCardId(int id)
     {
-        SmartWalletContext context = new SmartWalletContext();
-        Repository<Transaction> repository = new Repository<Transaction>(context);
-        return repository.GetAll().Where(t => t.RecipientCardId == id || t.SenderCardId == id).ToList();
+        return _transactions.Where(t => t.RecipientCardId == id).ToList();
     }
 
-    public static List<Transaction> GetTransactionsAfterDate(DateTime dateTime, int id)
+    public Transaction GetTransactionById(int id)
+    {
+        return _transactions.Find(t => t.Id == id);
+    }
+    
+    public List<Transaction> GetAllTransactionByCardId(int id)
+    {
+        return _transactions.Where(t => t.RecipientCardId == id || t.SenderCardId == id).ToList();
+    }
+
+    public List<Transaction> GetTransactionsAfterDate(DateTime dateTime, int id)
     {
         return GetAllTransactionByCardId(id).Where(t => t.DateTime > dateTime).ToList();
     }
     
-    public static List<Transaction> GetTransactionsBeforeDate(DateTime dateTime, int id)
+    public List<Transaction> GetTransactionsBeforeDate(DateTime dateTime, int id)
     {
         return GetAllTransactionByCardId(id).Where(t => t.DateTime < dateTime).ToList();
     }
     
-    public static List<Transaction> GetTransactionsByDate(DateTime dateTime, int id)
+    public List<Transaction> GetTransactionsByDate(DateTime dateTime, int id)
     {
         return GetAllTransactionByCardId(id).Where(t => t.DateTime == dateTime).ToList();
     }
     
-    public static List<Transaction> GetTransactionsBetweenDate(DateTime startDate, DateTime endDate, int id)
+    public List<Transaction> GetTransactionsBetweenDate(DateTime startDate, DateTime endDate, int id)
     {
         return GetAllTransactionByCardId(id).Where(t => t.DateTime <= endDate && t.DateTime >= startDate).ToList();
     }
     
-    public static void AddNewTransaction(string senderNumber, string recipientNumber, double amount)
+    public double GetIncomeByMonth(int month, int cardId)
     {
-        List<Card> cards = CardProvider.GetAllCards();
-        Card senderCard = cards.Find(card => card.Number == senderNumber);
-        Card recipientCard = cards.Find(card => card.Number == recipientNumber);
+        var Transactions = GetAllTransactionByCardId(cardId);
+
+        var monthTransactions = Transactions.Where(t => t.DateTime.Month == month);
+
+        return monthTransactions.Where(t => t.RecipientCardId == cardId).Sum(t => t.Amount * t.Rate);
+    }
+
+    public double GetOutcomeByMonth(int month, int cardId)
+    {
+        var Transactions = GetAllTransactionByCardId(cardId);
+
+        var monthTransactions = Transactions.Where(t => t.DateTime.Month == month);
+
+        return monthTransactions.Where(t => t.SenderCardId == cardId).Sum(t => t.Amount);
+    }
+    
+    public void AddNewTransaction(string senderNumber, string recipientNumber, double amount) // TODO remove static
+    {
+        Card senderCard = _cards.Find(card => card.Number == senderNumber);
+        Card recipientCard = _cards.Find(card => card.Number == recipientNumber);
 
         double rate = MoneyProvider.GetRate(senderCard.Currency, recipientCard.Currency);
         
         AddNewTransaction(senderCard.UserId, senderCard.Id, recipientCard.UserId, recipientCard.Id, amount, rate);
     }
     
-    private static void AddNewTransaction(int senderId, int senderCardId, int recipientId, int recipientCardId, double amount, double rate)
+    private void AddNewTransaction(int senderId, int senderCardId, int recipientId, int recipientCardId, double amount, double rate)
     {
         SmartWalletContext context = new SmartWalletContext();
         Repository<Transaction> repository = new Repository<Transaction>(context);

@@ -1,83 +1,94 @@
 ﻿using SmartWallet.DAL.Entity;
 using SmartWallet.DAL.Repository;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SmartWallet.DAL;
 
 namespace SmartWallet.Providers
 {
     public class UserProvider
     {
-        public static void AddUser(User user)
+        private Repository<User> _userRepository;
+        private Repository<Card> _cardRepository;
+        private List<User> _users;
+        private List<Card> _cards;
+
+        public UserProvider(SmartWalletContext context)
         {
-            SmartWalletContext context = new SmartWalletContext();
-            Repository<User> repository = new Repository<User>(context);
-            repository.Add(user);
+            _userRepository = new Repository<User>(context);
+            _users = _userRepository.GetAll().ToList();
+            _cardRepository = new Repository<Card>(context);
+            _cards = _cardRepository.GetAll().ToList();
         }
         
-        public static void AddUsers(List<User> users)
+        public UserProvider()
         {
             SmartWalletContext context = new SmartWalletContext();
-            Repository<User> repository = new Repository<User>(context);
-            users.ForEach(user => repository.Add(user));
+            _userRepository = new Repository<User>(context);
+            _users = _userRepository.GetAll().ToList();
+            _cardRepository = new Repository<Card>(context);
+            _cards = _cardRepository.GetAll().ToList();
         }
         
-        public static User GetUserByID(int id)
+        public void AddUser(User user)
         {
-            SmartWalletContext context = new SmartWalletContext();
-            Repository<User> userRepository = new Repository<User>(context);
-            Repository<Card> cardRepository = new Repository<Card>(context);
-            List<User> users = userRepository.GetAll().ToList();
-            List<Card> cards = cardRepository.GetAll().ToList();
-            return userRepository.Get(id);
+            _userRepository.Add(user);
+        }
+        
+        public void AddUsers(List<User> users)
+        {
+            users.ForEach(user => _userRepository.Add(user));
+        }
+        
+        // public static User GetUserByIDStatic(int id)
+        // {
+        //     SmartWalletContext context = new SmartWalletContext();
+        //     Repository<User> userRepository = new Repository<User>(context);
+        //     Repository<Card> cardRepository = new Repository<Card>(context);
+        //     List<User> users = userRepository.GetAll().ToList();
+        //     List<Card> cards = cardRepository.GetAll().ToList();
+        //     return userRepository.Get(id);
+        // }
+
+        public User GetUserById(int id)
+        {
+            return _users.Find(u => u.Id == id);
+        }
+        
+        public User GetUserByCredentials(string email, string password)
+        {
+            return _users.First(u => u.Email == email && u.Password == password);
         }
 
-        public static User GetUserByCredentials(string email, string password)
+        public List<User> GetAllUsers()
         {
-            SmartWalletContext context = new SmartWalletContext();
-            Repository<User> repository = new Repository<User>(context);
-            return repository.GetAll().First(u => u.Email == email && u.Password == password);
+            // SmartWalletContext context = new SmartWalletContext();
+            // Repository<User> userRepository = new Repository<User>(context);
+            // Repository<Card> cardRepository = new Repository<Card>(context);
+            // List<User> users = userRepository.GetAll().ToList();
+            // List<Card> cards = cardRepository.GetAll().ToList(); // Cannot load cards from users without this line
+            return _users;
         }
 
-        public static List<User> GetAllUsers()
+        public void RemoveUser(User user)
         {
-            SmartWalletContext context = new SmartWalletContext();
-            Repository<User> userRepository = new Repository<User>(context);
-            Repository<Card> cardRepository = new Repository<Card>(context);
-            List<User> users = userRepository.GetAll().ToList();
-            List<Card> cards = cardRepository.GetAll().ToList(); // Cannot load cards from users without this line
-            return users;
+            _userRepository.Remove(user);
         }
 
-        public static void RemoveUser(User user)
+        public void UpdateUser(User user)
         {
-            SmartWalletContext context = new SmartWalletContext();
-            Repository<User> repository = new Repository<User>(context);
-            repository.Remove(user);
+            _userRepository.Update(user);
         }
 
-        public static void UpdateUser(User user)
+        public string UserExists(User user)
         {
-            SmartWalletContext context = new SmartWalletContext();
-            Repository<User> repository = new Repository<User>(context);
-            repository.Update(user);
-        }
-
-        public static string UserExists(User user)
-        {
-            SmartWalletContext context = new SmartWalletContext();
-            Repository<User> repository = new Repository<User>(context);
-            
-            var emails = repository.GetAll().Select(u => u.Email);
+            var emails = _users.Select(u => u.Email);
             if(emails.Contains(user.Email))
             {
                 return "This email is already registered";
             }
 
-            var phones = repository.GetAll().Select(u => u.Phone);
+            var phones = _users.Select(u => u.Phone);
             if (phones.Contains(user.Phone))
             {
                 return "This phone is already registered";
@@ -86,12 +97,9 @@ namespace SmartWallet.Providers
             return "0";
         }
 
-        public static string CheckLogin(string email, string password)
+        public string CheckLogin(string email, string password)
         {
-            SmartWalletContext context = new SmartWalletContext();
-            Repository<User> repository = new Repository<User>(context);
-            
-            var emails = repository.GetAll().Select(u => u.Email);
+            var emails = _users.Select(u => u.Email);
             if (!emails.Contains(email))
             {
                 return "This email is not registered";

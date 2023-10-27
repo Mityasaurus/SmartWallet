@@ -1,23 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SmartWallet.DAL;
-using SmartWallet.DAL.Entity;
-using SmartWallet.DAL.Repository;
+﻿using SmartWallet.DAL.Entity;
 using SmartWallet.Providers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SmartWallet
 {
@@ -48,6 +35,8 @@ namespace SmartWallet
 
         private void btn_Register_Click(object sender, RoutedEventArgs e)
         {
+            UserProvider userProvider = new UserProvider();
+            
             bool isOkay = true;
 
             string name = tb_Name.Text;
@@ -96,7 +85,7 @@ namespace SmartWallet
                 Password = password
             };
 
-            string message = UserProvider.UserExists(newUser);
+            string message = userProvider.UserExists(newUser);
 
             if (message != "0")
             {
@@ -104,7 +93,7 @@ namespace SmartWallet
                 return;
             }
 
-            UserProvider.AddUser(newUser);
+            userProvider.AddUser(newUser);
 
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();

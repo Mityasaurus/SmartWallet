@@ -46,6 +46,8 @@ public partial class CardViewer : UserControl
         }
     }
 
+    public TransactionProvider TransactionProvider;
+
     public CardViewer()
     {
         InitializeComponent();
@@ -134,7 +136,7 @@ public partial class CardViewer : UserControl
 
     private void TransferClick(object sender, RoutedEventArgs e)
     {
-        // TODO Transfer
+        if (TransactionProvider == null) return;
         TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 6000);
     }
 

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
 using SmartWallet.DAL.Entity;
@@ -53,12 +50,11 @@ public partial class TransactionsControl : UserControl
     public int CardId
     {
         get { return (int)GetValue(CardIdProperty); }
-        set
-        {
-            SetValue(CardIdProperty, value);
-            UpdateList();
-        }
+        set { SetValue(CardIdProperty, value); }
     }
+
+    public CardProvider CardProvider;
+    public TransactionProvider TransactionProvider;
     
     public TransactionsControl()
     {
@@ -70,13 +66,20 @@ public partial class TransactionsControl : UserControl
         AnimationView.PlayAnimation();
     }
 
-    private async Task UpdateList()
+    public void Refresh()
     {
-        if (StartDatePicker.SelectedDate == null || EndDatePicker.SelectedDate == null) return;
+        UpdateList();
+    }
+
+    private void UpdateList()
+    {
+        if (StartDatePicker.SelectedDate == null 
+            || EndDatePicker.SelectedDate == null
+            || TransactionProvider == null) return;
         DateTime startDate = StartDatePicker.SelectedDate.Value;
         DateTime endDate = EndDatePicker.SelectedDate.Value;
         
-        _transactions = await ParseTransactions(TransactionProvider.GetTransactionsBetweenDate(startDate, endDate, CardId).ToList());
+        _transactions = ParseTransactions(TransactionProvider.GetTransactionsBetweenDate(startDate, endDate, CardId).ToList());
 
         if (_transactions.Count == 0)
         {
@@ -93,21 +96,23 @@ public partial class TransactionsControl : UserControl
         }
     }
 
-    private async Task<List<TransactionsItem>> ParseTransactions(List<Transaction> transactions)
+    private List<TransactionsItem> ParseTransactions(List<Transaction> transactions)
     {
         List<TransactionsItem> items = new List<TransactionsItem>();
         
         foreach (Transaction transaction in transactions)
         {
-            Card recipient = CardProvider.GetAllCards().Find(c => c.Id == transaction.RecipientCardId);
-            Card sender = CardProvider.GetAllCards().Find(c => c.Id == transaction.SenderCardId);
+            Card recipient = CardProvider.GetCardById(transaction.RecipientCardId);
+            Card sender = CardProvider.GetCardById(transaction.SenderCardId);
+            Card current = CardProvider.GetCardById(CardId);
+            
             TransactionsItem item = new TransactionsItem()
             {
                 Card = transaction.SenderCardId == CardId 
                     ? recipient.Number 
                     : sender.Number,
                 Date = transaction.DateTime.ToString("ddd,dd MMM yyyy"),
-                Amount = transaction.Amount.ToString() + MoneyProvider.Symbols[CardProvider.GetCardById(CardId).Currency],
+                Amount = transaction.Amount.ToString() + MoneyProvider.Symbols[current.Currency],
                 TransactionStatus = transaction.SenderCardId == CardId ? TransactionStatus.SENT.ToString() : TransactionStatus.GET.ToString()
             };
             
