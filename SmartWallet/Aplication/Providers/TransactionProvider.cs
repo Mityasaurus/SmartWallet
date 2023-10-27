@@ -69,20 +69,12 @@ public class TransactionProvider
     
     public double GetIncomeByMonth(int month, int cardId)
     {
-        var Transactions = GetAllTransactionByCardId(cardId);
-
-        var monthTransactions = Transactions.Where(t => t.DateTime.Month == month);
-
-        return monthTransactions.Where(t => t.RecipientCardId == cardId).Sum(t => t.Amount * t.Rate);
+        return GetAllTransactionReceivedByCardId(cardId).Where(t => t.DateTime.Month == month).Sum(t => t.Amount * t.Rate);
     }
 
     public double GetOutcomeByMonth(int month, int cardId)
     {
-        var Transactions = GetAllTransactionByCardId(cardId);
-
-        var monthTransactions = Transactions.Where(t => t.DateTime.Month == month);
-
-        return monthTransactions.Where(t => t.SenderCardId == cardId).Sum(t => t.Amount);
+        return GetAllTransactionSendByCardId(cardId).Where(t => t.DateTime.Month == month).Sum(t => t.Amount);
     }
     
     public void AddNewTransaction(string senderNumber, string recipientNumber, double amount) // TODO remove static
