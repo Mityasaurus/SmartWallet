@@ -41,17 +41,19 @@
         </Grid>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="4.7*"/>
-                <RowDefinition Height="3.8*"/>
+                <RowDefinition Height="13*"/>
+                <RowDefinition Height="51*"/>
+                <RowDefinition Height="59*"/>
             </Grid.RowDefinitions>
-            <Border BorderThickness="2" BorderBrush="White" CornerRadius="10" HorizontalAlignment="Right" VerticalAlignment="Center"
-                    Margin="17">
+            <Border BorderThickness="2" BorderBrush="White" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Center"
+                    Margin="229,0,0,0" Height="54" Width="154">
                 <Button x:Name="btn_Refresh" Content="Refresh" Background="Transparent" BorderThickness="0" Click="btn_Refresh_Click"
                         Width="150" Height="50"/>
             </Border>
 
-            <controls:CardViewer Grid.Row="1" x:Name="CardViewer" VerticalAlignment="Top" Margin="0 25 5 0"/>
+            <controls:CardViewer Grid.Row="1" x:Name="CardViewer" VerticalAlignment="Center" Margin="0,0,5,0" Height="363"/>
+
+            <controls:UserInformation Grid.Row="2" Margin="7 5 13 15"/>
         </Grid>
     </Grid>
 </Window>
