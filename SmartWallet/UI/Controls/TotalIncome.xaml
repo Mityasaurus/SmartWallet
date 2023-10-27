@@ -15,7 +15,7 @@
                 <StackPanel HorizontalAlignment="Center">
                     <TextBlock Text="Total Income" Foreground="#8C89B4" FontSize="16"
                                Margin="0 34 0 0"></TextBlock>
-                    <TextBlock x:Name="tb_Income" Text="632.00" Foreground="White" Margin="0 0 0 34" FontSize="22" FontWeight="Bold"></TextBlock>
+                    <TextBlock x:Name="tb_Income" Text="000.00" Foreground="White" Margin="0 0 0 34" FontSize="22" FontWeight="Bold"></TextBlock>
                 </StackPanel>
             </StackPanel>
         </Border>

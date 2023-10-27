@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
+using SmartWallet.Providers;
 
 namespace SmartWallet.UI.Controls
 {
@@ -7,25 +9,24 @@ namespace SmartWallet.UI.Controls
     /// </summary>
     public partial class TotalOutcome : UserControl
     {
-        private int cardId;
-        public int CardId
-        {
-            get => cardId;
-            set
-            {
-                cardId = value;
-                SetOutcome();
-            }
-        }
+        public int CardId { get; set; }
+        public TransactionProvider TransactionProvider;
+        
         public TotalOutcome()
         {
             InitializeComponent();
         }
 
+        public void Refresh()
+        {
+            SetOutcome();
+        }
+
         private void SetOutcome()
         {
-            // var outcome = CardProvider.GetOutcomeByMonth(DateTime.Now.Month, cardId);
-            // tb_Outcome.Text = $"{outcome:f2}";
+            if (TransactionProvider == null) return;
+            var outcome = TransactionProvider.GetOutcomeByMonth(DateTime.Now.Month, CardId);
+            tb_Outcome.Text = $"{outcome:f2}";
         }
     }
 }
