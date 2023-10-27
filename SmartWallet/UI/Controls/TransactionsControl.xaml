@@ -21,8 +21,8 @@
                 <DockPanel Grid.Row="0" Margin="0 0 0 35">
                     <TextBlock Foreground="White" FontSize="24" FontWeight="SemiBold">Transactions</TextBlock>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                        <DatePicker x:Name="StartDatePicker" Margin="0 0 10 0" Style="{StaticResource DatePickerStyle1}" SelectedDateChanged="StartDatePicker_OnSelectedDateChanged" />
-                        <DatePicker x:Name="EndDatePicker" Style="{StaticResource DatePickerStyle1}" SelectedDateChanged="EndDatePicker_OnSelectedDateChanged" />
+                        <DatePicker x:Name="StartDatePicker" Margin="0 0 10 0" Style="{StaticResource DatePickerStyle}" SelectedDateChanged="StartDatePicker_OnSelectedDateChanged" />
+                        <DatePicker x:Name="EndDatePicker" Style="{StaticResource DatePickerStyle}" SelectedDateChanged="EndDatePicker_OnSelectedDateChanged" />
                     </StackPanel>
                 </DockPanel>
                 <DataGrid

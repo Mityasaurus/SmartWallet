@@ -131,7 +131,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="DatePickerStyle1" TargetType="{x:Type DatePicker}">
+    <Style x:Key="DatePickerStyle" TargetType="{x:Type DatePicker}">
         <Setter Property="CalendarStyle" Value="{DynamicResource CalendarStyle}"/>
         <Setter Property="Width" Value="110" />
         <Setter Property="Foreground" Value="#AEABD8" />
