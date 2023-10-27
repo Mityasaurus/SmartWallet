@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="SmartWallet.UI.Controls.UserInformation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmartWallet.UI.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="370">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Border Background="#1D1D41" CornerRadius="25">
+            <StackPanel Margin="20 10">
+                <UniformGrid Columns="2">
+                    <TextBlock Text="Name" Foreground="White" FontSize="16" Margin="0 5"/>
+                    <TextBlock Text="Lastname" Foreground="White" FontSize="16" Margin="5 5 0 5"/>
+                </UniformGrid>
+                <UniformGrid Columns="2">
+                    <TextBox x:Name="tb_Name" IsReadOnly="True" Text="Dmytro" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5 5 5"/>
+                    <TextBox x:Name="tb_Lastname" IsReadOnly="True" Text="Bovdun" Style="{StaticResource TextBoxRegistrationWindow}" Margin="5 5 0 5"/>
+                </UniformGrid>
+                <TextBlock Text="Phone" Foreground="White" FontSize="16" Margin="0 5"/>
+                <TextBox x:Name="tb_Phone" IsReadOnly="True" Text="+380987586371" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5"/>
+                <TextBlock Text="Email" Foreground="White" FontSize="16" Margin="0 5"/>
+                <TextBox x:Name="tb_Email" IsReadOnly="True" Text="dmytro@gmail.com" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5"/>
+                <TextBlock Text="Password" Foreground="White" FontSize="16" Margin="0 5"/>
+                <TextBox x:Name="tb_Password" IsReadOnly="True" Text="********" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5 0 0"/>
+                <UniformGrid Columns="2">
+                    <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="0 10 5 0" Background="Green"
+                             Visibility="Hidden">
+                        <Button x:Name="btn_Confirm" Content="Confirm" Background="Transparent" BorderThickness="0"/>
+                    </Border>
+                    <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="5 10 0 0" Background="#B30000"
+                             Visibility="Hidden">
+                        <Button x:Name="btn_Cancel" Content="Cancel" Background="Transparent" BorderThickness="0"/>
+                    </Border>
+                </UniformGrid>
+                <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="0 10 0 0">
+                    <Button x:Name="btn_Edit" Content="Edit information" Background="Transparent" BorderThickness="0" Margin="0 -3"/>
+                </Border>
+                <Border BorderThickness="2" BorderBrush="Red" CornerRadius="7" Margin="0 10 0 0">
+                    <Button x:Name="btn_Logout" Content="Log out" Background="Transparent" BorderThickness="0" Margin="0 -3"/>
+                </Border>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
