@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
+using SmartWallet.Aplication.Navigator;
 using SmartWallet.DAL;
 using SmartWallet.Providers;
+using SmartWallet.UI.Pages;
 
 namespace SmartWallet
 {
@@ -10,92 +13,41 @@ namespace SmartWallet
     /// </summary>
     public partial class MainWindow : Window
     {
-        private int _userId;
-        private int _cardId;
-
-        public int CardId
-        {
-            get => _cardId;
-            set
-            {
-                _cardId = value;
-                UpdateUI();
-            }
-        }
-
-        private SmartWalletContext _context;
-        private CardProvider _cardProvider;
-        private TransactionProvider _transactionProvider;
-        private UserProvider _userProvider;
         
         public MainWindow(int userId)
         {
             InitializeComponent();
-            _userId = userId;
-            
-            UpdateUI();
-            CardViewer.SetSelectedCardId += SetSelectedCardId;
-            UserInformation.CloseMainWindow += this.Close;
 
-            UserInformation.UserId = userId;
-
-            //TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 65000);
-
-            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
-            double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+            double screenWidth = SystemParameters.PrimaryScreenWidth;
+            double screenHeight = SystemParameters.PrimaryScreenHeight;
 
             this.Left = (screenWidth - this.Width) / 2;
             this.Top = (screenHeight - this.Height) / 2;
+
+            NavigatorObject.pageSwitcher = this;
+
+            HomeScreen homeScreen = new HomeScreen(userId);
+            homeScreen.UserInformation.CloseMainWindow += this.Close;
+
+            NavigatorObject.Switch(homeScreen);
         }
 
-        public void SetSelectedCardId(int id)
+        public Action? CloseAction { get; set; }
+
+        public void Navigate(UserControl nextPage)
         {
-            CardId = id;
+            this.Content = nextPage;
         }
 
-        private void UpdateUI()
+        public void Navigate(UserControl nextPage, object state)
         {
-            // refresh context and providers
-            _context = new SmartWalletContext();
-            _cardProvider = new CardProvider(_context);
-            _transactionProvider = new TransactionProvider(_context);
-            _userProvider = new UserProvider(_context);
-            
-            // Greeting line
-            UserName.Text = _userProvider.GetUserById(_userId).Name;
-            
-            // MyCards Control
-            CardViewer.TransactionProvider = _transactionProvider;
-            CardViewer.Cards = _userProvider.GetUserById(_userId).Cards;
-            
-            // Analytics Control
-            Analytics.CardNumber = CardId;
-            Analytics.TransactionProvider = _transactionProvider;
-            Analytics.Refresh();
-            
-            // Transaction control
-            TransactionsView.CardProvider = _cardProvider;
-            TransactionsView.TransactionProvider = _transactionProvider;
-            TransactionsView.CardId = CardId;
-            TransactionsView.Refresh();
+            this.Content = nextPage;
+            INavigator? s = nextPage as INavigator;
 
-            // User information control
-            UserInformation.UserProvider = _userProvider;
-            
-            // TotalIncome control
-            TotalIncome.TransactionProvider = _transactionProvider;
-            TotalIncome.CardId = CardId;
-            TotalIncome.Refresh();
-            
-            // TotalOutcome control
-            TotalOutcome.TransactionProvider = _transactionProvider;
-            TotalOutcome.CardId = CardId;
-            TotalOutcome.Refresh();
-        }
-
-        private void btn_Refresh_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateUI();
+            if (s != null)
+                s.UtilizeState(state);
+            else
+                throw new ArgumentException("NextPage is not INavigator! " + nextPage.Name.ToString());
         }
     }
 }
