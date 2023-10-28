@@ -1,4 +1,5 @@
-﻿using SmartWallet.DAL.Entity;
+﻿using SmartWallet.Aplication.Services;
+using SmartWallet.DAL.Entity;
 using SmartWallet.Providers;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -55,12 +56,12 @@ namespace SmartWallet
                 tb_LastName.BorderBrush = new SolidColorBrush(Colors.Red);
                 isOkay = false;
             }
-            if (IsValidEmail(email) == false)
+            if (DataValidatorService.IsValidEmail(email) == false)
             {
                 tb_Email.BorderBrush = new SolidColorBrush(Colors.Red);
                 isOkay = false;
             }
-            if(IsValidPhoneNumber(phone) == false)
+            if(DataValidatorService.IsValidPhoneNumber(phone) == false)
             {
                 tb_Phone.BorderBrush = new SolidColorBrush(Colors.Red);
                 isOkay = false;
@@ -98,27 +99,6 @@ namespace SmartWallet
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
             this.Close();
-        }
-
-        private bool IsValidEmail(string email)
-        {
-            if (string.IsNullOrWhiteSpace(email))
-                return false;
-
-            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-
-            Regex regex = new Regex(pattern);
-
-            return regex.IsMatch(email);
-        }
-
-        private bool IsValidPhoneNumber(string phoneNumber)
-        {
-            string pattern = @"^\+\d{10,}$";
-
-            Regex regex = new Regex(pattern);
-
-            return regex.IsMatch(phoneNumber);
         }
 
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

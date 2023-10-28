@@ -1,4 +1,5 @@
-﻿using SmartWallet.DAL.Entity;
+﻿using SmartWallet.Aplication.Services;
+using SmartWallet.DAL.Entity;
 using SmartWallet.Providers;
 using System;
 using System.Collections.Generic;
@@ -92,6 +93,69 @@ namespace SmartWallet.UI.Controls
         {
             CloseEditingMode();
             UpdateInfo();
+        }
+
+        private void btn_Confirm_Click(object sender, RoutedEventArgs e)
+        {
+            bool isOkay = true;
+
+            string name = tb_Name.Text;
+            string lastname = tb_LastName.Text;
+            string email = tb_Email.Text;
+            string phone = tb_Phone.Text;
+            string password = tb_Password.Text;
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                tb_Name.BorderBrush = new SolidColorBrush(Colors.Red);
+                isOkay = false;
+            }
+            if (string.IsNullOrWhiteSpace(lastname))
+            {
+                tb_LastName.BorderBrush = new SolidColorBrush(Colors.Red);
+                isOkay = false;
+            }
+            if (DataValidatorService.IsValidEmail(email) == false)
+            {
+                tb_Email.BorderBrush = new SolidColorBrush(Colors.Red);
+                isOkay = false;
+            }
+            if (DataValidatorService.IsValidPhoneNumber(phone) == false)
+            {
+                tb_Phone.BorderBrush = new SolidColorBrush(Colors.Red);
+                isOkay = false;
+            }
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                tb_Password.BorderBrush = new SolidColorBrush(Colors.Red);
+                isOkay = false;
+            }
+
+            if (isOkay == false)
+            {
+                return;
+            }
+
+            User editedUser = new User()
+            {
+                Name = name,
+                LastName = lastname,
+                Email = email,
+                Phone = phone,
+                Password = password
+            };
+
+            UserProvider.UpdateUser(editedUser);
+        }
+
+        private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox != null)
+            {
+                textBox.BorderBrush = new SolidColorBrush(Colors.White);
+            }
         }
     }
 }

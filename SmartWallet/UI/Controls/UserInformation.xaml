@@ -21,19 +21,19 @@
                     <TextBlock Text="Lastname" Foreground="White" FontSize="16" Margin="5 5 0 5"/>
                 </UniformGrid>
                 <UniformGrid Columns="2">
-                    <TextBox x:Name="tb_Name" IsReadOnly="True" Text="Dmytro" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5 5 5"/>
-                    <TextBox x:Name="tb_Lastname" IsReadOnly="True" Text="Bovdun" Style="{StaticResource TextBoxRegistrationWindow}" Margin="5 5 0 5"/>
+                    <TextBox x:Name="tb_Name" IsReadOnly="True" Text="Dmytro" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5 5 5" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
+                    <TextBox x:Name="tb_LastName" IsReadOnly="True" Text="Bovdun" Style="{StaticResource TextBoxRegistrationWindow}" Margin="5 5 0 5" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
                 </UniformGrid>
                 <TextBlock Text="Phone" Foreground="White" FontSize="16" Margin="0 5"/>
-                <TextBox x:Name="tb_Phone" IsReadOnly="True" Text="+380987586371" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5"/>
+                <TextBox x:Name="tb_Phone" IsReadOnly="True" Text="+380987586371" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
                 <TextBlock Text="Email" Foreground="White" FontSize="16" Margin="0 5"/>
-                <TextBox x:Name="tb_Email" IsReadOnly="True" Text="dmytro@gmail.com" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5"/>
+                <TextBox x:Name="tb_Email" IsReadOnly="True" Text="dmytro@gmail.com" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
                 <TextBlock Text="Password" Foreground="White" FontSize="16" Margin="0 5"/>
-                <TextBox x:Name="tb_Password" IsReadOnly="True" Text="********" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5 0 0"/>
+                <TextBox x:Name="tb_Password" IsReadOnly="True" Text="********" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5 0 0" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
                 <UniformGrid Columns="2">
                     <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="0 10 5 0" Background="Green"
                              Visibility="Hidden" x:Name="border_Confirm">
-                        <Button x:Name="btn_Confirm" Content="Confirm" Background="Transparent" BorderThickness="0"/>
+                        <Button x:Name="btn_Confirm" Content="Confirm" Background="Transparent" BorderThickness="0" Click="btn_Confirm_Click"/>
                     </Border>
                     <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="5 10 0 0" Background="#B30000"
                              Visibility="Hidden" x:Name="border_Cancel">
