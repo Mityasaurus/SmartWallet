@@ -6,38 +6,84 @@
              xmlns:local="clr-namespace:SmartWallet.UI.Controls"
              mc:Ignorable="d" 
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:lottie="clr-namespace:LottieSharp.WPF;assembly=LottieSharp"
              >
     <UserControl.Resources>
-        <!-- Создайте стиль для Tooltip с задним фоном -->
         <Style x:Key="CustomTooltipStyle" TargetType="ToolTip">
             <Setter Property="Background" Value="#464687" />
-            <!-- Измените цвет заднего фона здесь -->
-            <!-- Другие настройки стиля Tooltip, если необходимо -->
         </Style>
     </UserControl.Resources>
 
     <Grid>
-        <Border Background="#1D1D41" CornerRadius="25" Padding="30 30 10 10">
-            <lvc:CartesianChart x:Name="AnalyticsDiagram" Series="{Binding ChartSeries}" LegendLocation="Right" Foreground="White">
-                <lvc:CartesianChart.DataTooltip>
-                    <lvc:DefaultTooltip Background="#464687"/>
-                </lvc:CartesianChart.DataTooltip>
+        <Border Background="#1D1D41" CornerRadius="25" Padding="30 30 30 30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <DockPanel Grid.Row="0" Margin="0 0 0 35">
+                    <TextBlock Foreground="White" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Left">Analytics</TextBlock>
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <Image Source="../Images/barChartIcon.png" Width="20" Height="20" Margin="0 0 5 0"/>
+                        <ToggleButton x:Name="ChartType" Checked="ChartType_OnChecked" Unchecked="ChartType_OnUnchecked"/>
+                        <Image Source="../Images/lineChartIcon.png" Width="20" Height="20" Margin="5 0 50 0"/>
+                        
+                        <StackPanel Margin="0 0 40 0" Orientation="Horizontal">
+                            <Ellipse Fill="#64CFF6" Width="12" Height="12" Margin="0 0 12 0"/>
+                            <TextBlock Foreground="White" FontSize="16" FontWeight="SemiBold" TextAlignment="Center" VerticalAlignment="Center">Income</TextBlock>
+                        </StackPanel>
+                        <StackPanel Margin="0 0 40 0" Orientation="Horizontal">
+                            <Ellipse Fill="#6359E9" Width="12" Height="12" Margin="0 0 12 0"/>
+                            <TextBlock Foreground="White" FontSize="16" FontWeight="SemiBold" TextAlignment="Center" VerticalAlignment="Center">Outcome</TextBlock>
+                        </StackPanel>
+                        
+                        <ComboBox x:Name="AnalyticsYears" SelectionChanged="AnalyticsYears_OnSelectionChanged" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle}" Style="{DynamicResource ComboBoxStyle}"></ComboBox>
+                    </StackPanel>
+                </DockPanel>
+                
+                <lvc:CartesianChart 
+                    Grid.Row="1" 
+                    x:Name="AnalyticsDiagram" 
+                    Series="{Binding ChartSeries}" 
+                    LegendLocation="None" 
+                    Foreground="White"
+                    Visibility="Collapsed">
+                    <lvc:CartesianChart.DataTooltip>
+                        <lvc:DefaultTooltip Background="#464687"/>
+                    </lvc:CartesianChart.DataTooltip>
 
-                <lvc:CartesianChart.AxisX>
-                    <lvc:Axis x:Name="AnalyticsLables" Labels="{Binding MonthLabels}" Foreground="#8C89B4" FontSize="14">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator StrokeThickness="0"/>
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisX>
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Foreground="#8C89B4" FontSize="14">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator StrokeDashArray="4,4" Stroke="#8C89B4"/>
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisY>
-            </lvc:CartesianChart>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis x:Name="AnalyticsLabels" 
+                                  Labels="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec" 
+                                  Foreground="#8C89B4" FontSize="14">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator StrokeThickness="0" Step="1"/>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Foreground="#8C89B4" FontSize="14">
+                            <lvc:Axis.Separator>
+                                <lvc:Separator StrokeDashArray="4,4" Stroke="#8C89B4"/>
+                            </lvc:Axis.Separator>
+                        </lvc:Axis>
+                    </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart>
+                <StackPanel Grid.Row="1" x:Name="NoGraphData" Visibility="Visible">
+                    <lottie:LottieAnimationView 
+                        x:Name="AnimationView"
+                        Width="400"
+                        Height="200"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        ResourcePath="pack://application:,,,/UI/Animations/noGraphData.json"
+                        AutoPlay="True"
+                        Margin="0 0 0 10"
+                        RepeatCount="-1"/>
+                    <TextBlock FontSize="16" FontWeight="SemiBold" Foreground="#AEABD8" TextAlignment="Center" VerticalAlignment="Center">There is no transactions</TextBlock>
+                </StackPanel>
+            </Grid>
         </Border>
     </Grid>
 </UserControl>
