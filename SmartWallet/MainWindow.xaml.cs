@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using SmartWallet.DAL;
 using SmartWallet.Providers;
 
@@ -68,6 +69,16 @@ namespace SmartWallet
             TransactionsView.TransactionProvider = _transactionProvider;
             TransactionsView.CardId = CardId;
             TransactionsView.Refresh();
+            
+            // TotalIncome control
+            TotalIncome.TransactionProvider = _transactionProvider;
+            TotalIncome.CardId = CardId;
+            TotalIncome.Refresh();
+            
+            // TotalOutcome control
+            TotalOutcome.TransactionProvider = _transactionProvider;
+            TotalOutcome.CardId = CardId;
+            TotalOutcome.Refresh();
         }
 
         private void btn_Refresh_Click(object sender, RoutedEventArgs e)

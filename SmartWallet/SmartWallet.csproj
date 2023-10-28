@@ -50,6 +50,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <None Remove="UI\Animations\noTransactions1.json" />
+    <None Remove="UI\Animations\noGraphData.json" />
+    <Resource Include="UI\Animations\noGraphData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="UI\Images\barChartIcon.png" />
+    <Resource Include="UI\Images\barChartIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="UI\Images\lineChartIcon.png" />
+    <Resource Include="UI\Images\lineChartIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

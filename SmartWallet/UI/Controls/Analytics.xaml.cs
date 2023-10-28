@@ -1,7 +1,9 @@
-﻿using LiveCharts.Wpf;
+﻿using System;
+using LiveCharts.Wpf;
 using LiveCharts;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using SmartWallet.Providers;
@@ -32,11 +34,21 @@ namespace SmartWallet.UI.Controls
         public TransactionProvider TransactionProvider;
 
         public SeriesCollection ChartSeries { get; set; }
-        public List<string> MonthLabels { get; set; }
+        // public List<string> MonthLabels { get; set; }
 
         public Analytics()
         {
             InitializeComponent();
+            AnimationView.PlayAnimation();
+            FillYears();
+        }
+
+        private void FillYears()
+        {
+            int registrationYear = 2022; // TODO
+            int currentYear = DateTime.Today.Year;
+            for (int i = currentYear; i >= registrationYear; i--) AnalyticsYears.Items.Add(i);
+            AnalyticsYears.SelectedItem = AnalyticsYears.Items[0];
         }
 
         public void Refresh()
@@ -48,68 +60,115 @@ namespace SmartWallet.UI.Controls
         {
             if (TransactionProvider == null) return;
             
-            var Transactions = TransactionProvider.GetAllTransactionByCardId(CardNumber);
-
-            if (Transactions == null)
+            var Transactions = TransactionProvider.GetTransactionsBetweenDate(
+                new DateTime(int.Parse(AnalyticsYears.SelectedItem.ToString()), 1, 1),
+                new DateTime(int.Parse(AnalyticsYears.SelectedItem.ToString()), 1, 1),
+                CardNumber
+                );
+            
+            if (Transactions == null || Transactions.Count == 0)
             {
+                AnalyticsDiagram.Visibility = Visibility.Collapsed;
+                NoGraphData.Visibility = Visibility.Visible;
                 return;
-            }
-
-            if(Transactions.Count == _oldTransactionsCount)
+            } else
             {
-                return;
+                AnalyticsDiagram.Visibility = Visibility.Visible;
+                NoGraphData.Visibility = Visibility.Collapsed;
             }
-
-            _oldTransactionsCount = Transactions.Count;
-
+            
             ChartSeries = new SeriesCollection();
-            MonthLabels = new List<string>();
 
-            var uniqueMonths = Transactions.Select(t => t.DateTime.Month).Distinct().Reverse().Take(8).Reverse();
-
-            var outcomeSeries = new ColumnSeries
+            Series outcomeSeries;
+            Series incomeSeries;
+            if (!ChartType.IsChecked.Value)
             {
-                Title = "Outcome",
-                Values = new ChartValues<double>(),
-                DataLabels = false,
-                LabelPoint = point => $"{point.Y:N2}",
-                Fill = new SolidColorBrush(Color.FromRgb(100, 207, 246)),
-                MaxColumnWidth = 15,
-                ColumnPadding = 8,
-                Foreground = new SolidColorBrush(Colors.White),
-            };
-
-            var incomeSeries = new ColumnSeries
+                outcomeSeries = new ColumnSeries
+                {
+                    Title = "Outcome",
+                    Values = new ChartValues<double>(),
+                    DataLabels = false,
+                    LabelPoint = point => $"{point.Y:N2}",
+                    Fill = new SolidColorBrush(Color.FromRgb(99, 89, 233)),
+                    MaxColumnWidth = 15,
+                    ColumnPadding = 8,
+                    ClipToBounds = false,
+                    Foreground = new SolidColorBrush(Colors.White),
+                };
+            
+                incomeSeries = new ColumnSeries
+                {
+                    Title = "Income",
+                    Values = new ChartValues<double>(),
+                    DataLabels = false,
+                    LabelPoint = point => $"{point.Y:N2}",
+                    Fill = new SolidColorBrush(Color.FromRgb(100, 207, 246)),
+                    MaxColumnWidth = 15,
+                    ColumnPadding = 8,
+                    ClipToBounds = false,
+                    Foreground = new SolidColorBrush(Colors.White),
+                };
+            }
+            else
             {
-                Title = "Income",
-                Values = new ChartValues<double>(),
-                DataLabels = false,
-                LabelPoint = point => $"{point.Y:N2}",
-                Fill = new SolidColorBrush(Color.FromRgb(99, 89, 233)),
-                MaxColumnWidth = 15,
-                ColumnPadding = 8,
-                Foreground = new SolidColorBrush(Colors.White),
-            };
-
-            foreach (var month in uniqueMonths)
+                outcomeSeries = new LineSeries
+                {
+                    Title = "Outcome",
+                    Values = new ChartValues<double>(),
+                    DataLabels = false,
+                    LabelPoint = point => $"{point.Y:N2}",
+                    Stroke = new SolidColorBrush(Color.FromRgb(99, 89, 233)),
+                    ClipToBounds = false,
+                    Foreground = new SolidColorBrush(Colors.White),
+                };
+            
+                incomeSeries = new LineSeries
+                {
+                    Title = "Income",
+                    Values = new ChartValues<double>(),
+                    DataLabels = false,
+                    LabelPoint = point => $"{point.Y:N2}",
+                    Stroke = new SolidColorBrush(Color.FromRgb(100, 207, 246)),
+                    ClipToBounds = false,
+                    Foreground = new SolidColorBrush(Colors.White),
+                };
+            }
+            
+            
+            for(int month = 1; month <= (AnalyticsYears.SelectedItem.ToString() == DateTime.Today.Year.ToString()
+                    ? DateTime.Today.Month
+                    : 12); month++)
             {
                 var income = TransactionProvider.GetIncomeByMonth(month, CardNumber);
                 var outcome = TransactionProvider.GetOutcomeByMonth(month, CardNumber);
-
+            
                 incomeSeries.Values.Add(income);
                 outcomeSeries.Values.Add(outcome);
-
-                MonthLabels.Add($"{month}");
+            
             }
-
+            
             ChartSeries.Add(incomeSeries);
             ChartSeries.Add(outcomeSeries);
-
+            
             AnalyticsDiagram.Series = ChartSeries;
-            AnalyticsLables.Labels = MonthLabels;
-
+            AnalyticsDiagram.Update();
+            
             DataContext = this;
         }
 
+        private void AnalyticsYears_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateChartSeries();
+        }
+
+        private void ChartType_OnChecked(object sender, RoutedEventArgs e)
+        {
+            UpdateChartSeries();
+        }
+
+        private void ChartType_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            UpdateChartSeries();
+        }
     }
 }
