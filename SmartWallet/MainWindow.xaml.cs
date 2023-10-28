@@ -35,6 +35,9 @@ namespace SmartWallet
             
             UpdateUI();
             CardViewer.SetSelectedCardId += SetSelectedCardId;
+            UserInformation.CloseMainWindow += this.Close;
+
+            UserInformation.UserId = userId;
 
             //TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 65000);
         }
@@ -69,6 +72,9 @@ namespace SmartWallet
             TransactionsView.TransactionProvider = _transactionProvider;
             TransactionsView.CardId = CardId;
             TransactionsView.Refresh();
+
+            // User information control
+            UserInformation.UserProvider = _userProvider;
             
             // TotalIncome control
             TotalIncome.TransactionProvider = _transactionProvider;

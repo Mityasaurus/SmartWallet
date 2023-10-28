@@ -89,9 +89,7 @@ public class TransactionProvider
     
     private void AddNewTransaction(int senderId, int senderCardId, int recipientId, int recipientCardId, double amount, double rate)
     {
-        SmartWalletContext context = new SmartWalletContext();
-        Repository<Transaction> repository = new Repository<Transaction>(context);
-        repository.Add(new Transaction()
+        _transactionRepository.Add(new Transaction()
         {
             SenderId = senderId,
             SenderCardId = senderCardId,
