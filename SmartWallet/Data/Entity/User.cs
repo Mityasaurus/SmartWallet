@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SmartWallet.DAL.Entity;
@@ -22,6 +23,9 @@ public class User
     
     [Required]
     public string Password { get; set; }
+    
+    [Required]
+    public DateTime RegistrationDate { get; set; }
     
     public List<Card> Cards { get; set; }
 }
