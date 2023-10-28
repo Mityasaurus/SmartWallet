@@ -40,6 +40,12 @@ namespace SmartWallet
             UserInformation.UserId = userId;
 
             //TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 65000);
+
+            double screenWidth = System.Windows.SystemParameters.PrimaryScreenWidth;
+            double screenHeight = System.Windows.SystemParameters.PrimaryScreenHeight;
+
+            this.Left = (screenWidth - this.Width) / 2;
+            this.Top = (screenHeight - this.Height) / 2;
         }
 
         public void SetSelectedCardId(int id)
