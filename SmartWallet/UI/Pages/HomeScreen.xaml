@@ -42,7 +42,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         
-                        <controls:TotalIncome Grid.Row="0" Grid.Column="0" x:Name="TotalIncome" Margin="0 0 20 15"/>
+                        <controls:TotalIncome Grid.Row="0" Grid.Column="0" x:Name="TotalIncome" Margin="0 0 15 15"/>
                         <controls:TotalOutcome Grid.Row="0" Grid.Column="1" x:Name="TotalOutcome" Margin="0 0 0 15"/>
 
                         <controls:Analytics Grid.Column="0" x:Name="Analytics" Grid.Row="1" Grid.ColumnSpan="2" Margin="0 0 0 15"/>
