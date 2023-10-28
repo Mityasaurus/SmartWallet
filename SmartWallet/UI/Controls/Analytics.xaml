@@ -21,12 +21,12 @@
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                
+
                 <DockPanel Grid.Row="0" Margin="0 0 0 35">
                     <TextBlock Foreground="White" FontSize="24" FontWeight="SemiBold" HorizontalAlignment="Left">Analytics</TextBlock>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                         <Image Source="../Images/barChartIcon.png" Width="20" Height="20" Margin="0 0 5 0"/>
-                        <ToggleButton x:Name="ChartType" Checked="ChartType_OnChecked" Unchecked="ChartType_OnUnchecked"/>
+                        <ToggleButton Width="30" Height="16" x:Name="ChartType" Style="{StaticResource ToggleButtonStyle}" Checked="ChartType_OnChecked" Unchecked="ChartType_OnUnchecked"/>
                         <Image Source="../Images/lineChartIcon.png" Width="20" Height="20" Margin="5 0 50 0"/>
                         
                         <StackPanel Margin="0 0 40 0" Orientation="Horizontal">
