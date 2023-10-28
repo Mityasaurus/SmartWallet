@@ -78,12 +78,14 @@ namespace SmartWallet.UI.Pages
             // Analytics Control
             Analytics.CardNumber = CardId;
             Analytics.TransactionProvider = _transactionProvider;
+            Analytics.User = _userProvider.GetUserById(_userId);
             Analytics.Refresh();
 
             // Transaction control
             TransactionsView.CardProvider = _cardProvider;
             TransactionsView.TransactionProvider = _transactionProvider;
             TransactionsView.CardId = CardId;
+            TransactionsView.User = _userProvider.GetUserById(_userId);
             TransactionsView.Refresh();
 
             // User information control
