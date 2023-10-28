@@ -1,4 +1,5 @@
-﻿using SmartWallet.Aplication.Services;
+﻿using System;
+using SmartWallet.Aplication.Services;
 using SmartWallet.DAL.Entity;
 using SmartWallet.Providers;
 using System.Text.RegularExpressions;
@@ -19,12 +20,6 @@ namespace SmartWallet
         public RegistrationWindow()
         {
             InitializeComponent();
-
-            // SmartWalletContext context = new SmartWalletContext();
-
-            // IRepository<User> userRepository = new Repository<User>(context);
-
-            // _userProvider = new UserProvider(userRepository);
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
@@ -83,7 +78,8 @@ namespace SmartWallet
                 LastName = lastname,
                 Email = email,
                 Phone = phone,
-                Password = password
+                Password = password,
+                RegistrationDate = DateTime.Now
             };
 
             string message = userProvider.UserExists(newUser);
