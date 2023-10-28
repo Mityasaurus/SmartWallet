@@ -161,7 +161,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Button x:Name="PART_Button" Grid.Column="0"
-                                    Foreground="{TemplateBinding Foreground}"
+                                    Foreground="#AEABD8"
                                     Focusable="False" HorizontalAlignment="Center"
                                     Margin="0,0,6,0" Grid.Row="0"
                                     Width="19"
@@ -241,14 +241,6 @@
                                     <Storyboard>
                                         <DoubleAnimation Duration="0" Storyboard.TargetName="HighlightBackground"
                                                          To="0.5" Storyboard.TargetProperty="Opacity" />
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Disabled">
-                                    <Storyboard>
-                                        <ColorAnimation Duration="0" Storyboard.TargetName="HighlightBackground"
-                                                        To="#141332" Storyboard.TargetProperty="Foreground" />
-                                        <DoubleAnimation Duration="0" Storyboard.TargetName="NormalText" To=".35"
-                                                         Storyboard.TargetProperty="Opacity" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -451,14 +443,6 @@
                                                 <VisualStateManager.VisualStateGroups>
                                                     <VisualStateGroup x:Name="CommonStates">
                                                         <VisualState x:Name="Normal" />
-                                                        <VisualState x:Name="MouseOver">
-                                                            <Storyboard>
-                                                                <ColorAnimation Duration="0"
-                                                                    Storyboard.TargetName="buttonContent"
-                                                                    To="#6359E9"
-                                                                    Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" />
-                                                            </Storyboard>
-                                                        </VisualState>
                                                         <VisualState x:Name="Disabled">
                                                             <Storyboard>
                                                                 <DoubleAnimation Duration="0"
@@ -605,12 +589,6 @@
                                     <VisualTransition GeneratedDuration="0" />
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Active" />
-                                <VisualState x:Name="Inactive">
-                                    <Storyboard>
-                                        <ColorAnimation Duration="0" Storyboard.TargetName="NormalText" To="#FF777777"
-                                                        Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" />
-                                    </Storyboard>
-                                </VisualState>
                             </VisualStateGroup>
                             <VisualStateGroup x:Name="CalendarButtonFocusStates">
                                 <VisualStateGroup.Transitions>
