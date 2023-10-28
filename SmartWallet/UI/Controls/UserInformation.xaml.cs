@@ -136,16 +136,16 @@ namespace SmartWallet.UI.Controls
                 return;
             }
 
-            User editedUser = new User()
-            {
-                Name = name,
-                LastName = lastname,
-                Email = email,
-                Phone = phone,
-                Password = password
-            };
+            User editedUser = UserProvider.GetUserById(UserId);
 
-            UserProvider.UpdateUser(editedUser, UserId);
+            editedUser.Name = name;
+            editedUser.LastName = lastname;
+            editedUser.Phone = phone;
+            editedUser.Email = email;
+            editedUser.Password = password;
+            
+
+            UserProvider.UpdateUser(editedUser);
             CloseEditingMode();
             UpdateInfo();
         }
