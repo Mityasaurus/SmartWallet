@@ -49,7 +49,7 @@ namespace SmartWallet.UI.Controls
             User user = UserProvider.GetUserById(UserId);
 
             tb_Name.Text = user.Name;
-            tb_Lastname.Text = user.LastName;
+            tb_LastName.Text = user.LastName;
             tb_Phone.Text = user.Phone;
             tb_Email.Text = user.Email;
             tb_Password.Text = new string('*', user.Password.Length);
@@ -68,7 +68,7 @@ namespace SmartWallet.UI.Controls
             border_Confirm.Visibility = Visibility.Visible;
 
             tb_Name.IsReadOnly = false;
-            tb_Lastname.IsReadOnly = false;
+            tb_LastName.IsReadOnly = false;
             tb_Phone.IsReadOnly = false;
             tb_Email.IsReadOnly = false;
             tb_Password.IsReadOnly = false;
@@ -78,7 +78,7 @@ namespace SmartWallet.UI.Controls
         private void CloseEditingMode()
         {
             tb_Name.IsReadOnly = true;
-            tb_Lastname.IsReadOnly = true;
+            tb_LastName.IsReadOnly = true;
             tb_Phone.IsReadOnly = true;
             tb_Email.IsReadOnly = true;
             tb_Password.IsReadOnly = true;
@@ -145,7 +145,9 @@ namespace SmartWallet.UI.Controls
                 Password = password
             };
 
-            UserProvider.UpdateUser(editedUser);
+            UserProvider.UpdateUser(editedUser, UserId);
+            CloseEditingMode();
+            UpdateInfo();
         }
 
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

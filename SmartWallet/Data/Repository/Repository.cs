@@ -37,10 +37,10 @@ public class Repository<T> : IRepository<T> where T: class
         return _dbSet.Find(id);
     }
 
-    public void Update(T entity)
+    public void Update(T entity, int id)
     {
-        _dbSet.Attach(entity);
-        _context.Entry(entity).State = EntityState.Modified;
+        T existingEntity = _dbSet.Find(id);
+        _context.Entry(existingEntity).CurrentValues.SetValues(entity);
         _context.SaveChanges();
     }
 }

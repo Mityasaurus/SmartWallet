@@ -8,5 +8,5 @@ public interface IRepository<T> where T: class
     void Remove(T entity);
     IEnumerable<T> GetAll();
     T Get(int id);
-    void Update(T entity);
+    void Update(T entity, int id);
 }

@@ -75,9 +75,9 @@ namespace SmartWallet.Providers
             _userRepository.Remove(user);
         }
 
-        public void UpdateUser(User user)
+        public void UpdateUser(User user, int id)
         {
-            _userRepository.Update(user);
+            _userRepository.Update(user, id);
         }
 
         public string UserExists(User user)
