@@ -14,38 +14,47 @@
     </UserControl.Resources>
     <Grid>
         <Border Background="#1D1D41" CornerRadius="25">
-            <StackPanel Margin="20 10">
-                <UniformGrid Columns="2">
-                    <TextBlock Text="Name" Foreground="White" FontSize="16" Margin="0 5"/>
-                    <TextBlock Text="Lastname" Foreground="White" FontSize="16" Margin="5 5 0 5"/>
-                </UniformGrid>
-                <UniformGrid Columns="2">
-                    <TextBox x:Name="tb_Name" IsReadOnly="True" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5 5 5" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
-                    <TextBox x:Name="tb_LastName" IsReadOnly="True" Style="{StaticResource TextBoxRegistrationWindow}" Margin="5 5 0 5" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
-                </UniformGrid>
-                <TextBlock Text="Phone" Foreground="White" FontSize="16" Margin="0 5"/>
-                <TextBox x:Name="tb_Phone" IsReadOnly="True" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
-                <TextBlock Text="Email" Foreground="White" FontSize="16" Margin="0 5"/>
-                <TextBox x:Name="tb_Email" IsReadOnly="True" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
-                <TextBlock Text="Password" Foreground="White" FontSize="16" Margin="0 5"/>
-                <TextBox x:Name="tb_Password" IsReadOnly="True" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5 0 0" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
-                <UniformGrid Columns="2">
-                    <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="0 10 5 0" Background="Green"
-                             Visibility="Hidden" x:Name="border_Confirm">
-                        <Button x:Name="btn_Confirm" Content="Confirm" Background="Transparent" BorderThickness="0" Click="btn_Confirm_Click"/>
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0">
+                    <UniformGrid Columns="2">
+                        <TextBlock Text="Name" Foreground="White" FontSize="16" Margin="0 5"/>
+                        <TextBlock Text="Lastname" Foreground="White" FontSize="16" Margin="5 5 0 5"/>
+                    </UniformGrid>
+                    <UniformGrid Columns="2">
+                        <TextBox x:Name="tb_Name" IsReadOnly="True" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5 5 5" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
+                        <TextBox x:Name="tb_LastName" IsReadOnly="True" Style="{StaticResource TextBoxRegistrationWindow}" Margin="5 5 0 5" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
+                    </UniformGrid>
+                    <TextBlock Text="Phone" Foreground="White" FontSize="16" Margin="0 5"/>
+                    <TextBox x:Name="tb_Phone" IsReadOnly="True" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
+                    <TextBlock Text="Email" Foreground="White" FontSize="16" Margin="0 5"/>
+                    <TextBox x:Name="tb_Email" IsReadOnly="True" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
+                    <TextBlock Text="Password" Foreground="White" FontSize="16" Margin="0 5"/>
+                    <TextBox x:Name="tb_Password" IsReadOnly="True" Style="{StaticResource TextBoxRegistrationWindow}" Margin="0 5 0 0" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
+                    <UniformGrid Columns="2">
+                        <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="0 10 5 0" Background="Green"
+                                 Visibility="Hidden" x:Name="border_Confirm">
+                            <Button x:Name="btn_Confirm" Content="Confirm" Background="Transparent" BorderThickness="0" Click="btn_Confirm_Click"/>
+                        </Border>
+                        <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="5 10 0 0" Background="#B30000"
+                                 Visibility="Hidden" x:Name="border_Cancel">
+                            <Button x:Name="btn_Cancel" Content="Cancel" Background="Transparent" BorderThickness="0" Click="btn_Cancel_Click"/>
+                        </Border>
+                    </UniformGrid>
+                </StackPanel>
+                <StackPanel Grid.Row="1">
+                    <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="0 0 0 0">
+                        <Button x:Name="btn_Edit" Content="Edit information" Background="Transparent" BorderThickness="0" Margin="0 -3" Click="btn_Edit_Click"/>
                     </Border>
-                    <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="5 10 0 0" Background="#B30000"
-                             Visibility="Hidden" x:Name="border_Cancel">
-                        <Button x:Name="btn_Cancel" Content="Cancel" Background="Transparent" BorderThickness="0" Click="btn_Cancel_Click"/>
+                    <Border BorderThickness="2" BorderBrush="Red" CornerRadius="7" Margin="0 10 0 0">
+                        <Button x:Name="btn_Logout" Content="Log out" Background="Transparent" BorderThickness="0" Margin="0 -3" Click="btn_Logout_Click"/>
                     </Border>
-                </UniformGrid>
-                <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="0 10 0 0">
-                    <Button x:Name="btn_Edit" Content="Edit information" Background="Transparent" BorderThickness="0" Margin="0 -3" Click="btn_Edit_Click"/>
-                </Border>
-                <Border BorderThickness="2" BorderBrush="Red" CornerRadius="7" Margin="0 10 0 0">
-                    <Button x:Name="btn_Logout" Content="Log out" Background="Transparent" BorderThickness="0" Margin="0 -3" Click="btn_Logout_Click"/>
-                </Border>
-            </StackPanel>
+                </StackPanel>
+            </Grid>
         </Border>
     </Grid>
 </UserControl>
