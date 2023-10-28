@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using SmartWallet.DAL.Entity;
 using SmartWallet.Providers;
 
 namespace SmartWallet.UI.Controls
@@ -17,6 +18,7 @@ namespace SmartWallet.UI.Controls
     {
         private int _cardNumber;
         private int _oldTransactionsCount;
+        private int _selectedYear;
 
         public int CardNumber
         {
@@ -32,37 +34,51 @@ namespace SmartWallet.UI.Controls
         }
 
         public TransactionProvider TransactionProvider;
+        public User User;
 
         public SeriesCollection ChartSeries { get; set; }
-        // public List<string> MonthLabels { get; set; }
 
         public Analytics()
         {
             InitializeComponent();
             AnimationView.PlayAnimation();
-            FillYears();
         }
 
         private void FillYears()
         {
-            int registrationYear = 2022; // TODO
-            int currentYear = DateTime.Today.Year;
-            for (int i = currentYear; i >= registrationYear; i--) AnalyticsYears.Items.Add(i);
-            AnalyticsYears.SelectedItem = AnalyticsYears.Items[0];
+            AnalyticsYears.Items.Clear();
+            if (User == null)
+            {
+                AnalyticsYears.Items.Add(DateTime.Today.Year);
+                AnalyticsYears.SelectedItem = AnalyticsYears.Items[0];
+            }
+            else
+            {
+                int registrationYear = User.RegistrationDate.Year;
+                int currentYear = DateTime.Today.Year;
+                for (int i = currentYear; i >= registrationYear; i--) AnalyticsYears.Items.Add(i);
+                if (AnalyticsYears.Items.Contains(_selectedYear))
+                {
+                    AnalyticsYears.SelectedItem = _selectedYear;
+                }
+                else AnalyticsYears.SelectedItem = AnalyticsYears.Items[0];
+            }
         }
 
         public void Refresh()
         {
+            if (AnalyticsYears.SelectedItem != null) _selectedYear = (int)AnalyticsYears.SelectedItem;
+            FillYears();
             UpdateChartSeries();
         }
 
         private void UpdateChartSeries()
         {
-            if (TransactionProvider == null) return;
+            if (TransactionProvider == null || User == null) return;
             
             var Transactions = TransactionProvider.GetTransactionsBetweenDate(
                 new DateTime(int.Parse(AnalyticsYears.SelectedItem.ToString()), 1, 1),
-                new DateTime(int.Parse(AnalyticsYears.SelectedItem.ToString()), 1, 1),
+                new DateTime(int.Parse(AnalyticsYears.SelectedItem.ToString()), 12, 31),
                 CardNumber
                 );
             
@@ -158,7 +174,10 @@ namespace SmartWallet.UI.Controls
 
         private void AnalyticsYears_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateChartSeries();
+            if (AnalyticsYears.SelectedItem != null)
+            {
+                UpdateChartSeries();
+            }
         }
 
         private void ChartType_OnChecked(object sender, RoutedEventArgs e)

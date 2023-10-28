@@ -65,6 +65,7 @@ namespace SmartWallet
             // Analytics Control
             Analytics.CardNumber = CardId;
             Analytics.TransactionProvider = _transactionProvider;
+            Analytics.User = _userProvider.GetUserById(_userId);
             Analytics.Refresh();
             
             // Transaction control
