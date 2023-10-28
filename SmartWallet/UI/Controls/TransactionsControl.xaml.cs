@@ -55,6 +55,7 @@ public partial class TransactionsControl : UserControl
 
     public CardProvider CardProvider;
     public TransactionProvider TransactionProvider;
+    public User User;
     
     public TransactionsControl()
     {
@@ -68,6 +69,12 @@ public partial class TransactionsControl : UserControl
 
     public void Refresh()
     {
+        StartDatePicker.DisplayDateStart = User.RegistrationDate;
+        EndDatePicker.DisplayDateStart = User.RegistrationDate;
+        
+        StartDatePicker.DisplayDateEnd = DateTime.Today;
+        EndDatePicker.DisplayDateEnd = DateTime.Today;
+        
         UpdateList();
     }
 
@@ -129,7 +136,10 @@ public partial class TransactionsControl : UserControl
         if (startDate > EndDatePicker.SelectedDate.Value)
         {
             DateTime selectedDate = EndDatePicker.SelectedDate.Value;
-            StartDatePicker.SelectedDate = new DateTime(selectedDate.Year, selectedDate.Month, 1);
+            DateTime possibleDate = new DateTime(selectedDate.Year, selectedDate.Month, 1);
+            StartDatePicker.SelectedDate = possibleDate < StartDatePicker.DisplayDateStart
+                ? StartDatePicker.DisplayDateStart
+                : possibleDate;
         }
 
         UpdateList();

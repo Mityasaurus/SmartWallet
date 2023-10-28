@@ -72,6 +72,7 @@ namespace SmartWallet
             TransactionsView.CardProvider = _cardProvider;
             TransactionsView.TransactionProvider = _transactionProvider;
             TransactionsView.CardId = CardId;
+            TransactionsView.User = _userProvider.GetUserById(_userId);
             TransactionsView.Refresh();
 
             // User information control
