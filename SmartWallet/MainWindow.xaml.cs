@@ -14,7 +14,7 @@ namespace SmartWallet
     public partial class MainWindow : Window
     {
         
-        public MainWindow(int userId)
+        public MainWindow()
         {
             InitializeComponent();
 
@@ -26,10 +26,11 @@ namespace SmartWallet
 
             NavigatorObject.pageSwitcher = this;
 
-            HomeScreen homeScreen = new HomeScreen(userId);
-            homeScreen.UserInformation.CloseMainWindow += this.Close;
-
-            NavigatorObject.Switch(homeScreen);
+            // HomeScreen homeScreen = new HomeScreen(userId);
+            // homeScreen.UserInformation.CloseMainWindow += this.Close;
+            // NavigatorObject.Switch(homeScreen);
+            LoginWindow loginWindow = new LoginWindow();
+            NavigatorObject.Switch(loginWindow);
         }
 
         public Action? CloseAction { get; set; }

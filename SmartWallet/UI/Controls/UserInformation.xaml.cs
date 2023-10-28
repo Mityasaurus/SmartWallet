@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SmartWallet.Aplication.Navigator;
 
 namespace SmartWallet.UI.Controls
 {
@@ -57,9 +58,7 @@ namespace SmartWallet.UI.Controls
 
         private void btn_Logout_Click(object sender, RoutedEventArgs e)
         {
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.Show();
-            CloseMainWindow.Invoke();
+            NavigatorObject.Switch(new LoginWindow());
         }
 
         private void btn_Edit_Click(object sender, RoutedEventArgs e)

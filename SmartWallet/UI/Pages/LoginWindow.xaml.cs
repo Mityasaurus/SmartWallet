@@ -3,13 +3,15 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using SmartWallet.Aplication.Navigator;
+using SmartWallet.UI.Pages;
 
 namespace SmartWallet
 {
     /// <summary>
     /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class LoginWindow : UserControl
     {
         public LoginWindow()
         {
@@ -18,8 +20,8 @@ namespace SmartWallet
             double screenWidth = SystemParameters.PrimaryScreenWidth;
             double screenHeight = SystemParameters.PrimaryScreenHeight;
 
-            this.Left = (screenWidth - this.Width) / 2;
-            this.Top = (screenHeight - this.Height) / 2;
+            // this.Left = (screenWidth - this.Width) / 2;
+            // this.Top = (screenHeight - this.Height) / 2;
         }
 
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -57,17 +59,13 @@ namespace SmartWallet
             }
             else
             {
-                MainWindow mainWindow = new MainWindow(userProvider.GetUserByCredentials(email, password).Id);
-                mainWindow.Show();
-                this.Close();
+                NavigatorObject.Switch(new HomeScreen(userProvider.GetUserByCredentials(email, password).Id));
             }
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            RegistrationWindow registrationWindow = new RegistrationWindow();
-            registrationWindow.Show();
-            this.Close();
+            NavigatorObject.Switch(new RegistrationWindow());
         }
     }
 }

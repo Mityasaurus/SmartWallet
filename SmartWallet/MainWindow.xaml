@@ -5,5 +5,5 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartWallet"
         mc:Ignorable="d"
-        Title="Smart Wallet" Height="1000" Width="1200" MinHeight="1000" MinWidth="1200" MaxHeight="1000" MaxWidth="1200">
+        Title="Smart Wallet" Height="1000" Width="1200">
 </Window>

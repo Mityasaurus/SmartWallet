@@ -7,13 +7,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using SmartWallet.Aplication.Navigator;
 
 namespace SmartWallet
 {
     /// <summary>
     /// Interaction logic for RegistrationWindow.xaml
     /// </summary>
-    public partial class RegistrationWindow : Window
+    public partial class RegistrationWindow : UserControl
     {
         // private UserProvider _userProvider; 
 
@@ -24,15 +25,13 @@ namespace SmartWallet
             double screenWidth = SystemParameters.PrimaryScreenWidth;
             double screenHeight = SystemParameters.PrimaryScreenHeight;
 
-            this.Left = (screenWidth - this.Width) / 2;
-            this.Top = (screenHeight - this.Height) / 2;
+            // this.Left = (screenWidth - this.Width) / 2;
+            // this.Top = (screenHeight - this.Height) / 2;
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.Show();
-            this.Close();
+            NavigatorObject.Switch(new LoginWindow());
         }
 
         private void btn_Register_Click(object sender, RoutedEventArgs e)
@@ -98,9 +97,7 @@ namespace SmartWallet
 
             userProvider.AddUser(newUser);
 
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.Show();
-            this.Close();
+            NavigatorObject.Switch(new LoginWindow());
         }
 
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
