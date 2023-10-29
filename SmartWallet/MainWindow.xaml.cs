@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using SmartWallet.Aplication.Navigator;
 using SmartWallet.DAL;
 using SmartWallet.Providers;
+using SmartWallet.UI.Controls;
 using SmartWallet.UI.Pages;
 
 namespace SmartWallet

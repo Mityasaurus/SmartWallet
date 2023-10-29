@@ -16,6 +16,8 @@ namespace SmartWallet
     {
         private static List<CultureInfo> _languages = new List<CultureInfo>();
 
+        public static event EventHandler LanguageChanged;
+
         public static List<CultureInfo> Languages
         {
             get => _languages;
@@ -56,6 +58,8 @@ namespace SmartWallet
                 {
                     Application.Current.Resources.MergedDictionaries.Add(dict);
                 }
+
+                if (LanguageChanged != null) LanguageChanged(Application.Current, new EventArgs());
             }
         }
         
