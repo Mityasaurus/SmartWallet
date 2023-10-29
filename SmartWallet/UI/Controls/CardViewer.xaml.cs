@@ -120,11 +120,13 @@ public partial class CardViewer : UserControl
         
         if (_selectedIndex == CardDots.Children.Count - 1)
         {
+            NewCardWindow.Visibility = Visibility.Collapsed;
             DisplayedCard.Visibility = Visibility.Collapsed;
             AddNewCard.Visibility = Visibility.Visible;
         }
         else
         {
+            NewCardWindow.Visibility = Visibility.Collapsed;
             DisplayedCard.Visibility = Visibility.Visible;
             AddNewCard.Visibility = Visibility.Collapsed;
             DisplayedCard.CardData = Cards[_selectedIndex];
