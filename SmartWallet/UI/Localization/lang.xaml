@@ -79,4 +79,12 @@
     <v:String x:Key="userInfoControl_Cancel">Cancel</v:String>
     <v:String x:Key="userInfoControl_Edit">Edit information</v:String>
     <v:String x:Key="userInfoControl_LogOut">Log Out</v:String>
+
+    <!--New card control-->
+    <v:String x:Key="newCardControl_Currency">Choose a currency</v:String>
+    <v:String x:Key="newCardControl_Money">Money</v:String>
+    <v:String x:Key="newCardControl_Crypto">Crypto</v:String>
+    <v:String x:Key="newCardControl_Balance">Enter an opening balance</v:String>
+    
+    
 </ResourceDictionary>

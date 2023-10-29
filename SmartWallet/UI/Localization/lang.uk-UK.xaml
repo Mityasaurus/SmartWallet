@@ -79,4 +79,11 @@
     <v:String x:Key="userInfoControl_Cancel">Відмінити</v:String>
     <v:String x:Key="userInfoControl_Edit">Редагувати</v:String>
     <v:String x:Key="userInfoControl_LogOut">Вийти</v:String>
+    
+    <!--New card control-->
+    <v:String x:Key="newCardControl_Currency">Оберіть валюту</v:String>
+    <v:String x:Key="newCardControl_Money">Фіат</v:String>
+    <v:String x:Key="newCardControl_Crypto">Крипта</v:String>
+    <v:String x:Key="newCardControl_Balance">Введіть початковий баланс</v:String>
+
 </ResourceDictionary>
