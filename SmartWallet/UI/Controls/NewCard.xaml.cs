@@ -17,7 +17,8 @@ namespace SmartWallet.UI.Pages
 
         public delegate void MainWindowHandler();
         public event MainWindowHandler CloseNewCardWindow;
-        public event MainWindowHandler UpdateUI;
+
+        public event MainWindowHandler UpdateUI; // Temporary solution
 
         public NewCardWindow()
         {

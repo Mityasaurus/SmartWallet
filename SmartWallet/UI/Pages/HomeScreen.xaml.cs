@@ -81,7 +81,7 @@ namespace SmartWallet.UI.Pages
             CardViewer.Cards = _userProvider.GetUserById(_userId).Cards;
             CardViewer.NewCardWindow.UserId = _userId;
 
-            CardViewer.NewCardWindow.UpdateUI += UpdateUI;
+            CardViewer.NewCardWindow.UpdateUI += UpdateUI; // Temporary solution
 
             // Analytics Control
             Analytics.CardNumber = CardId;
