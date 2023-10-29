@@ -5,8 +5,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using SmartWallet.Aplication.Navigator;
 using SmartWallet.DAL.Entity;
 using SmartWallet.Providers;
+using SmartWallet.UI.Pages;
 
 namespace SmartWallet.UI.Controls;
 
@@ -51,6 +53,8 @@ public partial class CardViewer : UserControl
     public CardViewer()
     {
         InitializeComponent();
+
+        NewCardWindow.CloseNewCardWindow += CancelAddNewCard;
     }
 
     private void update()
@@ -142,6 +146,13 @@ public partial class CardViewer : UserControl
 
     private void AddNewCard_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
     {
-        // TODO Add new card
+        AddNewCard.Visibility = Visibility.Collapsed;
+        NewCardWindow.Visibility = Visibility.Visible;
+    }
+
+    public void CancelAddNewCard()
+    {
+        AddNewCard.Visibility = Visibility.Visible;
+        NewCardWindow.Visibility = Visibility.Collapsed;
     }
 }

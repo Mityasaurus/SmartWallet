@@ -47,7 +47,7 @@
     </generic:List>
     
     <!-- Card control -->
-    <v:String x:Key="analytics_Balance">Current Balance</v:String>
+    <v:String x:Key="cardControl_Balance">Current Balance</v:String>
     
     <!-- Card Viewer control -->
     <v:String x:Key="cardViewer_Title">My Cards</v:String>

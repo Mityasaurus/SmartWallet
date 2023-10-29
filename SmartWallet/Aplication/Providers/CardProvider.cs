@@ -48,8 +48,47 @@ public class CardProvider
         }
     }
 
+    public static string GenerateCVV()
+    {
+        Random rand = new Random();
+
+        string cvv;
+
+        do
+        {
+            cvv = "";
+            for (int i = 0; i < 3; i++)
+            {
+                cvv += rand.Next(0, 10);
+            }
+        } while (cvv[0] == cvv[1] && cvv[1] == cvv[2]);
+
+        return cvv;
+    }
+
+    public static DateTime GenerateDateExpire()
+    {
+        return DateTime.Now.AddMonths(50);
+    }
+
     public bool DoesCardExist(string number)
     {
         return _cards.Count(c => c.Number == number) != 0;
+    }
+
+    public void AddNewCard(string cardNumber, DateTime dateExpire, string cvv, string type, Currency currency, double balance, int userId)
+    {
+        Card newCard = new Card()
+        {
+            Number = cardNumber,
+            DateExpire = dateExpire,
+            Cvv = cvv,
+            Type = type,
+            Currency = currency,
+            Balance = balance,
+            UserId = userId
+        };
+
+        _cardRepository.Add(newCard);
     }
 }
