@@ -18,8 +18,6 @@ namespace SmartWallet
         public LoginWindow()
         {
             InitializeComponent();
-
-            App.Language = new CultureInfo("uk-UK");
         }
 
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
@@ -64,6 +62,16 @@ namespace SmartWallet
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
             NavigatorObject.Switch(new RegistrationWindow());
+        }
+        
+        private void English_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            App.Language = new CultureInfo("en-US");
+        }
+
+        private void Ukrainian_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            App.Language = new CultureInfo("uk-UK");
         }
     }
 }

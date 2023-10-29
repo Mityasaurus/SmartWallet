@@ -110,5 +110,15 @@ namespace SmartWallet.UI.Pages
         {
             UpdateUI();
         }
+
+        private void English_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            App.Language = new CultureInfo("en-US");
+        }
+
+        private void Ukrainian_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            App.Language = new CultureInfo("uk-UK");
+        }
     }
 }

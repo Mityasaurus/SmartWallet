@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using SmartWallet.Aplication.Services;
 using SmartWallet.DAL.Entity;
 using SmartWallet.Providers;
@@ -112,6 +113,16 @@ namespace SmartWallet
                     passwordBox.BorderBrush = new SolidColorBrush(Colors.GhostWhite);
                 }
             }
+        }
+
+        private void English_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            App.Language = new CultureInfo("en-US");
+        }
+
+        private void Ukrainian_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            App.Language = new CultureInfo("uk-UK");
         }
     }
 }

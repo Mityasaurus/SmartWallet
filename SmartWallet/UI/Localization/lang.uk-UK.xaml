@@ -3,7 +3,7 @@
                     xmlns:v="clr-namespace:System;assembly=mscorlib"
                     xmlns:generic="clr-namespace:System.Collections.Generic;assembly=System.Collections">
     <!-- Login page -->
-    <v:String x:Key="login_Welcome">Ласкаво просимо назад</v:String>
+    <v:String x:Key="login_Welcome">Ласкаво просимо</v:String>
     <v:String x:Key="login_Email">Email</v:String>
     <v:String x:Key="login_Password">Пароль</v:String>
     <v:String x:Key="login_Login">Ввійти</v:String>
