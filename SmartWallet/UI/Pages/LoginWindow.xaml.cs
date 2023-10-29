@@ -1,4 +1,6 @@
-﻿using SmartWallet.Providers;
+﻿using System;
+using System.Globalization;
+using SmartWallet.Providers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,11 +19,7 @@ namespace SmartWallet
         {
             InitializeComponent();
 
-            double screenWidth = SystemParameters.PrimaryScreenWidth;
-            double screenHeight = SystemParameters.PrimaryScreenHeight;
-
-            // this.Left = (screenWidth - this.Width) / 2;
-            // this.Top = (screenHeight - this.Height) / 2;
+            App.Language = new CultureInfo("uk-UK");
         }
 
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

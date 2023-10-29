@@ -2,6 +2,7 @@
 using SmartWallet.Providers;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,10 +52,13 @@ namespace SmartWallet.UI.Pages
             CardViewer.SetSelectedCardId += SetSelectedCardId;
 
             UserInformation.UserId = userId;
-
-            //TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 65000);
         }
 
+        public void ChangeLanguage(Object sender, EventArgs e)
+        {
+            App.Language = App.Languages[1];
+        }
+        
         public void SetSelectedCardId(int id)
         {
             CardId = id;

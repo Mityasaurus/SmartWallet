@@ -17,9 +17,7 @@
     <Grid>
         <Border Height="363" Width="374" CornerRadius="20" Background="#1D1D41">
             <StackPanel>
-                <TextBlock Margin="23 19" Foreground="White" FontSize="24" FontWeight="SemiBold">
-                    My Cards
-                </TextBlock>
+                <TextBlock Margin="23 19" Foreground="White" FontSize="24" FontWeight="SemiBold" Text="{DynamicResource cardViewer_Title}"/>
                 
                 <local:CardControl x:Name="DisplayedCard" Visibility="Visible" Margin="23 0 23 16"/>
                 <StackPanel x:Name="AddNewCard" Margin="23 0 23 16" MouseLeftButtonUp="AddNewCard_OnMouseLeftButtonUp" Visibility="Collapsed" Width="326" Height="184">
@@ -30,11 +28,10 @@
                 
                 <StackPanel x:Name="CardDots" Margin="0 0 0 15" Orientation="Horizontal" HorizontalAlignment="Center"/>
                 <Border CornerRadius="10" Height="50" Margin="23 0" BorderThickness="2" BorderBrush="White">
-                    <Button Foreground="White" Height="46" Background="Transparent" Click="TransferClick">
+                    <Button Foreground="White" Height="46" Background="Transparent" Click="TransferClick" Content="{DynamicResource cardViewer_Transfer}">
                         <Button.BorderThickness>
                             0
                         </Button.BorderThickness>
-                        Transfer
                     </Button>
                 </Border>
             </StackPanel>

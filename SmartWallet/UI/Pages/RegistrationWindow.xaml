@@ -15,27 +15,29 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <StackPanel Width="400" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Welcome to Smart Wallet!" Foreground="White" FontSize="25" HorizontalAlignment="Center" FontWeight="DemiBold" Margin="15 20 0 10"/>
-            <TextBlock Text="Your new way of financial management." Foreground="GhostWhite" HorizontalAlignment="Center" FontSize="14" Margin="15 0"/>
-            <TextBlock Text="Enter name" Foreground="GhostWhite" FontSize="14" Margin="20 40 0 0"></TextBlock>
+        <StackPanel Width="410" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="{DynamicResource registration_Greeting}" Foreground="White" FontSize="25" HorizontalAlignment="Center" FontWeight="DemiBold" Margin="15 20 0 10"/>
+            <TextBlock Text="{DynamicResource registration_GreetingSubLine}" Foreground="GhostWhite" HorizontalAlignment="Center" FontSize="14" Margin="15 0"/>
+            <TextBlock Text="{DynamicResource registration_Name}" Foreground="GhostWhite" FontSize="14" Margin="20 40 0 0"></TextBlock>
             <TextBox x:Name="tb_Name" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"></TextBox>
-            <TextBlock Text="Enter lastname" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
+            <TextBlock Text="{DynamicResource registration_LastName}" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
             <TextBox x:Name="tb_LastName" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"></TextBox>
-            <TextBlock Text="Enter email" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
+            <TextBlock Text="{DynamicResource registration_Email}" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
             <TextBox x:Name="tb_Email" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"></TextBox>
-            <TextBlock Text="Enter phone number" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
+            <TextBlock Text="{DynamicResource registration_Phone}" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
             <TextBox x:Name="tb_Phone" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"></TextBox>
-            <TextBlock Text="Create a password" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
+            <TextBlock Text="{DynamicResource registration_Password}" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
             <PasswordBox x:Name="tb_Password" Margin="20 7 20 0" Style="{StaticResource PasswordBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
             <TextBlock x:Name="tb_Error" Foreground="Red" FontSize="14" Margin="0 15 0 0" HorizontalAlignment="Center"></TextBlock>
             <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="20 15 20 0">
-                <Button x:Name="btn_Register" Content="Create an account" Background="Transparent" BorderThickness="0" Click="btn_Register_Click"/>
+                <Button x:Name="btn_Register" Content="{DynamicResource registration_CreateAccount}" Background="Transparent" BorderThickness="0" Click="btn_Register_Click"/>
             </Border>
             <StackPanel Orientation="Horizontal" Margin="0 17" HorizontalAlignment="Center">
-                <TextBlock Text="Already a member?" Foreground="GhostWhite" FontSize="12" Margin="0 0 5 0"/>
+                <TextBlock Text="{DynamicResource registration_AlreadyMemeber}" Foreground="GhostWhite" FontSize="12" Margin="0 0 5 0"/>
                 <TextBlock FontSize="12" Style="{StaticResource TextBlockLoginRegistrationWindow}">
-                    <Hyperlink Foreground="LightSkyBlue" Click="Hyperlink_Click">Login</Hyperlink>
+                    <Hyperlink Foreground="LightSkyBlue" Click="Hyperlink_Click">
+                        <TextBlock Text="{DynamicResource registration_SignIn}"></TextBlock>
+                    </Hyperlink>
                 </TextBlock>
             </StackPanel>
         </StackPanel>
