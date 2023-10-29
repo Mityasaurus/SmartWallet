@@ -65,6 +65,9 @@
     <v:String x:Key="transactionsControl_Grid_Date">Дата</v:String>
     <v:String x:Key="transactionsControl_Grid_Amount">Сума</v:String>
     <v:String x:Key="transactionsControl_Grid_Action">Тип</v:String>
+    <v:String x:Key="transactionsControl_Grid_ActionSent">ВІД.</v:String>
+    <v:String x:Key="transactionsControl_Grid_ActionGet">ОТР.</v:String>
+    <v:String x:Key="transactionsControl_NoData">Тут немає жодної транзакції</v:String>
     
     <!-- User information control -->
     <v:String x:Key="userInfoControl_Name">Ім'я</v:String>

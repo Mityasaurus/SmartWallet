@@ -40,6 +40,35 @@ public class StatusToColorConverter : IValueConverter
     }
 }
 
+public class StatusTextConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        ResourceDictionary dict = (from d in Application.Current.Resources.MergedDictionaries
+            where d.Source != null && d.Source.OriginalString.StartsWith("UI/Localization/lang.")
+            select d).FirstOrDefault();
+
+        if (dict != null)
+        {
+            switch ((string)value)
+            {
+                case "SENT":
+                    return dict["transactionsControl_Grid_ActionSent"];
+                case "GET":
+                    return dict["transactionsControl_Grid_ActionGet"];
+            }
+            return value;
+        }
+        
+        return value;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
 public partial class TransactionsControl : UserControl
 {
     private List<TransactionsItem> _transactions { get; set; }
@@ -65,6 +94,13 @@ public partial class TransactionsControl : UserControl
         StartDatePicker.SelectedDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
         
         AnimationView.PlayAnimation();
+        
+        App.LanguageChanged += LanguageChanged;
+    }
+
+    public void LanguageChanged(object sender, EventArgs e)
+    {
+        TransactionsList.Items.Refresh();
     }
 
     public void Refresh()
@@ -91,7 +127,7 @@ public partial class TransactionsControl : UserControl
         if (_transactions.Count == 0)
         {
             TransactionsList.Visibility = Visibility.Collapsed;
-            AnimationView.Visibility = Visibility.Visible;
+            NoGraphData.Visibility = Visibility.Visible;
         }
         else
         {
@@ -99,7 +135,7 @@ public partial class TransactionsControl : UserControl
             TransactionsList.Items.Refresh();
             
             TransactionsList.Visibility = Visibility.Visible;
-            AnimationView.Visibility = Visibility.Collapsed;
+            NoGraphData.Visibility = Visibility.Collapsed;
         }
     }
 
@@ -118,7 +154,7 @@ public partial class TransactionsControl : UserControl
                 Card = transaction.SenderCardId == CardId 
                     ? recipient.Number 
                     : sender.Number,
-                Date = transaction.DateTime.ToString("ddd,dd MMM yyyy"),
+                Date = transaction.DateTime.ToString("MM/dd/yyyy"),
                 Amount = transaction.Amount.ToString() + MoneyProvider.Symbols[current.Currency],
                 TransactionStatus = transaction.SenderCardId == CardId ? TransactionStatus.SENT.ToString() : TransactionStatus.GET.ToString()
             };

@@ -8,6 +8,7 @@
              mc:Ignorable="d" Height="350">
     <UserControl.Resources>
         <local:StatusToColorConverter x:Key="StatusToColorConverter"></local:StatusToColorConverter>
+        <local:StatusTextConverter x:Key="StatusTextConverter"></local:StatusTextConverter>
     </UserControl.Resources>
     <Grid>
         <Border CornerRadius="20" Background="#1D1D41">
@@ -61,7 +62,7 @@
                                         Width="70"
                                         Background="{Binding Converter={StaticResource StatusToColorConverter}}">
                                         <TextBlock
-                                            Text="{Binding TransactionStatus}"
+                                            Text="{Binding TransactionStatus, Converter={StaticResource StatusTextConverter}}"
                                             FontSize="12"
                                             FontWeight="Regular"
                                             TextAlignment="Center"
@@ -95,17 +96,19 @@
                         </Style>
                     </DataGrid.CellStyle>
                 </DataGrid>
-                <lottie:LottieAnimationView 
-                    x:Name="AnimationView"
-                    Width="300"
-                    Height="150"
-                    Visibility="Visible"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Grid.Row="1"
-                    ResourcePath="pack://application:,,,/UI/Animations/noTransactions.json"
-                    AutoPlay="True"
-                    RepeatCount="-1"/>
+                <StackPanel Grid.Row="1" x:Name="NoGraphData" Visibility="Visible">
+                    <lottie:LottieAnimationView 
+                        x:Name="AnimationView"
+                        Width="300"
+                        Height="150"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0 0 0 45"
+                        ResourcePath="pack://application:,,,/UI/Animations/noTransactions.json"
+                        AutoPlay="True"
+                        RepeatCount="-1"/>
+                    <TextBlock FontSize="16" FontWeight="SemiBold" Foreground="#AEABD8" TextAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource transactionsControl_NoData}"/>
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>

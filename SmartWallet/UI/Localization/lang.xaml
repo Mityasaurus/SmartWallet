@@ -65,6 +65,9 @@
     <v:String x:Key="transactionsControl_Grid_Date">Date</v:String>
     <v:String x:Key="transactionsControl_Grid_Amount">Amount</v:String>
     <v:String x:Key="transactionsControl_Grid_Action">Action</v:String>
+    <v:String x:Key="transactionsControl_Grid_ActionSent">SENT</v:String>
+    <v:String x:Key="transactionsControl_Grid_ActionGet">Get</v:String>
+    <v:String x:Key="transactionsControl_NoData">There is no transactions</v:String>
     
     <!-- User information control -->
     <v:String x:Key="userInfoControl_Name">Name</v:String>
