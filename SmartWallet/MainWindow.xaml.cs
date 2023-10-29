@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using SmartWallet.Aplication.Navigator;
@@ -18,17 +19,10 @@ namespace SmartWallet
         {
             InitializeComponent();
 
-            double screenWidth = SystemParameters.PrimaryScreenWidth;
-            double screenHeight = SystemParameters.PrimaryScreenHeight;
-
-            this.Left = (screenWidth - this.Width) / 2;
-            this.Top = (screenHeight - this.Height) / 2;
+            App.Language = new CultureInfo("en-US");
 
             NavigatorObject.pageSwitcher = this;
 
-            // HomeScreen homeScreen = new HomeScreen(userId);
-            // homeScreen.UserInformation.CloseMainWindow += this.Close;
-            // NavigatorObject.Switch(homeScreen);
             LoginWindow loginWindow = new LoginWindow();
             NavigatorObject.Switch(loginWindow);
         }

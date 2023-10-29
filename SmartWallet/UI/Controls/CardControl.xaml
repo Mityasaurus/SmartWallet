@@ -13,9 +13,7 @@
             </StackPanel.Background>
                     
             <StackPanel Margin="30 20 30 0">
-                <TextBlock Foreground="#8C89B4" FontSize="16" FontWeight="Regular">
-                    Current Balance
-                </TextBlock>
+                <TextBlock Foreground="#8C89B4" FontSize="16" FontWeight="Regular" Text="{DynamicResource cardControl_Balance}"/>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock x:Name="CurrencySymbol" Foreground="white" FontSize="24" FontWeight="SemiBold"/>
                     <TextBlock x:Name="Balance" Foreground="white" FontSize="24" FontWeight="SemiBold"/>

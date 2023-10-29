@@ -18,7 +18,7 @@
                 </Grid.RowDefinitions>
                 
                 <DockPanel Grid.Row="0" Margin="0 0 0 35">
-                    <TextBlock Foreground="White" FontSize="24" FontWeight="SemiBold">Transactions</TextBlock>
+                    <TextBlock Foreground="White" FontSize="24" FontWeight="SemiBold" Text="{DynamicResource transactionsControl_Title}"/>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                         <DatePicker x:Name="StartDatePicker" Margin="0 0 10 0" Style="{StaticResource DatePickerStyle}" SelectedDateChanged="StartDatePicker_OnSelectedDateChanged" />
                         <DatePicker x:Name="EndDatePicker" Style="{StaticResource DatePickerStyle}" SelectedDateChanged="EndDatePicker_OnSelectedDateChanged" />
@@ -35,22 +35,22 @@
                     AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn
-                            Header="Card Number"
+                            Header="{DynamicResource transactionsControl_Grid_CardNumber}"
                             Width="*"
                             Binding="{Binding Card}"
                             HeaderStyle="{StaticResource DataGridColumnHeaderStyle}" />
                         <DataGridTextColumn
-                            Header="Date"
+                            Header="{DynamicResource transactionsControl_Grid_Date}"
                             Width="*"
                             Binding="{Binding Date}"
                             HeaderStyle="{StaticResource DataGridColumnHeaderStyle}" />
                         <DataGridTextColumn
-                            Header="Amount"
+                            Header="{DynamicResource transactionsControl_Grid_Amount}"
                             Width="*"
                             Binding="{Binding Amount}"
                             HeaderStyle="{StaticResource DataGridColumnHeaderStyle}" />
                         <DataGridTemplateColumn
-                            Header="Action"
+                            Header="{DynamicResource transactionsControl_Grid_Action}"
                             Width="*"
                             HeaderStyle="{StaticResource DataGridColumnHeaderStyle}">
                             <DataGridTemplateColumn.CellTemplate>

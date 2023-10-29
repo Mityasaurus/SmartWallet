@@ -13,9 +13,9 @@
                     <Image Source="../Images/arrow_outcome.png" Width="15" Height="15"></Image>
                 </Border>
                 <StackPanel>
-                    <TextBlock Text="Total Outcome" Foreground="#8C89B4" FontSize="16"
+                    <TextBlock Text="{DynamicResource totalOutcome_Title}" Foreground="#8C89B4" FontSize="16"
                                Margin="0 26 0 0"></TextBlock>
-                    <TextBlock x:Name="tb_Outcome" Text="632.00" Foreground="White" Margin="0 0 0 34" FontSize="22" FontWeight="Bold"></TextBlock>
+                    <TextBlock x:Name="tb_Outcome" Text="???.??" Foreground="White" Margin="0 0 0 34" FontSize="22" FontWeight="Bold"></TextBlock>
                 </StackPanel>
             </StackPanel>
         </Border>

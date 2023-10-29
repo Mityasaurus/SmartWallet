@@ -13,17 +13,24 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             
-            <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Margin="0 0 0 15">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Foreground="White" FontSize="28" FontWeight="SemiBold" Margin="0 0 5 0">
-                        Welcome Back,
-                    </TextBlock>
-                    <TextBlock x:Name="UserName" Foreground="White" FontSize="28" FontWeight="SemiBold"/>
+            <Grid Grid.Row="0" Margin="0 0 0 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource home_Greeting}" Foreground="White" FontSize="28" FontWeight="SemiBold" Margin="0 0 5 0"/>
+                        <TextBlock x:Name="UserName" Foreground="White" FontSize="28" FontWeight="SemiBold"/>
+                    </StackPanel>
+                    <TextBlock Text="{DynamicResource home_GreetingSubLine}" Foreground="#A6A6A6" FontSize="19" FontWeight="Regular"/>
                 </StackPanel>
-                <TextBlock Foreground="#A6A6A6" FontSize="19" FontWeight="Regular" >
-                    Here's what's happening with your accounts today.
-                </TextBlock>
-            </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource LanguageTextBox}" Margin="0 0 5 0" MouseLeftButtonUp="English_OnMouseLeftButtonUp" Text="EN"/>
+                    <TextBlock Style="{StaticResource LanguageTextBox}" MouseLeftButtonUp="Ukrainian_OnMouseLeftButtonUp" Text="UK"/>
+                </StackPanel>
+            </Grid>
             
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>

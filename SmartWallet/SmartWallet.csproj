@@ -62,6 +62,17 @@
     <Resource Include="UI\Images\lineChartIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Page Remove="UI\Localization\lang.xaml" />
+    <Resource Include="UI\Localization\lang.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Page Remove="UI\Localization\lang.uk-UK.xaml" />
+    <Resource Include="UI\Localization\lang.uk-UK.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

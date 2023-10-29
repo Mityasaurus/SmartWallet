@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using SmartWallet.Aplication.Services;
 using SmartWallet.DAL.Entity;
 using SmartWallet.Providers;
@@ -21,12 +22,6 @@ namespace SmartWallet
         public RegistrationWindow()
         {
             InitializeComponent();
-
-            double screenWidth = SystemParameters.PrimaryScreenWidth;
-            double screenHeight = SystemParameters.PrimaryScreenHeight;
-
-            // this.Left = (screenWidth - this.Width) / 2;
-            // this.Top = (screenHeight - this.Height) / 2;
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
@@ -118,6 +113,16 @@ namespace SmartWallet
                     passwordBox.BorderBrush = new SolidColorBrush(Colors.GhostWhite);
                 }
             }
+        }
+
+        private void English_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            App.Language = new CultureInfo("en-US");
+        }
+
+        private void Ukrainian_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            App.Language = new CultureInfo("uk-UK");
         }
     }
 }
