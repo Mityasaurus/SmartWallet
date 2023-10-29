@@ -54,7 +54,7 @@ namespace SmartWallet.UI.Pages
             UserInformation.UserId = userId;
         }
 
-        public void ChangeLanguage(Object sender, EventArgs e)
+        public void ChangeLanguage(object sender, EventArgs e)
         {
             App.Language = App.Languages[1];
         }
@@ -77,7 +77,11 @@ namespace SmartWallet.UI.Pages
 
             // MyCards Control
             CardViewer.TransactionProvider = _transactionProvider;
+            CardViewer.NewCardWindow.CardProvider = _cardProvider;
             CardViewer.Cards = _userProvider.GetUserById(_userId).Cards;
+            CardViewer.NewCardWindow.UserId = _userId;
+
+            CardViewer.NewCardWindow.UpdateUI += UpdateUI; // Temporary solution
 
             // Analytics Control
             Analytics.CardNumber = CardId;

@@ -6,7 +6,7 @@
     <v:String x:Key="login_Welcome">Ласкаво просимо</v:String>
     <v:String x:Key="login_Email">Email</v:String>
     <v:String x:Key="login_Password">Пароль</v:String>
-    <v:String x:Key="login_Login">Ввійти</v:String>
+    <v:String x:Key="login_Login">Увійти</v:String>
     <v:String x:Key="login_DontHaveAccount">Ще не маєте облікового запису?</v:String>
     <v:String x:Key="login_SingUp">Зареєструватися</v:String>
     
@@ -20,7 +20,7 @@
     <v:String x:Key="registration_Password">Пароль</v:String>
     <v:String x:Key="registration_CreateAccount">Створити акаунт</v:String>
     <v:String x:Key="registration_AlreadyMemeber">Вже зареєстровані?</v:String>
-    <v:String x:Key="registration_SignIn">Ввійти</v:String>
+    <v:String x:Key="registration_SignIn">Увійти</v:String>
     
     <!-- Home page -->
     <v:String x:Key="home_Greeting">Ласкаво просимо назад,</v:String>
@@ -79,4 +79,11 @@
     <v:String x:Key="userInfoControl_Cancel">Відмінити</v:String>
     <v:String x:Key="userInfoControl_Edit">Редагувати</v:String>
     <v:String x:Key="userInfoControl_LogOut">Вийти</v:String>
+    
+    <!--New card control-->
+    <v:String x:Key="newCardControl_Currency">Оберіть валюту</v:String>
+    <v:String x:Key="newCardControl_Money">Фіат</v:String>
+    <v:String x:Key="newCardControl_Crypto">Крипта</v:String>
+    <v:String x:Key="newCardControl_Balance">Введіть початковий баланс</v:String>
+
 </ResourceDictionary>

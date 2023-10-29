@@ -47,7 +47,7 @@
     </generic:List>
     
     <!-- Card control -->
-    <v:String x:Key="analytics_Balance">Current Balance</v:String>
+    <v:String x:Key="cardControl_Balance">Current Balance</v:String>
     
     <!-- Card Viewer control -->
     <v:String x:Key="cardViewer_Title">My Cards</v:String>
@@ -79,4 +79,12 @@
     <v:String x:Key="userInfoControl_Cancel">Cancel</v:String>
     <v:String x:Key="userInfoControl_Edit">Edit information</v:String>
     <v:String x:Key="userInfoControl_LogOut">Log Out</v:String>
+
+    <!--New card control-->
+    <v:String x:Key="newCardControl_Currency">Choose a currency</v:String>
+    <v:String x:Key="newCardControl_Money">Money</v:String>
+    <v:String x:Key="newCardControl_Crypto">Crypto</v:String>
+    <v:String x:Key="newCardControl_Balance">Enter an opening balance</v:String>
+    
+    
 </ResourceDictionary>
