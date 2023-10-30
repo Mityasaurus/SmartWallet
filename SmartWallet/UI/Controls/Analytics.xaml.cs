@@ -88,7 +88,7 @@ namespace SmartWallet.UI.Controls
                 AnalyticsDiagram.Visibility = Visibility.Visible;
                 NoGraphData.Visibility = Visibility.Collapsed;
             }
-            
+
             ChartSeries = new SeriesCollection();
 
             Series outcomeSeries;
@@ -155,9 +155,10 @@ namespace SmartWallet.UI.Controls
                     Foreground = new SolidColorBrush(Colors.White),
                 };
             }
+
+            int month;
             
-            
-            for(int month = 1; month <= (AnalyticsYears.SelectedItem.ToString() == DateTime.Today.Year.ToString()
+            for(month = 1; month <= (AnalyticsYears.SelectedItem.ToString() == DateTime.Today.Year.ToString()
                     ? DateTime.Today.Month
                     : 12); month++)
             {
@@ -166,9 +167,17 @@ namespace SmartWallet.UI.Controls
             
                 incomeSeries.Values.Add(income);
                 outcomeSeries.Values.Add(outcome);
-            
             }
-            
+
+            if (ChartType.IsChecked.Value)
+            {
+                var income = TransactionProvider.GetIncomeByMonth(month - 1, CardNumber);
+                var outcome = TransactionProvider.GetOutcomeByMonth(month - 1, CardNumber);
+
+                incomeSeries.Values.Add(income);
+                outcomeSeries.Values.Add(outcome);
+            }
+
             ChartSeries.Add(incomeSeries);
             ChartSeries.Add(outcomeSeries);
             
