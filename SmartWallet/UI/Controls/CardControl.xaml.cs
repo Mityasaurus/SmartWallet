@@ -35,7 +35,7 @@ public partial class CardControl : UserControl
             if (value.Background.Length == 0)
             {
                 Card.Background =
-                    new ImageBrush(new BitmapImage(new Uri("D:\\C#\\SmartWallet\\SmartWallet\\UI\\Images\\CardBackground.png", UriKind.Relative)));
+                    new ImageBrush(new BitmapImage(new Uri("pack://application:,,,/UI/Images/CardBackground.png")));
             }
             else
             {
