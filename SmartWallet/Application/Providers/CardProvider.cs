@@ -91,7 +91,8 @@ public class CardProvider
             Type = type,
             Currency = currency,
             Balance = balance,
-            UserId = userId
+            UserId = userId,
+            Background = new byte[] { }
         };
 
         _cardRepository.Add(newCard);

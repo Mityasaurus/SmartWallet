@@ -70,11 +70,11 @@ namespace SmartWallet.UI.Pages
 
             if(rdBtn_Money.IsChecked == true)
             {
-                type = rdBtn_Money.Content.ToString();
+                type = "Money";
             }
             else if(rdBtn_Crypto.IsChecked == true)
             {
-                type = rdBtn_Crypto.Content.ToString();
+                type = "Crypto";
             }
 
             Currency currency;
