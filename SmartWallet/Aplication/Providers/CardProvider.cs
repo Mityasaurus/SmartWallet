@@ -48,6 +48,11 @@ public class CardProvider
         }
     }
 
+    public void Update(Card card)
+    {
+        _cardRepository.Update(card);
+    }
+
     public static string GenerateCVV()
     {
         Random rand = new Random();

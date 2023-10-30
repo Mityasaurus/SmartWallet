@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SmartWallet.DAL.Entity;
+using SmartWallet.UI.Controls;
 
 namespace SmartWallet.UI.Pages
 {
@@ -52,6 +54,12 @@ namespace SmartWallet.UI.Pages
             CardViewer.SetSelectedCardId += SetSelectedCardId;
 
             UserInformation.UserId = userId;
+            
+            // test
+            // Card card = _cardProvider.GetCardById(11);
+            // card.Background =
+            //     System.IO.File.ReadAllBytes("D:\\C#\\SmartWallet\\SmartWallet\\UI\\Images\\cardCover.jpg");
+            // _cardProvider.Update(card);
         }
 
         public void ChangeLanguage(object sender, EventArgs e)
@@ -78,10 +86,12 @@ namespace SmartWallet.UI.Pages
             // MyCards Control
             CardViewer.TransactionProvider = _transactionProvider;
             CardViewer.NewCardWindow.CardProvider = _cardProvider;
+            EditCard.CardProvider = _cardProvider;
             CardViewer.Cards = _userProvider.GetUserById(_userId).Cards;
             CardViewer.NewCardWindow.UserId = _userId;
 
             CardViewer.NewCardWindow.UpdateUI += UpdateUI; // Temporary solution
+            CardViewer.EditCardWindow.UpdateUI += UpdateUI; // Temporary solution
 
             // Analytics Control
             Analytics.CardNumber = CardId;

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace SmartWallet.DAL.Entity;
 
@@ -25,6 +27,8 @@ public class Card
     
     [Required]
     public double Balance { get; set; }
+
+    public byte[] Background { get; set; }
     
     public int UserId { get; set; }
     public User User { get; set; }

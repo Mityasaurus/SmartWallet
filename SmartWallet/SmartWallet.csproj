@@ -35,7 +35,7 @@
     </Resource>
     <None Remove="UI\Images\CardBackground.png" />
     <Resource Include="UI\Images\CardBackground.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <None Remove="UI\Images\addCard.png" />
     <Resource Include="UI\Images\addCard.png">
@@ -72,6 +72,20 @@
       <Generator>MSBuild:Compile</Generator>
       <XamlRuntime>Wpf</XamlRuntime>
       <SubType>Designer</SubType>
+    </Resource>
+    <None Remove="UI\Images\editIcon.png" />
+    <Resource Include="UI\Images\editIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="UI\Images\dragNdropIcon.png" />
+    <Page Update="UI\Controls\EditCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <None Remove="UI\Images\editCard.png" />
+    <Resource Include="UI\Images\editCard.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 

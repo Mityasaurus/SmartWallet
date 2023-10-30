@@ -8,16 +8,32 @@
              mc:Ignorable="d">
     <Grid>
         <StackPanel x:Name="Card" Height="184">
-            <StackPanel.Background>
-                <ImageBrush ImageSource="..\Images\CardBackground.png"/>
-            </StackPanel.Background>
-                    
             <StackPanel Margin="30 20 30 0">
-                <TextBlock Foreground="#8C89B4" FontSize="16" FontWeight="Regular" Text="{DynamicResource cardControl_Balance}"/>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="CurrencySymbol" Foreground="white" FontSize="24" FontWeight="SemiBold"/>
-                    <TextBlock x:Name="Balance" Foreground="white" FontSize="24" FontWeight="SemiBold"/>
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Foreground="#8C89B4" FontSize="16" FontWeight="Regular" Text="{DynamicResource cardControl_Balance}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="CurrencySymbol" Foreground="white" FontSize="24" FontWeight="SemiBold"/>
+                            <TextBlock x:Name="Balance" Foreground="white" FontSize="24" FontWeight="SemiBold"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <Image x:Name="EditCard" Grid.Column="1" Source="../Images/editIcon.png" Width="20" Height="20" MouseLeftButtonUp="EditCard_OnMouseLeftButtonUp">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </Grid>
             </StackPanel>
 
             <DockPanel Margin="23 68 23 0">

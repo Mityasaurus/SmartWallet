@@ -11,9 +11,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
-                    <!-- Ширина для TextBlock -->
                     <ColumnDefinition Width="*" />
-                    <!-- Оставшееся пространство для ComboBox -->
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="{DynamicResource newCardControl_Currency}" Foreground="White" FontSize="16" VerticalAlignment="Center"/>
@@ -28,10 +26,10 @@
             <TextBox x:Name="tb_Balance" Style="{DynamicResource TextBoxRegistrationWindow}" Margin="14 10" TextAlignment="Center" PreviewKeyDown="TextBox_PreviewKeyDown"/>
             <UniformGrid Columns="2">
                 <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="0 0 5 10" Background="Green">
-                    <Button x:Name="btn_Confirm" Content="{DynamicResource userInfoControl_Confirm}" Background="Transparent" BorderThickness="0" Click="btn_Confirm_Click"/>
+                    <Button x:Name="btn_Confirm" Content="{DynamicResource newCardControl_Confirm}" Background="Transparent" BorderThickness="0" Click="btn_Confirm_Click"/>
                 </Border>
                 <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="5 0 0 10" Background="#B30000">
-                    <Button x:Name="btn_Cancel" Content="{DynamicResource userInfoControl_Cancel}" Background="Transparent" BorderThickness="0" Click="btn_Cancel_Click"/>
+                    <Button x:Name="btn_Cancel" Content="{DynamicResource newCardControl_Cancel}" Background="Transparent" BorderThickness="0" Click="btn_Cancel_Click"/>
                 </Border>
             </UniformGrid>
         </StackPanel>
