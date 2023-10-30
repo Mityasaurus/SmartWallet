@@ -1,13 +1,22 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using SmartWallet.DAL.Entity;
 using SmartWallet.Providers;
+using Image = System.Drawing.Image;
 
 namespace SmartWallet.UI.Controls;
 
 public partial class CardControl : UserControl
 {
+    public event EventHandler EditClick;
+    
     public static readonly DependencyProperty CardProperty = DependencyProperty.Register(
         "Card", typeof(Card), typeof(CardControl), new PropertyMetadata(null));
 
@@ -21,6 +30,28 @@ public partial class CardControl : UserControl
             Number.Text = formatCardNumber(value.Number);
             DateExpire.Text = formatDateExpire(value.DateExpire);
             CurrencySymbol.Text = MoneyProvider.Symbols[value.Currency];
+
+            // background
+            if (value.Background.Length == 0)
+            {
+                Card.Background =
+                    new ImageBrush(new BitmapImage(new Uri("D:\\C#\\SmartWallet\\SmartWallet\\UI\\Images\\CardBackground.png", UriKind.Relative)));
+            }
+            else
+            {
+                using (MemoryStream ms = new MemoryStream(value.Background))
+                {
+                    BitmapImage img = new BitmapImage();
+                    img.BeginInit();
+                    img.CacheOption = BitmapCacheOption.OnLoad;
+                    img.StreamSource = ms;
+                    img.EndInit();
+                    
+                    if (img.CanFreeze) img.Freeze();
+
+                    Card.Background = new ImageBrush(img);
+                }
+            }
         }
     }
     
@@ -37,5 +68,10 @@ public partial class CardControl : UserControl
     private string formatCardNumber(string number)
     {
         return $"{number.Substring(0, 4)} {number.Substring(4, 4)} {number.Substring(8, 4)} {number.Substring(12)}";
+    }
+
+    private void EditCard_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        if (EditClick != null) EditClick(sender, e);
     }
 }

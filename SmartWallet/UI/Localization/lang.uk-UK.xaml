@@ -85,5 +85,11 @@
     <v:String x:Key="newCardControl_Money">Фіат</v:String>
     <v:String x:Key="newCardControl_Crypto">Крипта</v:String>
     <v:String x:Key="newCardControl_Balance">Введіть початковий баланс</v:String>
-
+    <v:String x:Key="newCardControl_Cancel">Відмінити</v:String>
+    <v:String x:Key="newCardControl_Confirm">Підтвердити</v:String>
+    
+    <!-- EditCard control -->
+    <v:String x:Key="editCardControl_Cancel">Відмінити</v:String>
+    <v:String x:Key="editCardControl_Confirm">Підтвердити</v:String>
+    <v:String x:Key="editCardControl_Default">Стандарт</v:String>
 </ResourceDictionary>

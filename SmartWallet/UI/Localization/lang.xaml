@@ -85,6 +85,11 @@
     <v:String x:Key="newCardControl_Money">Money</v:String>
     <v:String x:Key="newCardControl_Crypto">Crypto</v:String>
     <v:String x:Key="newCardControl_Balance">Enter an opening balance</v:String>
-    
-    
+    <v:String x:Key="newCardControl_Cancel">Cancel</v:String>
+    <v:String x:Key="newCardControl_Confirm">Confirm</v:String>
+
+    <!-- EditCard control -->
+    <v:String x:Key="editCardControl_Cancel">Cancel</v:String>
+    <v:String x:Key="editCardControl_Confirm">Confirm</v:String>
+    <v:String x:Key="editCardControl_Default">Default</v:String>
 </ResourceDictionary>
