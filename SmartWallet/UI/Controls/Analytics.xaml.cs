@@ -82,7 +82,8 @@ namespace SmartWallet.UI.Controls
                 AnalyticsDiagram.Visibility = Visibility.Collapsed;
                 NoGraphData.Visibility = Visibility.Visible;
                 return;
-            } else
+            }
+            else
             {
                 AnalyticsDiagram.Visibility = Visibility.Visible;
                 NoGraphData.Visibility = Visibility.Collapsed;
@@ -92,11 +93,21 @@ namespace SmartWallet.UI.Controls
 
             Series outcomeSeries;
             Series incomeSeries;
+
+            string titleIncome = "Income";
+            string titleOutcome = "Outcome";
+
+            if(App.Language.Name == "uk-UK")
+            {
+                titleIncome = "Дохід";
+                titleOutcome = "Витрати";
+            }
+
             if (!ChartType.IsChecked.Value)
             {
                 outcomeSeries = new ColumnSeries
                 {
-                    Title = "Outcome",
+                    Title = titleOutcome,
                     Values = new ChartValues<double>(),
                     DataLabels = false,
                     LabelPoint = point => $"{point.Y:N2}",
@@ -109,7 +120,7 @@ namespace SmartWallet.UI.Controls
             
                 incomeSeries = new ColumnSeries
                 {
-                    Title = "Income",
+                    Title = titleIncome,
                     Values = new ChartValues<double>(),
                     DataLabels = false,
                     LabelPoint = point => $"{point.Y:N2}",
@@ -124,7 +135,7 @@ namespace SmartWallet.UI.Controls
             {
                 outcomeSeries = new LineSeries
                 {
-                    Title = "Outcome",
+                    Title = titleOutcome,
                     Values = new ChartValues<double>(),
                     DataLabels = false,
                     LabelPoint = point => $"{point.Y:N2}",
@@ -135,7 +146,7 @@ namespace SmartWallet.UI.Controls
             
                 incomeSeries = new LineSeries
                 {
-                    Title = "Income",
+                    Title = titleIncome,
                     Values = new ChartValues<double>(),
                     DataLabels = false,
                     LabelPoint = point => $"{point.Y:N2}",
