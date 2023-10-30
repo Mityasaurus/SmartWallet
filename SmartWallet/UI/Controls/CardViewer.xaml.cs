@@ -17,7 +17,8 @@ public partial class CardViewer : UserControl
     public delegate void SetSelectedCardIdHandler(int id);
 
     public event SetSelectedCardIdHandler SetSelectedCardId;
-    
+
+    private bool _isNew = true;
     private int selectedIndex { get; set; }
 
     private int _selectedIndex
@@ -27,6 +28,7 @@ public partial class CardViewer : UserControl
         {
             selectedIndex = value;
             if (SetSelectedCardId != null && value >= 0 && value < CardsList.Count) SetSelectedCardId.Invoke(CardsList[value].CardData.Id);
+            if (value >= 0 && value < CardsList.Count) EditCard.CardId = CardsList[value].CardData.Id;
         }
     }
 
@@ -44,6 +46,11 @@ public partial class CardViewer : UserControl
             if (value == null) SetValue(CardsProperty, new List<Card>());
             else SetValue(CardsProperty, value);
             CardsList = GenerateCardControls();
+            if (CardsList.Count > 0 && _isNew)
+            {
+                _selectedIndex = 0;
+                _isNew = false;
+            }
             update();
         }
     }
@@ -55,6 +62,8 @@ public partial class CardViewer : UserControl
         InitializeComponent();
 
         NewCardWindow.CloseNewCardWindow += CancelAddNewCard;
+        EditCardWindow.CloseEditCardWindow += CancelEditCard;
+        DisplayedCard.EditClick += EditCardClick;
     }
 
     private void update()
@@ -121,12 +130,14 @@ public partial class CardViewer : UserControl
         if (_selectedIndex == CardDots.Children.Count - 1)
         {
             NewCardWindow.Visibility = Visibility.Collapsed;
+            EditCardWindow.Visibility = Visibility.Collapsed;
             DisplayedCard.Visibility = Visibility.Collapsed;
             AddNewCard.Visibility = Visibility.Visible;
         }
         else
         {
             NewCardWindow.Visibility = Visibility.Collapsed;
+            EditCardWindow.Visibility = Visibility.Collapsed;
             DisplayedCard.Visibility = Visibility.Visible;
             AddNewCard.Visibility = Visibility.Collapsed;
             DisplayedCard.CardData = Cards[_selectedIndex];
@@ -156,5 +167,17 @@ public partial class CardViewer : UserControl
     {
         AddNewCard.Visibility = Visibility.Visible;
         NewCardWindow.Visibility = Visibility.Collapsed;
+    }
+    
+    public void EditCardClick(object sender, EventArgs e)
+    {
+        DisplayedCard.Visibility = Visibility.Collapsed;
+        EditCardWindow.Visibility = Visibility.Visible;
+    }
+    
+    public void CancelEditCard()
+    {
+        DisplayedCard.Visibility = Visibility.Visible;
+        EditCardWindow.Visibility = Visibility.Collapsed;
     }
 }
