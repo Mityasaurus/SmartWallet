@@ -17,7 +17,6 @@ namespace SmartWallet.UI.Controls
     public partial class Analytics : UserControl
     {
         private int _cardNumber;
-        private int _oldTransactionsCount;
         private int _selectedYear;
 
         public int CardNumber
@@ -25,10 +24,6 @@ namespace SmartWallet.UI.Controls
             get => _cardNumber;
             set
             {
-                if (value != _cardNumber)
-                {
-                    _oldTransactionsCount = -1;
-                }
                 _cardNumber = value;
             }
         }
