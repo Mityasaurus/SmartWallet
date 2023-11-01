@@ -17,7 +17,6 @@ namespace SmartWallet.UI.Controls
     public partial class Analytics : UserControl
     {
         private int _cardNumber;
-        private int _oldTransactionsCount;
         private int _selectedYear;
 
         public int CardNumber
@@ -25,10 +24,6 @@ namespace SmartWallet.UI.Controls
             get => _cardNumber;
             set
             {
-                if (value != _cardNumber)
-                {
-                    _oldTransactionsCount = -1;
-                }
                 _cardNumber = value;
             }
         }
@@ -87,21 +82,32 @@ namespace SmartWallet.UI.Controls
                 AnalyticsDiagram.Visibility = Visibility.Collapsed;
                 NoGraphData.Visibility = Visibility.Visible;
                 return;
-            } else
+            }
+            else
             {
                 AnalyticsDiagram.Visibility = Visibility.Visible;
                 NoGraphData.Visibility = Visibility.Collapsed;
             }
-            
+
             ChartSeries = new SeriesCollection();
 
             Series outcomeSeries;
             Series incomeSeries;
+
+            string titleIncome = "Income";
+            string titleOutcome = "Outcome";
+
+            if(App.Language.Name == "uk-UK")
+            {
+                titleIncome = "Дохід";
+                titleOutcome = "Витрати";
+            }
+
             if (!ChartType.IsChecked.Value)
             {
                 outcomeSeries = new ColumnSeries
                 {
-                    Title = "Outcome",
+                    Title = titleOutcome,
                     Values = new ChartValues<double>(),
                     DataLabels = false,
                     LabelPoint = point => $"{point.Y:N2}",
@@ -114,7 +120,7 @@ namespace SmartWallet.UI.Controls
             
                 incomeSeries = new ColumnSeries
                 {
-                    Title = "Income",
+                    Title = titleIncome,
                     Values = new ChartValues<double>(),
                     DataLabels = false,
                     LabelPoint = point => $"{point.Y:N2}",
@@ -129,7 +135,7 @@ namespace SmartWallet.UI.Controls
             {
                 outcomeSeries = new LineSeries
                 {
-                    Title = "Outcome",
+                    Title = titleOutcome,
                     Values = new ChartValues<double>(),
                     DataLabels = false,
                     LabelPoint = point => $"{point.Y:N2}",
@@ -140,7 +146,7 @@ namespace SmartWallet.UI.Controls
             
                 incomeSeries = new LineSeries
                 {
-                    Title = "Income",
+                    Title = titleIncome,
                     Values = new ChartValues<double>(),
                     DataLabels = false,
                     LabelPoint = point => $"{point.Y:N2}",
@@ -149,9 +155,10 @@ namespace SmartWallet.UI.Controls
                     Foreground = new SolidColorBrush(Colors.White),
                 };
             }
+
+            int month;
             
-            
-            for(int month = 1; month <= (AnalyticsYears.SelectedItem.ToString() == DateTime.Today.Year.ToString()
+            for(month = 1; month <= (AnalyticsYears.SelectedItem.ToString() == DateTime.Today.Year.ToString()
                     ? DateTime.Today.Month
                     : 12); month++)
             {
@@ -160,9 +167,17 @@ namespace SmartWallet.UI.Controls
             
                 incomeSeries.Values.Add(income);
                 outcomeSeries.Values.Add(outcome);
-            
             }
-            
+
+            if (ChartType.IsChecked.Value)
+            {
+                var income = TransactionProvider.GetIncomeByMonth(month - 1, CardNumber);
+                var outcome = TransactionProvider.GetOutcomeByMonth(month - 1, CardNumber);
+
+                incomeSeries.Values.Add(income);
+                outcomeSeries.Values.Add(outcome);
+            }
+
             ChartSeries.Add(incomeSeries);
             ChartSeries.Add(outcomeSeries);
             
