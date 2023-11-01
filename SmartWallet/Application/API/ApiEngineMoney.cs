@@ -4,13 +4,13 @@ using SmartWallet.DAL.Entity;
 
 namespace SmartWallet.AL.API;
 
-public class ApiEngine
+public class ApiEngineMoney
 {
     private static string _rateApiKey = "fxr_live_4462ef8b75e6631cc97d6553776f4fe2a3bf";
 
     private HttpClient _client { get; set; }
 
-    public ApiEngine()
+    public ApiEngineMoney()
     {
         _client = new HttpClient();
     }

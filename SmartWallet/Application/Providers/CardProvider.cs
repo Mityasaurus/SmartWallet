@@ -11,6 +11,7 @@ namespace SmartWallet.Providers;
 public class CardProvider
 {
     private Repository<Card> _cardRepository;
+
     private List<Card> _cards;
 
     public CardProvider(SmartWalletContext context)
@@ -18,12 +19,12 @@ public class CardProvider
         _cardRepository = new Repository<Card>(context);
         _cards = _cardRepository.GetAll().ToList();
     }
-    
+
     public List<Card> GetAllCards()
     {
         return _cards;
     }
-    
+
     public Card GetCardById(int id)
     {
         return _cardRepository.Get(id);
@@ -43,7 +44,7 @@ public class CardProvider
                 long positiveValue = Math.Abs(longValue);
                 cardNumber = positiveValue.ToString().Substring(0, 16);
             } while (DoesCardExist(cardNumber));
-            
+
             return cardNumber;
         }
     }
@@ -81,6 +82,11 @@ public class CardProvider
         return _cards.Count(c => c.Number == number) != 0;
     }
     
+    public bool DoesCardExist(int id)
+    {
+        return _cards.Count(c => c.Id == id) != 0;
+    }
+
     public bool DoesCardExist(int id)
     {
         return _cards.Count(c => c.Id == id) != 0;

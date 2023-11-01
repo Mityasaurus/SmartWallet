@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using SmartWallet.AL.API;
+using SmartWallet.Aplication.API;
 using SmartWallet.DAL.Entity;
 
 namespace SmartWallet.Providers;
@@ -115,8 +116,8 @@ public class MoneyProvider
         { Currency.XRP,	"XRP" },
         { Currency.SOL,	"SOL" },
         { Currency.DOT,	"DOT" },
-        { Currency.AVA,	"AVAX" },
-        { Currency.MAT,	"MATIC" },
+        { Currency.APT,	"APT" },
+        { Currency.MATIC, "MATIC" },
         { Currency.LTC,	"Ł" },
         { Currency.ADA,	"ADA" },
         { Currency.USDT, "USDT" },
@@ -196,12 +197,100 @@ public class MoneyProvider
         { Currency.UZS,	"UZS" },
     };
 
+    public static Dictionary<Currency, string> CryptoNames = new Dictionary<Currency, string>()
+    {
+        { Currency.BTC, "bitcoin" },
+        { Currency.ETH, "ethereum" },
+        { Currency.BNB, "binancecoin" },
+        { Currency.XRP, "ripple" },
+        { Currency.SOL, "solana" },
+        { Currency.DOT, "polkadot" },
+        { Currency.APT, "aptos" },
+        { Currency.MATIC, "matic-network" },
+        { Currency.LTC, "litecoin" },
+        { Currency.ADA, "cardano" },
+        { Currency.USDT, "tether" },
+        { Currency.USDC, "usd-coin" },
+        { Currency.DAI, "dai" },
+        { Currency.BUSD, "binance-usd" },
+        { Currency.ARB, "arbitrum" },
+        { Currency.OP, "optimism" },
+    };
+
     public static double GetRate(Currency from, Currency to)
     {
-        ApiEngine engine = new ApiEngine();
-        string json = engine.getRateJson(from, to, DateTime.Now);
-        JObject jObject = JObject.Parse(json);
-        if ((bool)jObject["success"]) return (double)jObject["result"];
+        if (from <= Currency.UZS && to <= Currency.UZS)
+        {
+            ApiEngineMoney engine = new ApiEngineMoney();
+            string json = engine.getRateJson(from, to, DateTime.Now);
+            JObject jObject = JObject.Parse(json);
+            if ((bool)jObject["success"]) return (double)jObject["result"];
+        }
+        else if(from >= Currency.BTC && to >= Currency.BTC)
+        {
+            ApiEngineCrypto engine = new ApiEngineCrypto();
+            string json = engine.getRateJson(from, to);
+            JObject jObject = JObject.Parse(json);
+
+            if(to == Currency.BTC)
+            {
+                return (double)jObject[MoneyProvider.CryptoNames[from]]["btc"];
+            }
+
+            json = engine.getRateJson(from, Currency.BTC);
+            jObject = JObject.Parse(json);
+            double rate1 = (double)jObject[MoneyProvider.CryptoNames[from]]["btc"];
+
+            json = engine.getRateJson(to, Currency.BTC);
+            jObject = JObject.Parse(json);
+            double rate2 = (double)jObject[MoneyProvider.CryptoNames[to]]["btc"];
+
+            double rate = rate1 / rate2;
+
+            return rate;
+        }
+        else
+        {
+            ApiEngineMoney engineMoney = new ApiEngineMoney();
+            ApiEngineCrypto engineCrypto = new ApiEngineCrypto();
+
+            Currency money;
+            Currency crypto;
+
+            if (from <= Currency.UZS)
+            {
+                money = from;
+                crypto = to;
+            }
+            else
+            {
+                money = to;
+                crypto = from;
+            }
+
+            string json = engineMoney.getRateJson(money, Currency.USD, DateTime.Now);
+            JObject jObject = JObject.Parse(json);
+            double rate1 = (double)jObject["result"];
+
+            json = engineCrypto.getRateJson(crypto, Currency.USD);
+            jObject = JObject.Parse(json);
+            double rate2 = (double)jObject[MoneyProvider.CryptoNames[crypto]]["usd"];
+
+            double rate;
+
+            if (from <= Currency.UZS)
+            {
+                rate = rate1 / rate2;
+            }
+            else
+            {
+                rate = rate2 / rate1;
+            }
+
+            return rate;
+        }
+
+
         return 0;
     }
 }

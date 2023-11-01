@@ -1,6 +1,7 @@
 ﻿using SmartWallet.DAL.Entity;
 using SmartWallet.Providers;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -24,8 +25,8 @@ namespace SmartWallet.UI.Pages
         {
             InitializeComponent();
 
-            cmbBox_Currencies.ItemsSource = Enum.GetNames(typeof(Currency));
-            cmbBox_Currencies.SelectedIndex = 170;
+            cmbBox_Currencies.ItemsSource = Enum.GetNames(typeof(Currency)).Take(168);
+            cmbBox_Currencies.SelectedIndex = 154;
         }
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -88,6 +89,18 @@ namespace SmartWallet.UI.Pages
 
             CloseNewCardWindow?.Invoke();
             UpdateUI?.Invoke();
+        }
+
+        private void rdBtn_Money_Checked(object sender, RoutedEventArgs e)
+        {
+            cmbBox_Currencies.ItemsSource = Enum.GetNames(typeof(Currency)).Take(168);
+            cmbBox_Currencies.SelectedIndex = 154;
+        }
+
+        private void rdBtn_Crypto_Checked(object sender, RoutedEventArgs e)
+        {
+            cmbBox_Currencies.ItemsSource = Enum.GetNames(typeof(Currency)).Skip(168);
+            cmbBox_Currencies.SelectedIndex = 0;
         }
     }
 }
