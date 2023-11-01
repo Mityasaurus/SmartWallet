@@ -226,8 +226,7 @@ public class MoneyProvider
             JObject jObject = JObject.Parse(json);
             if ((bool)jObject["success"]) return (double)jObject["result"];
         }
-
-        if(from >= Currency.BTC && to >= Currency.BTC)
+        else if(from >= Currency.BTC && to >= Currency.BTC)
         {
             ApiEngineCrypto engine = new ApiEngineCrypto();
             string json = engine.getRateJson(from, to);
@@ -247,6 +246,46 @@ public class MoneyProvider
             double rate2 = (double)jObject[MoneyProvider.CryptoNames[to]]["btc"];
 
             double rate = rate1 / rate2;
+
+            return rate;
+        }
+        else
+        {
+            ApiEngineMoney engineMoney = new ApiEngineMoney();
+            ApiEngineCrypto engineCrypto = new ApiEngineCrypto();
+
+            Currency money;
+            Currency crypto;
+
+            if (from <= Currency.UZS)
+            {
+                money = from;
+                crypto = to;
+            }
+            else
+            {
+                money = to;
+                crypto = from;
+            }
+
+            string json = engineMoney.getRateJson(money, Currency.USD, DateTime.Now);
+            JObject jObject = JObject.Parse(json);
+            double rate1 = (double)jObject["result"];
+
+            json = engineCrypto.getRateJson(crypto, Currency.USD);
+            jObject = JObject.Parse(json);
+            double rate2 = (double)jObject[MoneyProvider.CryptoNames[crypto]]["usd"];
+
+            double rate;
+
+            if (from <= Currency.UZS)
+            {
+                rate = rate1 / rate2;
+            }
+            else
+            {
+                rate = rate2 / rate1;
+            }
 
             return rate;
         }
