@@ -80,6 +80,11 @@ public class CardProvider
     {
         return _cards.Count(c => c.Number == number) != 0;
     }
+    
+    public bool DoesCardExist(int id)
+    {
+        return _cards.Count(c => c.Id == id) != 0;
+    }
 
     public void AddNewCard(string cardNumber, DateTime dateExpire, string cvv, string type, Currency currency, double balance, int userId)
     {

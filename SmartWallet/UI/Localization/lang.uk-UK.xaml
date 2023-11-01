@@ -92,4 +92,14 @@
     <v:String x:Key="editCardControl_Cancel">Відмінити</v:String>
     <v:String x:Key="editCardControl_Confirm">Підтвердити</v:String>
     <v:String x:Key="editCardControl_Default">Стандарт</v:String>
+    
+    <!-- Transfer control -->
+    <v:String x:Key="transferControl_Cancel">Відмінити</v:String>
+    <v:String x:Key="transferControl_Confirm">Підтвердити</v:String>
+    <v:String x:Key="transferControl_CardNumber">Номер отримувача</v:String>
+    <v:String x:Key="transferControl_Amount">Сума</v:String>
+    <v:String x:Key="transferControl_ErrorMoney">Недостатньо коштів</v:String>
+    <v:String x:Key="transferControl_ErrorEmptyMoney">Введіть суму</v:String>
+    <v:String x:Key="transferControl_ErrorNumber">Немає такого отримувача</v:String>
+    <v:String x:Key="transferControl_ErrorOther">Інша помилка</v:String>
 </ResourceDictionary>
