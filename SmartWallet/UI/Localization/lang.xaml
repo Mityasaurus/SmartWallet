@@ -92,4 +92,14 @@
     <v:String x:Key="editCardControl_Cancel">Cancel</v:String>
     <v:String x:Key="editCardControl_Confirm">Confirm</v:String>
     <v:String x:Key="editCardControl_Default">Default</v:String>
+    
+    <!-- Transfer control -->
+    <v:String x:Key="transferControl_Cancel">Cancel</v:String>
+    <v:String x:Key="transferControl_Confirm">Confirm</v:String>
+    <v:String x:Key="transferControl_CardNumber">Recipient card number</v:String>
+    <v:String x:Key="transferControl_Amount">Amount</v:String>
+    <v:String x:Key="transferControl_ErrorMoney">Not enough money on account</v:String>
+    <v:String x:Key="transferControl_ErrorEmptyMoney">Enter the amount</v:String>
+    <v:String x:Key="transferControl_ErrorNumber">No such card number</v:String>
+    <v:String x:Key="transferControl_ErrorOther">Other error</v:String>
 </ResourceDictionary>

@@ -28,7 +28,11 @@ public partial class CardViewer : UserControl
         {
             selectedIndex = value;
             if (SetSelectedCardId != null && value >= 0 && value < CardsList.Count) SetSelectedCardId.Invoke(CardsList[value].CardData.Id);
-            if (value >= 0 && value < CardsList.Count) EditCard.CardId = CardsList[value].CardData.Id;
+            if (value >= 0 && value < CardsList.Count)
+            {
+                EditCard.CardId = CardsList[value].CardData.Id;
+                TransferControl.CardId = CardsList[value].CardData.Id;
+            }
         }
     }
 
@@ -63,6 +67,7 @@ public partial class CardViewer : UserControl
 
         NewCardWindow.CloseNewCardWindow += CancelAddNewCard;
         EditCardWindow.CloseEditCardWindow += CancelEditCard;
+        TransferWindow.CloseTransferControl += CancelTransferControl;
         DisplayedCard.EditClick += EditCardClick;
     }
 
@@ -113,7 +118,6 @@ public partial class CardViewer : UserControl
     private void CardDotClick(object sender, MouseButtonEventArgs e)
     {
         Border dot = (Border)sender;
-        Console.WriteLine($"Dot {CardDots.Children.IndexOf(dot)} clicked!");
         if (CardDots.Children.IndexOf(dot) < 0 || CardDots.Children.IndexOf(dot) == _selectedIndex) return;
         if (CardDotsList[_selectedIndex].Width > 10) UnselectDot(_selectedIndex);
         _selectedIndex = CardDots.Children.IndexOf(dot);
@@ -132,12 +136,14 @@ public partial class CardViewer : UserControl
             NewCardWindow.Visibility = Visibility.Collapsed;
             EditCardWindow.Visibility = Visibility.Collapsed;
             DisplayedCard.Visibility = Visibility.Collapsed;
+            TransferWindow.Visibility = Visibility.Collapsed;
             AddNewCard.Visibility = Visibility.Visible;
         }
         else
         {
             NewCardWindow.Visibility = Visibility.Collapsed;
             EditCardWindow.Visibility = Visibility.Collapsed;
+            TransferWindow.Visibility = Visibility.Collapsed;
             DisplayedCard.Visibility = Visibility.Visible;
             AddNewCard.Visibility = Visibility.Collapsed;
             DisplayedCard.CardData = Cards[_selectedIndex];
@@ -154,7 +160,10 @@ public partial class CardViewer : UserControl
     private void TransferClick(object sender, RoutedEventArgs e)
     {
         if (TransactionProvider == null) return;
-        TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 6000);
+        // TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 6000);
+        DisplayedCard.Visibility = Visibility.Collapsed;
+        AddNewCard.Visibility = Visibility.Collapsed;
+        TransferWindow.Visibility = Visibility.Visible;
     }
 
     private void AddNewCard_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -179,5 +188,27 @@ public partial class CardViewer : UserControl
     {
         DisplayedCard.Visibility = Visibility.Visible;
         EditCardWindow.Visibility = Visibility.Collapsed;
+    }
+    
+    public void CancelTransferControl()
+    {
+        if (_selectedIndex == CardDots.Children.Count - 1)
+        {
+            NewCardWindow.Visibility = Visibility.Collapsed;
+            EditCardWindow.Visibility = Visibility.Collapsed;
+            DisplayedCard.Visibility = Visibility.Collapsed;
+            TransferWindow.Visibility = Visibility.Collapsed;
+            AddNewCard.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            NewCardWindow.Visibility = Visibility.Collapsed;
+            EditCardWindow.Visibility = Visibility.Collapsed;
+            TransferWindow.Visibility = Visibility.Collapsed;
+            DisplayedCard.Visibility = Visibility.Visible;
+            AddNewCard.Visibility = Visibility.Collapsed;
+            DisplayedCard.CardData = Cards[_selectedIndex];
+        }
+        TransferWindow.Visibility = Visibility.Collapsed;
     }
 }

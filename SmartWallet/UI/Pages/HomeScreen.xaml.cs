@@ -87,11 +87,14 @@ namespace SmartWallet.UI.Pages
             CardViewer.TransactionProvider = _transactionProvider;
             CardViewer.NewCardWindow.CardProvider = _cardProvider;
             EditCard.CardProvider = _cardProvider;
+            TransferControl.CardProvider = _cardProvider;
+            TransferControl.TransactionProvider = _transactionProvider;
             CardViewer.Cards = _userProvider.GetUserById(_userId).Cards;
             CardViewer.NewCardWindow.UserId = _userId;
 
             CardViewer.NewCardWindow.UpdateUI += UpdateUI; // Temporary solution
             CardViewer.EditCardWindow.UpdateUI += UpdateUI; // Temporary solution
+            CardViewer.TransferWindow.UpdateUI += UpdateUI; // Temporary solution
 
             // Analytics Control
             Analytics.CardNumber = CardId;

@@ -27,6 +27,7 @@
                 </StackPanel>
                 <pages:NewCardWindow x:Name="NewCardWindow" Margin="23 0 23 16" Width="326" Height="184" Visibility="Collapsed"></pages:NewCardWindow>
                 <local:EditCard x:Name="EditCardWindow" Margin="23 0 23 16" Width="326" Height="184" Visibility="Collapsed"></local:EditCard>
+                <pages:TransferControl x:Name="TransferWindow" Margin="23 0 23 16" Width="326" Height="184" Visibility="Collapsed"></pages:TransferControl>
                 
                 <StackPanel x:Name="CardDots" Margin="0 0 0 15" Orientation="Horizontal" HorizontalAlignment="Center"/>
                 <Border CornerRadius="10" Height="50" Margin="23 0" BorderThickness="2" BorderBrush="White">
