@@ -19,8 +19,8 @@
                 <ComboBox x:Name="cmbBox_Currencies" Grid.Column="1" Margin="15 0 0 0" ItemContainerStyle="{DynamicResource ComboBoxItemContainerStyle}" Style="{DynamicResource ComboBoxStyle}"/>
             </Grid>
             <UniformGrid Columns="2" Margin="0 5 0 0">
-                <RadioButton x:Name="rdBtn_Money" Content="{DynamicResource newCardControl_Money}" GroupName="CardType" IsChecked="True" Foreground="White" FontSize="16" HorizontalAlignment="Center" Background="White"/>
-                <RadioButton x:Name="rdBtn_Crypto" Content="{DynamicResource newCardControl_Crypto}" GroupName="CardType" Foreground="White" FontSize="16" HorizontalAlignment="Center" Background="White"/>
+                <RadioButton x:Name="rdBtn_Money" Content="{DynamicResource newCardControl_Money}" GroupName="CardType" IsChecked="True" Foreground="White" FontSize="16" HorizontalAlignment="Center" Background="White" Checked="rdBtn_Money_Checked"/>
+                <RadioButton x:Name="rdBtn_Crypto" Content="{DynamicResource newCardControl_Crypto}" GroupName="CardType" Foreground="White" FontSize="16" HorizontalAlignment="Center" Background="White" Checked="rdBtn_Crypto_Checked"/>
             </UniformGrid>
             <TextBlock Text="{DynamicResource newCardControl_Balance}" Foreground="White" FontSize="16" HorizontalAlignment="Center" Margin="0 5 0 0"/>
             <TextBox x:Name="tb_Balance" Style="{DynamicResource TextBoxRegistrationWindow}" Margin="14 10" TextAlignment="Center" PreviewKeyDown="TextBox_PreviewKeyDown"/>

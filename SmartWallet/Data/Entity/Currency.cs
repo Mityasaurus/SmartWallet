@@ -1,7 +1,9 @@
 ﻿namespace SmartWallet.DAL.Entity;
 
 public enum Currency
-{ 
+{
+    //Money currencies
+
     AFN,
     AMD,
     ANG,
@@ -101,22 +103,6 @@ public enum Currency
     ZWL,
     XPT,
     XPD,
-    BTC,
-    ETH,
-    BNB,
-    XRP,
-    SOL,
-    DOT,
-    AVA,
-    MAT,
-    LTC,
-    ADA,
-    USDT,
-    USDC,
-    DAI,
-    BUSD,
-    ARB,
-    OP, 
     AED,
     BTN,
     MKD,
@@ -186,4 +172,23 @@ public enum Currency
     MYR,
     SBD,
     UZS,
+
+    //Cryptocurrencies
+
+    BTC = 1000,
+    ETH,
+    BNB,
+    XRP,
+    SOL,
+    DOT,
+    AVA,
+    MAT,
+    LTC,
+    ADA,
+    USDT,
+    USDC,
+    DAI,
+    BUSD,
+    ARB,
+    OP
 }

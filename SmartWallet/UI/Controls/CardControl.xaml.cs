@@ -26,7 +26,7 @@ public partial class CardControl : UserControl
         set
         {
             SetValue(CardProperty, value);
-            Balance.Text = value.Balance.ToString("N2");
+            Balance.Text = value.Currency >= Currency.BTC ? value.Balance.ToString("#,0.####################") : value.Balance.ToString("N2");
             Number.Text = formatCardNumber(value.Number);
             DateExpire.Text = formatDateExpire(value.DateExpire);
             CurrencySymbol.Text = MoneyProvider.Symbols[value.Currency];
