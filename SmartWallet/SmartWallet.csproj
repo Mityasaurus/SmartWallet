@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>UI\Images\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -92,6 +93,11 @@
       <XamlRuntime>Wpf</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
+    <None Remove="UI\Images\icon.png" />
+    <None Remove="UI\Images\icon.ico" />
+    <Resource Include="UI\Images\icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
