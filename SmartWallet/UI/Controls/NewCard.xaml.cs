@@ -1,5 +1,4 @@
 ﻿using SmartWallet.DAL.Entity;
-using SmartWallet.Data.Entity;
 using SmartWallet.Providers;
 using System;
 using System.Linq;
