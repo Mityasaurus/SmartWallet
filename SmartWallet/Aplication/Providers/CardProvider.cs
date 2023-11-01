@@ -11,6 +11,7 @@ namespace SmartWallet.Providers;
 public class CardProvider
 {
     private Repository<Card> _cardRepository;
+
     private List<Card> _cards;
 
     public CardProvider(SmartWalletContext context)
