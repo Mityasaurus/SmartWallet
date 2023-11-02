@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmartWallet.UI.Pages" xmlns:controls="clr-namespace:SmartWallet.UI.Controls"
+             xmlns:lottie="clr-namespace:LottieSharp.WPF;assembly=LottieSharp"
+             xmlns:transforms="clr-namespace:LottieSharp.WPF.Transforms;assembly=LottieSharp"
              mc:Ignorable="d" 
              d:Height="1000" d:Width="1200">
     <Grid Background="#141332">
@@ -73,6 +75,23 @@
                     <controls:UserInformation x:Name="UserInformation" Grid.Row="1"/>
                 </Grid>
             </Grid>
+        </Grid>
+        <Grid x:Name="LoadingPanel" Background="#88D3D3D3" Visibility="Hidden">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <lottie:LottieAnimationView 
+                    x:Name="LoadingAnimation"
+                    Width="800"
+                    Height="600"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    ResourcePath="pack://application:,,,/UI/Animations/loading.json"
+                    AutoPlay="True"
+                    RepeatCount="-1">
+                    <lottie:LottieAnimationView.AnimationScale>
+                        <transforms:CenterTransform ScaleX="1" ScaleY="1" />
+                    </lottie:LottieAnimationView.AnimationScale>
+                </lottie:LottieAnimationView>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>
