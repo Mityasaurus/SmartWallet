@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="UI\Images\arrow_income.png" />
     <None Remove="UI\Images\arrow_outcome.png" />
+    <None Remove="UI\Images\refresh_arrow.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,6 +65,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Page Remove="UI\Localization\lang.xaml" />
+    <Content Include="UI\Images\refresh_arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="UI\Localization\lang.xaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

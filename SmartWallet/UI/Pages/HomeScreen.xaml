@@ -30,6 +30,12 @@
                     <TextBlock Style="{StaticResource LanguageTextBox}" Margin="0 0 5 0" MouseLeftButtonUp="English_OnMouseLeftButtonUp" Text="EN"/>
                     <TextBlock Style="{StaticResource LanguageTextBox}" MouseLeftButtonUp="Ukrainian_OnMouseLeftButtonUp" Text="UK"/>
                 </StackPanel>
+                <Button x:Name="btn_Refresh" Grid.Column="1" HorizontalContentAlignment="Center" VerticalAlignment="Center" Padding="0" Margin="0 25 0 0"
+                        Background="Transparent" BorderThickness="0" Click="btn_Refresh_Click">
+                    <Button.Content>
+                        <Image Source="../Images/refresh_arrow.png" Margin="5"/>
+                    </Button.Content>
+                </Button>
             </Grid>
             
             <Grid Grid.Row="1">
