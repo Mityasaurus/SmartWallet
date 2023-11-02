@@ -22,7 +22,11 @@
             <TextBox x:Name="tb_Email" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"></TextBox>
             <TextBlock Text="{DynamicResource login_Password}" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
             <PasswordBox x:Name="tb_Password" Margin="20 7 20 0" Style="{StaticResource PasswordBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
-            <TextBlock x:Name="tb_Error" Foreground="Red" FontSize="14" Margin="0 15 0 0" HorizontalAlignment="Center"></TextBlock>
+            
+            <TextBlock Text="" Visibility="Visible" x:Name="tb_EmptyError" Foreground="Red" FontSize="14" Margin="0 15 0 0" HorizontalAlignment="Center"/>
+            <TextBlock Text="{DynamicResource login_EmailError}" Visibility="Collapsed" x:Name="tb_EmailError" Foreground="Red" FontSize="14" Margin="0 15 0 0" HorizontalAlignment="Center"/>
+            <TextBlock Text="{DynamicResource login_PasswordError}" Visibility="Collapsed" x:Name="tb_PasswordError" Foreground="Red" FontSize="14" Margin="0 15 0 0" HorizontalAlignment="Center"/>
+            
             <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="20 15 20 0">
                 <Button x:Name="btn_Login" Content="{DynamicResource login_Login}" Background="Transparent" BorderThickness="0" Click="btn_Login_Click"/>
             </Border>

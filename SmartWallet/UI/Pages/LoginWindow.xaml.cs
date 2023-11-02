@@ -24,8 +24,6 @@ namespace SmartWallet
 
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            tb_Error.Text = "";
-
             TextBox textBox = sender as TextBox;
 
             if (textBox != null)
@@ -62,22 +60,38 @@ namespace SmartWallet
         {
             UserProvider userProvider = new UserProvider();
 
-            string message = userProvider.CheckLogin(email, password);
+            UserStatuses status = userProvider.CheckLogin(email, password);
 
-            if (message != "")
-            {
-                Application.Current.Dispatcher.Invoke(() => RaiseError(message));
-            }
-            else
+            if (status == UserStatuses.Success)
             {
                 Application.Current.Dispatcher.Invoke(() => LoginSuccess(new HomeScreen(userProvider.GetUserByCredentials(email, password).Id)));
             }
+            else
+            {
+                Application.Current.Dispatcher.Invoke(() => RaiseError(status));
+            }
         }
 
-        private void RaiseError(string message)
+        private void RaiseError(UserStatuses status)
         {
-            // TODO localization
-            tb_Error.Text = message;
+            switch (status)
+            {
+                case UserStatuses.EmailIncorrect:
+                    tb_EmailError.Visibility = Visibility.Visible;
+                    tb_PasswordError.Visibility = Visibility.Collapsed;
+                    tb_EmptyError.Visibility = Visibility.Collapsed;
+                    break;
+                case UserStatuses.PasswordIncorrect:
+                    tb_PasswordError.Visibility = Visibility.Visible;
+                    tb_EmailError.Visibility = Visibility.Collapsed;
+                    tb_EmptyError.Visibility = Visibility.Collapsed;
+                    break;
+                default:
+                    tb_EmptyError.Visibility = Visibility.Visible;
+                    tb_EmailError.Visibility = Visibility.Collapsed;
+                    tb_PasswordError.Visibility = Visibility.Collapsed;
+                    break;
+            }
         }
 
         private void LoginSuccess(UserControl startPage)

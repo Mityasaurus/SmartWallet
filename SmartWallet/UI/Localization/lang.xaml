@@ -9,6 +9,8 @@
     <v:String x:Key="login_Login">Login</v:String>
     <v:String x:Key="login_DontHaveAccount">Don't have an account yet?</v:String>
     <v:String x:Key="login_SingUp">Sign up</v:String>
+    <v:String x:Key="login_EmailError">There is no user with this email</v:String>
+    <v:String x:Key="login_PasswordError">Password is incorrect</v:String>
     
     <!-- Registration page -->
     <v:String x:Key="registration_Greeting">Welcome to Smart Wallet!</v:String>

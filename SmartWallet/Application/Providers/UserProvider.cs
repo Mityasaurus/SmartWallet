@@ -6,6 +6,15 @@ using SmartWallet.DAL;
 
 namespace SmartWallet.Providers
 {
+    public enum UserStatuses
+    {
+        EmailRegistered,
+        PhoneRegistered,
+        EmailIncorrect,
+        PasswordIncorrect,
+        Success
+    }
+    
     public class UserProvider
     {
         private Repository<User> _userRepository;
@@ -39,16 +48,6 @@ namespace SmartWallet.Providers
         {
             users.ForEach(user => _userRepository.Add(user));
         }
-        
-        // public static User GetUserByIDStatic(int id)
-        // {
-        //     SmartWalletContext context = new SmartWalletContext();
-        //     Repository<User> userRepository = new Repository<User>(context);
-        //     Repository<Card> cardRepository = new Repository<Card>(context);
-        //     List<User> users = userRepository.GetAll().ToList();
-        //     List<Card> cards = cardRepository.GetAll().ToList();
-        //     return userRepository.Get(id);
-        // }
 
         public User GetUserById(int id)
         {
@@ -62,11 +61,6 @@ namespace SmartWallet.Providers
 
         public List<User> GetAllUsers()
         {
-            // SmartWalletContext context = new SmartWalletContext();
-            // Repository<User> userRepository = new Repository<User>(context);
-            // Repository<Card> cardRepository = new Repository<Card>(context);
-            // List<User> users = userRepository.GetAll().ToList();
-            // List<Card> cards = cardRepository.GetAll().ToList(); // Cannot load cards from users without this line
             return _users;
         }
 
@@ -97,24 +91,23 @@ namespace SmartWallet.Providers
             return "0";
         }
 
-        public string CheckLogin(string email, string password)
+        public UserStatuses CheckLogin(string email, string password)
         {
             var emails = _users.Select(u => u.Email);
             if (!emails.Contains(email))
             {
-                return "This email is not registered";
+                // return "This email is not registered";
+                return UserStatuses.EmailIncorrect;
             }
 
             string userPassword = GetAllUsers().Where(u => u.Email == email).First().Password;
 
             if(userPassword == password)
             {
-                return "";
+                return UserStatuses.Success;
             }
-            else
-            {
-                return "Incorrect password";
-            }
+            // return "Incorrect password";
+            return UserStatuses.PasswordIncorrect;
         }
     }
 }
