@@ -12,6 +12,9 @@ namespace SmartWallet.Providers
         PhoneRegistered,
         EmailIncorrect,
         PasswordIncorrect,
+        EmptyFiled,
+        EmailNotValid,
+        PhoneNotValid,
         Success
     }
     
@@ -74,21 +77,21 @@ namespace SmartWallet.Providers
             _userRepository.Update(user);
         }
 
-        public string UserExists(User user)
+        public UserStatuses UserExists(User user)
         {
             var emails = _users.Select(u => u.Email);
             if(emails.Contains(user.Email))
             {
-                return "This email is already registered";
+                return UserStatuses.EmailRegistered;
             }
 
             var phones = _users.Select(u => u.Phone);
             if (phones.Contains(user.Phone))
             {
-                return "This phone is already registered";
+                return UserStatuses.PhoneRegistered;
             }
 
-            return "0";
+            return UserStatuses.Success;
         }
 
         public UserStatuses CheckLogin(string email, string password)

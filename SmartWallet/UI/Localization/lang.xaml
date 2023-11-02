@@ -23,6 +23,11 @@
     <v:String x:Key="registration_CreateAccount">Create an account</v:String>
     <v:String x:Key="registration_AlreadyMemeber">Already a member</v:String>
     <v:String x:Key="registration_SignIn">Sign in</v:String>
+    <v:String x:Key="registration_EmailError">This email is already registered</v:String>
+    <v:String x:Key="registration_PhoneError">This phone is already registered</v:String>
+    <v:String x:Key="registration_EmptyFieldError">All fields must be filled in</v:String>
+    <v:String x:Key="registration_ValidEmailError">Email is not valid</v:String>
+    <v:String x:Key="registration_ValidPhoneError">Phone is not valid</v:String>
     
     <!-- Home page -->
     <v:String x:Key="home_Greeting">Welcome Back,</v:String>
