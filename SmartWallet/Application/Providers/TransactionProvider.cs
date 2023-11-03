@@ -9,8 +9,8 @@ namespace SmartWallet.Providers;
 
 public class TransactionProvider
 {
-    private Repository<Transaction> _transactionRepository;
-    private Repository<Card> _cardRepository;
+    private IRepository<Transaction> _transactionRepository;
+    private IRepository<Card> _cardRepository;
     private List<Transaction> _transactions;
     private List<Card> _cards;
 

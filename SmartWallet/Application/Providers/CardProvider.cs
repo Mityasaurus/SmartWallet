@@ -10,7 +10,7 @@ namespace SmartWallet.Providers;
 
 public class CardProvider
 {
-    private Repository<Card> _cardRepository;
+    private IRepository<Card> _cardRepository;
 
     private List<Card> _cards;
 

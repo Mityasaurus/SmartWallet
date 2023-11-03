@@ -20,8 +20,8 @@ namespace SmartWallet.Providers
     
     public class UserProvider
     {
-        private Repository<User> _userRepository;
-        private Repository<Card> _cardRepository;
+        private IRepository<User> _userRepository;
+        private IRepository<Card> _cardRepository;
         private List<User> _users;
         private List<Card> _cards;
 
