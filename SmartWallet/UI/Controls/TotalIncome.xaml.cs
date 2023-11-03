@@ -27,7 +27,7 @@ namespace SmartWallet.UI.Controls
         {
             if (TransactionProvider == null) return;
             var income = TransactionProvider.GetIncomeByMonth(DateTime.Now, CardId);
-            tb_Income.Text = $"{income:f2}";
+            tb_Income.Text = $"{income:N2}";
         }
     }
 }

@@ -26,7 +26,7 @@ namespace SmartWallet.UI.Controls
         {
             if (TransactionProvider == null) return;
             var outcome = TransactionProvider.GetOutcomeByMonth(DateTime.Now, CardId);
-            tb_Outcome.Text = $"{outcome:f2}";
+            tb_Outcome.Text = $"{outcome:N2}";
         }
     }
 }
