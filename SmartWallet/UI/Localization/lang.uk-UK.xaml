@@ -9,7 +9,7 @@
     <v:String x:Key="login_Login">Увійти</v:String>
     <v:String x:Key="login_DontHaveAccount">Ще не маєте облікового запису?</v:String>
     <v:String x:Key="login_SingUp">Зареєструватися</v:String>
-    <v:String x:Key="login_EmailError">Користувача з такою адресою не знайденно</v:String>
+    <v:String x:Key="login_EmailError">Користувача з такою адресою не знайдено</v:String>
     <v:String x:Key="login_PasswordError">Неправильний пароль</v:String>
     
     <!-- Registration page -->
