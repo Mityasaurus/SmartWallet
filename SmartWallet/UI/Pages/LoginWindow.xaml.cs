@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Globalization;
+using System.Threading.Tasks;
 using SmartWallet.Providers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using SmartWallet.Aplication.Navigator;
 using SmartWallet.UI.Pages;
 
@@ -22,8 +24,6 @@ namespace SmartWallet
 
         private void TextBox_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            tb_Error.Text = "";
-
             TextBox textBox = sender as TextBox;
 
             if (textBox != null)
@@ -40,23 +40,63 @@ namespace SmartWallet
             }
         }
 
-        private void btn_Login_Click(object sender, RoutedEventArgs e)
+        private async void btn_Login_Click(object sender, RoutedEventArgs e)
         {
-            UserProvider userProvider = new UserProvider();
             string email = tb_Email.Text;
             string password = tb_Password.Password;
+            
+            // animation start
+            LoadingPanel.Visibility = Visibility.Visible;
+            LoadingAnimation.PlayAnimation();
 
-            string message = userProvider.CheckLogin(email, password);
+            await Task.Run(() => CheckLogin(email, password));
+            
+            // animation stop
+            LoadingPanel.Visibility = Visibility.Hidden;
+            LoadingAnimation.StopAnimation();
+        }
 
-            if (message != "")
+        private async Task CheckLogin(string email, string password)
+        {
+            UserProvider userProvider = new UserProvider();
+
+            UserStatuses status = userProvider.CheckLogin(email, password);
+
+            if (status == UserStatuses.Success)
             {
-                tb_Error.Text = message;
-                return;
+                Application.Current.Dispatcher.Invoke(() => LoginSuccess(new HomeScreen(userProvider.GetUserByCredentials(email, password).Id)));
             }
             else
             {
-                NavigatorObject.Switch(new HomeScreen(userProvider.GetUserByCredentials(email, password).Id));
+                Application.Current.Dispatcher.Invoke(() => RaiseError(status));
             }
+        }
+
+        private void RaiseError(UserStatuses status)
+        {
+            switch (status)
+            {
+                case UserStatuses.EmailIncorrect:
+                    tb_EmailError.Visibility = Visibility.Visible;
+                    tb_PasswordError.Visibility = Visibility.Collapsed;
+                    tb_EmptyError.Visibility = Visibility.Collapsed;
+                    break;
+                case UserStatuses.PasswordIncorrect:
+                    tb_PasswordError.Visibility = Visibility.Visible;
+                    tb_EmailError.Visibility = Visibility.Collapsed;
+                    tb_EmptyError.Visibility = Visibility.Collapsed;
+                    break;
+                default:
+                    tb_EmptyError.Visibility = Visibility.Visible;
+                    tb_EmailError.Visibility = Visibility.Collapsed;
+                    tb_PasswordError.Visibility = Visibility.Collapsed;
+                    break;
+            }
+        }
+
+        private void LoginSuccess(UserControl startPage)
+        {
+            NavigatorObject.Switch(startPage);
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)

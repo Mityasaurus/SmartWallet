@@ -65,6 +65,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Page Remove="UI\Localization\lang.xaml" />
+    <Resource Include="UI\Animations\loading.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="UI\Images\refresh_arrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -102,6 +105,7 @@
     <Resource Include="UI\Images\icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <None Remove="UI\Animations\loading.json" />
   </ItemGroup>
 
   <ItemGroup>

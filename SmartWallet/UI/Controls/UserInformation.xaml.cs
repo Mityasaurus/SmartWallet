@@ -47,6 +47,7 @@ namespace SmartWallet.UI.Controls
 
         private void UpdateInfo()
         {
+            if (UserProvider == null) return;
             User user = UserProvider.GetUserById(UserId);
 
             tb_Name.Text = user.Name;
@@ -63,6 +64,8 @@ namespace SmartWallet.UI.Controls
 
         private void btn_Edit_Click(object sender, RoutedEventArgs e)
         {
+            UpdateInfo();
+
             border_Cancel.Visibility = Visibility.Visible;
             border_Confirm.Visibility = Visibility.Visible;
 

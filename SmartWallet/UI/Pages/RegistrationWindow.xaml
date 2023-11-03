@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartWallet"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:wpf="clr-namespace:LottieSharp.WPF;assembly=LottieSharp"
+        xmlns:transforms="clr-namespace:LottieSharp.WPF.Transforms;assembly=LottieSharp"
         mc:Ignorable="d"
         Background="#141332">
     <UserControl.Resources>
@@ -28,7 +30,14 @@
             <TextBox x:Name="tb_Phone" Margin="20 7 20 0" Style="{StaticResource TextBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"></TextBox>
             <TextBlock Text="{DynamicResource registration_Password}" Foreground="GhostWhite" FontSize="14" Margin="20 20 0 0"></TextBlock>
             <PasswordBox x:Name="tb_Password" Margin="20 7 20 0" Style="{StaticResource PasswordBoxRegistrationWindow}" GotKeyboardFocus="TextBox_GotKeyboardFocus"/>
-            <TextBlock x:Name="tb_Error" Foreground="Red" FontSize="14" Margin="0 15 0 0" HorizontalAlignment="Center"></TextBlock>
+            
+            <TextBlock Text="" Visibility="Visible" x:Name="tb_EmptyError" Foreground="Red" FontSize="14" Margin="0 15 0 0" HorizontalAlignment="Center"/>
+            <TextBlock Text="{DynamicResource registration_EmailError}" Visibility="Collapsed" x:Name="tb_EmailError" Foreground="Red" FontSize="14" Margin="0 15 0 0" HorizontalAlignment="Center"/>
+            <TextBlock Text="{DynamicResource registration_PhoneError}" Visibility="Collapsed" x:Name="tb_PhoneError" Foreground="Red" FontSize="14" Margin="0 15 0 0" HorizontalAlignment="Center"/>
+            <TextBlock Text="{DynamicResource registration_EmptyFieldError}" Visibility="Collapsed" x:Name="tb_EmptyFieldError" Foreground="Red" FontSize="14" Margin="0 15 0 0" HorizontalAlignment="Center"/>
+            <TextBlock Text="{DynamicResource registration_ValidEmailError}" Visibility="Collapsed" x:Name="tb_ValidEmailError" Foreground="Red" FontSize="14" Margin="0 15 0 0" HorizontalAlignment="Center"/>
+            <TextBlock Text="{DynamicResource registration_ValidPhoneError}" Visibility="Collapsed" x:Name="tb_ValidPhoneError" Foreground="Red" FontSize="14" Margin="0 15 0 0" HorizontalAlignment="Center"/>
+            
             <Border BorderThickness="2" BorderBrush="GhostWhite" CornerRadius="7" Margin="20 15 20 0">
                 <Button x:Name="btn_Register" Content="{DynamicResource registration_CreateAccount}" Background="Transparent" BorderThickness="0" Click="btn_Register_Click"/>
             </Border>
@@ -45,5 +54,23 @@
                 <TextBlock Style="{StaticResource LanguageTextBox}" MouseLeftButtonUp="Ukrainian_OnMouseLeftButtonUp" Text="UK"/>
             </StackPanel>
         </StackPanel>
+        
+        <Grid x:Name="LoadingPanel" Background="#88D3D3D3" Visibility="Hidden">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <wpf:LottieAnimationView 
+                    x:Name="LoadingAnimation"
+                    Width="800"
+                    Height="600"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    ResourcePath="pack://application:,,,/UI/Animations/loading.json"
+                    AutoPlay="True"
+                    RepeatCount="-1">
+                    <wpf:LottieAnimationView.AnimationScale>
+                        <transforms:CenterTransform ScaleX="1" ScaleY="1" />
+                    </wpf:LottieAnimationView.AnimationScale>
+                </wpf:LottieAnimationView>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

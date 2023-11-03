@@ -9,6 +9,8 @@
     <v:String x:Key="login_Login">Увійти</v:String>
     <v:String x:Key="login_DontHaveAccount">Ще не маєте облікового запису?</v:String>
     <v:String x:Key="login_SingUp">Зареєструватися</v:String>
+    <v:String x:Key="login_EmailError">Користувача з такою адресою не знайдено</v:String>
+    <v:String x:Key="login_PasswordError">Неправильний пароль</v:String>
     
     <!-- Registration page -->
     <v:String x:Key="registration_Greeting">Ласкаво просимо в Smart Wallet!</v:String>
@@ -21,6 +23,11 @@
     <v:String x:Key="registration_CreateAccount">Створити акаунт</v:String>
     <v:String x:Key="registration_AlreadyMemeber">Вже зареєстровані?</v:String>
     <v:String x:Key="registration_SignIn">Увійти</v:String>
+    <v:String x:Key="registration_EmailError">Така пошта вже зареєстрована</v:String>
+    <v:String x:Key="registration_PhoneError">Такий номер телефону вже зареєстрований</v:String>
+    <v:String x:Key="registration_EmptyFieldError">Всі поля повинні бути заповнені</v:String>
+    <v:String x:Key="registration_ValidEmailError">Неправильна пошта</v:String>
+    <v:String x:Key="registration_ValidPhoneError">Неправильний номер телефону</v:String>
     
     <!-- Home page -->
     <v:String x:Key="home_Greeting">Ласкаво просимо назад,</v:String>

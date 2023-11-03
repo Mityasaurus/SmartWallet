@@ -6,6 +6,18 @@ using SmartWallet.DAL;
 
 namespace SmartWallet.Providers
 {
+    public enum UserStatuses
+    {
+        EmailRegistered,
+        PhoneRegistered,
+        EmailIncorrect,
+        PasswordIncorrect,
+        EmptyFiled,
+        EmailNotValid,
+        PhoneNotValid,
+        Success
+    }
+    
     public class UserProvider
     {
         private Repository<User> _userRepository;
@@ -39,16 +51,6 @@ namespace SmartWallet.Providers
         {
             users.ForEach(user => _userRepository.Add(user));
         }
-        
-        // public static User GetUserByIDStatic(int id)
-        // {
-        //     SmartWalletContext context = new SmartWalletContext();
-        //     Repository<User> userRepository = new Repository<User>(context);
-        //     Repository<Card> cardRepository = new Repository<Card>(context);
-        //     List<User> users = userRepository.GetAll().ToList();
-        //     List<Card> cards = cardRepository.GetAll().ToList();
-        //     return userRepository.Get(id);
-        // }
 
         public User GetUserById(int id)
         {
@@ -62,11 +64,6 @@ namespace SmartWallet.Providers
 
         public List<User> GetAllUsers()
         {
-            // SmartWalletContext context = new SmartWalletContext();
-            // Repository<User> userRepository = new Repository<User>(context);
-            // Repository<Card> cardRepository = new Repository<Card>(context);
-            // List<User> users = userRepository.GetAll().ToList();
-            // List<Card> cards = cardRepository.GetAll().ToList(); // Cannot load cards from users without this line
             return _users;
         }
 
@@ -80,41 +77,40 @@ namespace SmartWallet.Providers
             _userRepository.Update(user);
         }
 
-        public string UserExists(User user)
+        public UserStatuses UserExists(User user)
         {
             var emails = _users.Select(u => u.Email);
             if(emails.Contains(user.Email))
             {
-                return "This email is already registered";
+                return UserStatuses.EmailRegistered;
             }
 
             var phones = _users.Select(u => u.Phone);
             if (phones.Contains(user.Phone))
             {
-                return "This phone is already registered";
+                return UserStatuses.PhoneRegistered;
             }
 
-            return "0";
+            return UserStatuses.Success;
         }
 
-        public string CheckLogin(string email, string password)
+        public UserStatuses CheckLogin(string email, string password)
         {
             var emails = _users.Select(u => u.Email);
             if (!emails.Contains(email))
             {
-                return "This email is not registered";
+                // return "This email is not registered";
+                return UserStatuses.EmailIncorrect;
             }
 
             string userPassword = GetAllUsers().Where(u => u.Email == email).First().Password;
 
             if(userPassword == password)
             {
-                return "";
+                return UserStatuses.Success;
             }
-            else
-            {
-                return "Incorrect password";
-            }
+            // return "Incorrect password";
+            return UserStatuses.PasswordIncorrect;
         }
     }
 }
