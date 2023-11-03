@@ -155,7 +155,7 @@ public partial class TransactionsControl : UserControl
                     ? recipient.Number 
                     : sender.Number,
                 Date = transaction.DateTime.ToString("MM/dd/yyyy"),
-                Amount = transaction.Amount.ToString() + MoneyProvider.Symbols[current.Currency],
+                Amount = transaction.Amount.ToString() + (transaction.SenderCardId == CardId ? MoneyProvider.Symbols[current.Currency] : MoneyProvider.Symbols[sender.Currency]) ,
                 TransactionStatus = transaction.SenderCardId == CardId ? TransactionStatus.SENT.ToString() : TransactionStatus.GET.ToString()
             };
             
