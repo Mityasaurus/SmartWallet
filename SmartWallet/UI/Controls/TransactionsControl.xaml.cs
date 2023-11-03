@@ -100,7 +100,23 @@ public partial class TransactionsControl : UserControl
 
     public void LanguageChanged(object sender, EventArgs e)
     {
+        TranslateHeaders();
         TransactionsList.Items.Refresh();
+    }
+
+    public void TranslateHeaders()
+    {
+        ResourceDictionary dict = (from d in Application.Current.Resources.MergedDictionaries
+            where d.Source != null && d.Source.OriginalString.StartsWith("UI/Localization/lang.")
+            select d).FirstOrDefault();
+
+        if (dict != null)
+        {
+            CardNumberColumn.Header = dict["transactionsControl_Grid_CardNumber"];
+            DateColumn.Header = dict["transactionsControl_Grid_Date"];
+            AmountColumn.Header = dict["transactionsControl_Grid_Amount"];
+            ActionColumn.Header = dict["transactionsControl_Grid_Action"];
+        }
     }
 
     public void Refresh()

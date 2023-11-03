@@ -36,21 +36,25 @@
                     AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn
+                            x:Name="CardNumberColumn"
                             Header="{DynamicResource transactionsControl_Grid_CardNumber}"
                             Width="*"
                             Binding="{Binding Card}"
                             HeaderStyle="{StaticResource DataGridColumnHeaderStyle}" />
                         <DataGridTextColumn
+                            x:Name="DateColumn"
                             Header="{DynamicResource transactionsControl_Grid_Date}"
                             Width="*"
                             Binding="{Binding Date}"
                             HeaderStyle="{StaticResource DataGridColumnHeaderStyle}" />
                         <DataGridTextColumn
+                            x:Name="AmountColumn"
                             Header="{DynamicResource transactionsControl_Grid_Amount}"
                             Width="*"
                             Binding="{Binding Amount}"
                             HeaderStyle="{StaticResource DataGridColumnHeaderStyle}" />
                         <DataGridTemplateColumn
+                            x:Name="ActionColumn"
                             Header="{DynamicResource transactionsControl_Grid_Action}"
                             Width="*"
                             HeaderStyle="{StaticResource DataGridColumnHeaderStyle}">
