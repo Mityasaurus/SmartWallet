@@ -122,7 +122,7 @@ public partial class TransactionsControl : UserControl
         DateTime startDate = StartDatePicker.SelectedDate.Value;
         DateTime endDate = EndDatePicker.SelectedDate.Value;
         
-        _transactions = ParseTransactions(TransactionProvider.GetTransactionsBetweenDate(startDate, endDate, CardId).ToList());
+        _transactions = ParseTransactions(TransactionProvider.GetTransactionsBetweenDate(startDate, endDate, CardId).OrderByDescending(t => t.DateTime).ToList());
 
         if (_transactions.Count == 0)
         {

@@ -64,7 +64,7 @@ public class TransactionProvider
     
     public List<Transaction> GetTransactionsBetweenDate(DateTime startDate, DateTime endDate, int id)
     {
-        return GetAllTransactionByCardId(id).Where(t => t.DateTime <= endDate && t.DateTime >= startDate).ToList();
+        return GetAllTransactionByCardId(id).Where(t => t.DateTime <= endDate + TimeSpan.FromDays(1) && t.DateTime >= startDate).ToList();
     }
     
     public double GetIncomeByMonth(int month, int cardId)
