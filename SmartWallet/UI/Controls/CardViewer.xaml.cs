@@ -27,12 +27,7 @@ public partial class CardViewer : UserControl
         set
         {
             selectedIndex = value;
-            if (SetSelectedCardId != null && value >= 0 && value < CardsList.Count) SetSelectedCardId.Invoke(CardsList[value].CardData.Id);
-            if (value >= 0 && value < CardsList.Count)
-            {
-                EditCard.CardId = CardsList[value].CardData.Id;
-                TransferControl.CardId = CardsList[value].CardData.Id;
-            }
+            updateCardId();
         }
     }
 
@@ -66,9 +61,26 @@ public partial class CardViewer : UserControl
         InitializeComponent();
 
         NewCardWindow.CloseNewCardWindow += CancelAddNewCard;
+        NewCardWindow.SelectCard += ReselectCard;
         EditCardWindow.CloseEditCardWindow += CancelEditCard;
         TransferWindow.CloseTransferControl += CancelTransferControl;
         DisplayedCard.EditClick += EditCardClick;
+    }
+
+    private void updateCardId()
+    {
+        if (Cards.Count != CardsList.Count) CardsList = GenerateCardControls();
+        if (SetSelectedCardId != null && selectedIndex >= 0 && selectedIndex < CardsList.Count) SetSelectedCardId.Invoke(CardsList[selectedIndex].CardData.Id);
+        if (selectedIndex >= 0 && selectedIndex < CardsList.Count)
+        {
+            EditCard.CardId = CardsList[selectedIndex].CardData.Id;
+            TransferControl.CardId = CardsList[selectedIndex].CardData.Id;
+        }
+    }
+
+    private void ReselectCard()
+    {
+        updateCardId();
     }
 
     private void update()
