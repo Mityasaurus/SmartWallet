@@ -159,8 +159,7 @@ public partial class CardViewer : UserControl
 
     private void TransferClick(object sender, RoutedEventArgs e)
     {
-        if (TransactionProvider == null) return;
-        // TransactionProvider.AddNewTransaction("9438547896267294", "8922334455667862", 6000);
+        if (TransactionProvider == null || _selectedIndex == CardDots.Children.Count - 1) return;
         DisplayedCard.Visibility = Visibility.Collapsed;
         AddNewCard.Visibility = Visibility.Collapsed;
         TransferWindow.Visibility = Visibility.Visible;
