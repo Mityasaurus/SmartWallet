@@ -64,20 +64,20 @@ public class TransactionProvider
     
     public List<Transaction> GetTransactionsBetweenDate(DateTime startDate, DateTime endDate, int id)
     {
-        return GetAllTransactionByCardId(id).Where(t => t.DateTime <= endDate + TimeSpan.FromDays(1) && t.DateTime >= startDate).ToList();
+        return GetAllTransactionByCardId(id).Where(t => t.DateTime <= endDate + TimeSpan.FromSeconds(86399) && t.DateTime >= startDate).ToList();
     }
     
-    public double GetIncomeByMonth(int month, int cardId)
+    public double GetIncomeByMonth(DateTime date, int cardId)
     {
-        return GetAllTransactionReceivedByCardId(cardId).Where(t => t.DateTime.Month == month).Sum(t => t.Amount * t.Rate);
+        return GetAllTransactionReceivedByCardId(cardId).Where(t => t.DateTime.Month == date.Month && t.DateTime.Year == date.Year).Sum(t => t.Amount * t.Rate);
     }
 
-    public double GetOutcomeByMonth(int month, int cardId)
+    public double GetOutcomeByMonth(DateTime date, int cardId)
     {
-        return GetAllTransactionSendByCardId(cardId).Where(t => t.DateTime.Month == month).Sum(t => t.Amount);
+        return GetAllTransactionSendByCardId(cardId).Where(t => t.DateTime.Month == date.Month && t.DateTime.Year == date.Year).Sum(t => t.Amount);
     }
     
-    public void AddNewTransaction(string senderNumber, string recipientNumber, double amount) // TODO remove static
+    public void AddNewTransaction(string senderNumber, string recipientNumber, double amount)
     {
         Card senderCard = _cards.Find(card => card.Number == senderNumber);
         Card recipientCard = _cards.Find(card => card.Number == recipientNumber);

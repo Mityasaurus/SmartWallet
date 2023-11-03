@@ -70,10 +70,12 @@ namespace SmartWallet.UI.Controls
         private void UpdateChartSeries()
         {
             if (TransactionProvider == null || User == null) return;
-            
+
+            int year = int.Parse(AnalyticsYears.SelectedItem.ToString());
+
             var Transactions = TransactionProvider.GetTransactionsBetweenDate(
-                new DateTime(int.Parse(AnalyticsYears.SelectedItem.ToString()), 1, 1),
-                new DateTime(int.Parse(AnalyticsYears.SelectedItem.ToString()), 12, 31),
+                new DateTime(year, 1, 1),
+                new DateTime(year, 12, 31),
                 CardNumber
                 );
             
@@ -162,8 +164,8 @@ namespace SmartWallet.UI.Controls
                     ? DateTime.Today.Month
                     : 12); month++)
             {
-                var income = TransactionProvider.GetIncomeByMonth(month, CardNumber);
-                var outcome = TransactionProvider.GetOutcomeByMonth(month, CardNumber);
+                var income = TransactionProvider.GetIncomeByMonth(new DateTime(year, month, 1), CardNumber);
+                var outcome = TransactionProvider.GetOutcomeByMonth(new DateTime(year, month, 1), CardNumber);
             
                 incomeSeries.Values.Add(income);
                 outcomeSeries.Values.Add(outcome);
@@ -171,8 +173,8 @@ namespace SmartWallet.UI.Controls
 
             if (ChartType.IsChecked.Value)
             {
-                var income = TransactionProvider.GetIncomeByMonth(month - 1, CardNumber);
-                var outcome = TransactionProvider.GetOutcomeByMonth(month - 1, CardNumber);
+                var income = TransactionProvider.GetIncomeByMonth(new DateTime(year, month - 1, 1), CardNumber);
+                var outcome = TransactionProvider.GetOutcomeByMonth(new DateTime(year, month - 1, 1), CardNumber);
 
                 incomeSeries.Values.Add(income);
                 outcomeSeries.Values.Add(outcome);
