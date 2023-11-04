@@ -20,6 +20,7 @@ namespace SmartWallet.UI.Pages
         public event MainWindowHandler CloseNewCardWindow;
 
         public event MainWindowHandler UpdateUI; // Temporary solution
+        public event MainWindowHandler SelectCard; // Temporary solution
 
         public NewCardWindow()
         {
@@ -89,6 +90,7 @@ namespace SmartWallet.UI.Pages
 
             CloseNewCardWindow?.Invoke();
             UpdateUI?.Invoke();
+            SelectCard?.Invoke();
         }
 
         private void rdBtn_Money_Checked(object sender, RoutedEventArgs e)
