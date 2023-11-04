@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SmartWallet.Aplication.Navigator;
+using System.Xml.Linq;
 
 namespace SmartWallet.UI.Controls
 {
@@ -89,6 +90,8 @@ namespace SmartWallet.UI.Controls
 
             border_Cancel.Visibility = Visibility.Hidden;
             border_Confirm.Visibility = Visibility.Hidden;
+
+            TextBoxBordersToWhite();
         }
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
@@ -160,6 +163,15 @@ namespace SmartWallet.UI.Controls
             {
                 textBox.BorderBrush = new SolidColorBrush(Colors.White);
             }
+        }
+
+        private void TextBoxBordersToWhite()
+        {
+            tb_Name.BorderBrush = new SolidColorBrush(Colors.White);
+            tb_LastName.BorderBrush = new SolidColorBrush(Colors.White);
+            tb_Email.BorderBrush = new SolidColorBrush(Colors.White);
+            tb_Phone.BorderBrush = new SolidColorBrush(Colors.White);
+            tb_Password.BorderBrush = new SolidColorBrush(Colors.White);
         }
     }
 }
