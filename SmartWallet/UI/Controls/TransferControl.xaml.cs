@@ -50,20 +50,6 @@ namespace SmartWallet.UI.Pages
         {
             return (key >= Key.D0 && key <= Key.D9) || (key >= Key.NumPad0 && key <= Key.NumPad9);
         }
-        
-        private int CountDigits(string text)
-        {
-            int count = 0;
-            foreach (char c in text)
-            {
-                if (char.IsDigit(c))
-                {
-                    count++;
-                }
-            }
-
-            return count;
-        }
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
