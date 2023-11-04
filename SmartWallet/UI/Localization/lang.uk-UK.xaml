@@ -108,5 +108,6 @@
     <v:String x:Key="transferControl_ErrorMoney">Недостатньо коштів</v:String>
     <v:String x:Key="transferControl_ErrorEmptyMoney">Введіть суму</v:String>
     <v:String x:Key="transferControl_ErrorNumber">Немає такого отримувача</v:String>
+    <v:String x:Key="transferControl_ErrorSameNumber">Ви не можете зробити переказ на ту ж карту</v:String>
     <v:String x:Key="transferControl_ErrorOther">Інша помилка</v:String>
 </ResourceDictionary>

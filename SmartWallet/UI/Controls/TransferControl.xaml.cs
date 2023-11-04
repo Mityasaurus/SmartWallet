@@ -58,6 +58,7 @@ namespace SmartWallet.UI.Pages
             ErrorMoney.Visibility = Visibility.Collapsed;
             ErrorEmptyMoney.Visibility = Visibility.Collapsed;
             ErrorNumber.Visibility = Visibility.Collapsed;
+            ErrorSameNumber.Visibility = Visibility.Collapsed;
             ErrorOther.Visibility = Visibility.Collapsed;
             CloseTransferControl?.Invoke();
         }
@@ -69,6 +70,7 @@ namespace SmartWallet.UI.Pages
             ErrorMoney.Visibility = Visibility.Collapsed;
             ErrorEmptyMoney.Visibility = Visibility.Collapsed;
             ErrorNumber.Visibility = Visibility.Collapsed;
+            ErrorSameNumber.Visibility = Visibility.Collapsed;
             ErrorOther.Visibility = Visibility.Collapsed;
 
             if (!CardProvider.DoesCardExist(tb_Number.Text))
@@ -95,6 +97,12 @@ namespace SmartWallet.UI.Pages
                 return;
             }
             
+            if(CardProvider.GetCardById(CardId).Number == tb_Number.Text)
+            {
+                ErrorSameNumber.Visibility = Visibility.Visible;
+                return;
+            }
+
             TransactionProvider.AddNewTransaction(CardProvider.GetCardById(CardId).Number, 
                 tb_Number.Text, 
                 double.Parse(tb_Amount.Text));

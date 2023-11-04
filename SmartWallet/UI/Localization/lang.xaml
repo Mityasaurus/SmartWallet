@@ -108,5 +108,6 @@
     <v:String x:Key="transferControl_ErrorMoney">Not enough money on account</v:String>
     <v:String x:Key="transferControl_ErrorEmptyMoney">Enter the amount</v:String>
     <v:String x:Key="transferControl_ErrorNumber">No such card number</v:String>
+    <v:String x:Key="transferControl_ErrorSameNumber">You can't make a transfer to the same card</v:String>
     <v:String x:Key="transferControl_ErrorOther">Other error</v:String>
 </ResourceDictionary>
