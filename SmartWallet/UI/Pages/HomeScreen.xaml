@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="SmartWallet.UI.Pages.HomeScreen"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmartWallet.UI.Pages" xmlns:controls="clr-namespace:SmartWallet.UI.Controls"
+             xmlns:lottie="clr-namespace:LottieSharp.WPF;assembly=LottieSharp"
+             xmlns:transforms="clr-namespace:LottieSharp.WPF.Transforms;assembly=LottieSharp"
+             mc:Ignorable="d" 
+             d:Height="1000" d:Width="1200">
+    <Grid Background="#141332">
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0" Margin="0 0 0 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{DynamicResource home_Greeting}" Foreground="White" FontSize="28" FontWeight="SemiBold" Margin="0 0 5 0"/>
+                        <TextBlock x:Name="UserName" Foreground="White" FontSize="28" FontWeight="SemiBold"/>
+                    </StackPanel>
+                    <TextBlock Text="{DynamicResource home_GreetingSubLine}" Foreground="#A6A6A6" FontSize="19" FontWeight="Regular"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource LanguageTextBox}" Margin="0 0 5 0" MouseLeftButtonUp="English_OnMouseLeftButtonUp" Text="EN"/>
+                    <TextBlock Style="{StaticResource LanguageTextBox}" MouseLeftButtonUp="Ukrainian_OnMouseLeftButtonUp" Text="UK"/>
+                </StackPanel>
+                <Button x:Name="btn_Refresh" Grid.Column="1" HorizontalContentAlignment="Center" VerticalAlignment="Center" Padding="0" Margin="0 25 0 0"
+                        Background="Transparent" BorderThickness="0" Click="btn_Refresh_Click">
+                    <Button.Content>
+                        <Image Source="../Images/refresh_arrow.png" Margin="5"/>
+                    </Button.Content>
+                </Button>
+            </Grid>
+            
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Margin="0 0 15 0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <controls:TotalIncome Grid.Row="0" Grid.Column="0" x:Name="TotalIncome" Margin="0 0 15 15"/>
+                        <controls:TotalOutcome Grid.Row="0" Grid.Column="1" x:Name="TotalOutcome" Margin="0 0 0 15"/>
+
+                        <controls:Analytics Grid.Column="0" x:Name="Analytics" Grid.Row="1" Grid.ColumnSpan="2" Margin="0 0 0 15"/>
+                        <controls:TransactionsControl Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" x:Name="TransactionsView"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <controls:CardViewer Grid.Row="0" x:Name="CardViewer" VerticalAlignment="Center" Margin="0 0 0 15" Height="363"/>
+
+                    <controls:UserInformation x:Name="UserInformation" Grid.Row="1"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid x:Name="LoadingPanel" Background="#88D3D3D3" Visibility="Hidden">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <lottie:LottieAnimationView 
+                    x:Name="LoadingAnimation"
+                    Width="800"
+                    Height="600"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    ResourcePath="pack://application:,,,/UI/Animations/loading.json"
+                    AutoPlay="True"
+                    RepeatCount="-1">
+                    <lottie:LottieAnimationView.AnimationScale>
+                        <transforms:CenterTransform ScaleX="1" ScaleY="1" />
+                    </lottie:LottieAnimationView.AnimationScale>
+                </lottie:LottieAnimationView>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

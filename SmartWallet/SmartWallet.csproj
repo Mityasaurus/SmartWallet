@@ -5,6 +5,124 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>UI\Images\icon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="UI\Images\arrow_income.png" />
+    <None Remove="UI\Images\arrow_outcome.png" />
+    <None Remove="UI\Images\refresh_arrow.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="LottieSharp" Version="2.2.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.0.0-ci368" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.23" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.23">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.23" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="UI\Images\arrow_income.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="UI\Images\arrow_outcome.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="UI\Images\CardBackground.png" />
+    <Resource Include="UI\Images\CardBackground.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="UI\Images\addCard.png" />
+    <Resource Include="UI\Images\addCard.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="UI\Images\Calendar.png" />
+    <Resource Include="UI\Images\Calendar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="UI\Animations\noTransactions.json" />
+    <Resource Include="UI\Animations\noTransactions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="UI\Animations\noTransactions1.json" />
+    <None Remove="UI\Animations\noGraphData.json" />
+    <Resource Include="UI\Animations\noGraphData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="UI\Images\barChartIcon.png" />
+    <Resource Include="UI\Images\barChartIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="UI\Images\lineChartIcon.png" />
+    <Resource Include="UI\Images\lineChartIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Page Remove="UI\Localization\lang.xaml" />
+    <Resource Include="UI\Animations\loading.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="UI\Images\refresh_arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="UI\Localization\lang.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Page Remove="UI\Localization\lang.uk-UK.xaml" />
+    <Resource Include="UI\Localization\lang.uk-UK.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Resource>
+    <None Remove="UI\Images\editIcon.png" />
+    <Resource Include="UI\Images\editIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="UI\Images\dragNdropIcon.png" />
+    <Page Update="UI\Controls\EditCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <None Remove="UI\Images\editCard.png" />
+    <Resource Include="UI\Images\editCard.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Page Update="UI\Controls\TransferControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <None Remove="UI\Images\icon.png" />
+    <None Remove="UI\Images\icon.ico" />
+    <Resource Include="UI\Images\icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="UI\Animations\loading.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\sokol\.nuget\packages\lottiesharp\2.3.0\contentFiles\any\net6.0-windows7.0\lottie_sharp.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="UI\Pages\LoginWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Pages\RegistrationWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
 
 </Project>
